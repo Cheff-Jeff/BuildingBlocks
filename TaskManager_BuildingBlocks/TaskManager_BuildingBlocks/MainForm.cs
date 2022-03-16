@@ -19,7 +19,12 @@ namespace TaskManager_BuildingBlocks
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            LoginForm lg = new LoginForm();
+            this.Hide();
+            lg.ShowDialog();
 
+            if (LoggedIn.User == "") this.Close();
+            else this.Show();
         }
     }
 }
