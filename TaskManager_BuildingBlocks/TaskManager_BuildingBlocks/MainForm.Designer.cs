@@ -1,7 +1,7 @@
 ﻿
 namespace TaskManager_BuildingBlocks
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,20 @@ namespace TaskManager_BuildingBlocks
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.MaximumSize = new System.Drawing.Size(1280, 720);
+            this.MinimumSize = new System.Drawing.Size(1280, 720);
+            this.Name = "MainForm";
+            this.Text = "MainWindow";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
