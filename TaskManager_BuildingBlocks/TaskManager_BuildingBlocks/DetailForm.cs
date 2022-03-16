@@ -12,9 +12,10 @@ namespace TaskManager_BuildingBlocks
 {
     public partial class DetailForm : Form
     {
-        public DetailForm()
+        public DetailForm(int systemId)
         {
             InitializeComponent();
+            MessageBox.Show("systemId = " + systemId);
         }
     }
 }
