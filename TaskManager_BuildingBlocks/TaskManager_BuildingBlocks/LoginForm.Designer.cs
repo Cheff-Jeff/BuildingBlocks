@@ -41,9 +41,9 @@ namespace TaskManager_BuildingBlocks
             this.emailTxb.BackColor = System.Drawing.Color.White;
             this.emailTxb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.emailTxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
-            this.emailTxb.Location = new System.Drawing.Point(540, 237);
+            this.emailTxb.Location = new System.Drawing.Point(480, 237);
             this.emailTxb.Name = "emailTxb";
-            this.emailTxb.Size = new System.Drawing.Size(200, 32);
+            this.emailTxb.Size = new System.Drawing.Size(320, 32);
             this.emailTxb.TabIndex = 0;
             // 
             // label1
@@ -51,7 +51,7 @@ namespace TaskManager_BuildingBlocks
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(535, 205);
+            this.label1.Location = new System.Drawing.Point(475, 205);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 29);
             this.label1.TabIndex = 1;
@@ -62,7 +62,7 @@ namespace TaskManager_BuildingBlocks
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(535, 290);
+            this.label2.Location = new System.Drawing.Point(475, 290);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(120, 29);
             this.label2.TabIndex = 3;
@@ -73,9 +73,9 @@ namespace TaskManager_BuildingBlocks
             this.passwordTxb.BackColor = System.Drawing.Color.White;
             this.passwordTxb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.passwordTxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
-            this.passwordTxb.Location = new System.Drawing.Point(540, 322);
+            this.passwordTxb.Location = new System.Drawing.Point(480, 322);
             this.passwordTxb.Name = "passwordTxb";
-            this.passwordTxb.Size = new System.Drawing.Size(200, 32);
+            this.passwordTxb.Size = new System.Drawing.Size(320, 32);
             this.passwordTxb.TabIndex = 2;
             // 
             // loginBtn

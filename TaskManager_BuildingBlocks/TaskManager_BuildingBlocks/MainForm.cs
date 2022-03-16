@@ -23,8 +23,39 @@ namespace TaskManager_BuildingBlocks
             this.Hide();
             lg.ShowDialog();
 
-            if (LoggedIn.User == "") this.Close();
+            if (LoggedIn.User == "") { this.Close(); return; }
             else this.Show();
+
+            // exceedingSystemDataGrid.Rows.Add("System name", "CPU", "GPU", "RAM", "DISK", "NETWORK");
+            Random random = new Random();
+            for (int i = 1; i <= 4; i++)
+            {
+
+                exceedingSystemDataGrid.Rows.Add("server " + i,
+                    "25%> " + random.Next(10, 90).ToString() + " <85%",
+                    "25%> " + random.Next(10, 90).ToString() + " <85%",
+                    "25%> " + random.Next(10, 90).ToString() + " <85%",
+                    "25%> " + random.Next(10, 90).ToString() + " <85%",
+                    "25%> " + random.Next(10, 90).ToString() + " <85%");
+            }
+        }
+
+        private void systemComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // TODO get system ID and 
+            DetailForm df = new DetailForm(systemComboBox.SelectedIndex); // change to system ID
+            this.Hide();
+            df.ShowDialog();
+            this.Show();
+        }
+
+        private void exceedingSystemDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //TODO change rowindex to invisible system ID 
+            DetailForm df = new DetailForm(e.RowIndex+1);
+            this.Hide();
+            df.ShowDialog();
+            this.Show();
         }
     }
 }

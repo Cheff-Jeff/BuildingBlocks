@@ -29,13 +29,29 @@ namespace TaskManager_BuildingBlocks
         /// </summary>
         private void InitializeComponent()
         {
+            this.systemComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
+            // 
+            // systemComboBox
+            // 
+            this.systemComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.systemComboBox.FormattingEnabled = true;
+            this.systemComboBox.Items.AddRange(new object[] {
+            "System 1",
+            "System 2",
+            "System 3",
+            "System 4"});
+            this.systemComboBox.Location = new System.Drawing.Point(50, 60);
+            this.systemComboBox.Name = "systemComboBox";
+            this.systemComboBox.Size = new System.Drawing.Size(350, 33);
+            this.systemComboBox.TabIndex = 3;
             // 
             // DetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.systemComboBox);
             this.MaximumSize = new System.Drawing.Size(1280, 720);
             this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "DetailForm";
@@ -45,5 +61,7 @@ namespace TaskManager_BuildingBlocks
         }
 
         #endregion
+
+        private System.Windows.Forms.ComboBox systemComboBox;
     }
 }
