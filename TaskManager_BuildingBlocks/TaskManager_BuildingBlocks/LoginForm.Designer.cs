@@ -34,6 +34,7 @@ namespace TaskManager_BuildingBlocks
             this.label2 = new System.Windows.Forms.Label();
             this.passwordTxb = new System.Windows.Forms.TextBox();
             this.loginBtn = new System.Windows.Forms.Button();
+            this.skipLoginBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // emailTxb
@@ -94,11 +95,28 @@ namespace TaskManager_BuildingBlocks
             this.loginBtn.UseVisualStyleBackColor = false;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
+            // skipLoginBtn
+            // 
+            this.skipLoginBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.skipLoginBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
+            this.skipLoginBtn.FlatAppearance.BorderSize = 2;
+            this.skipLoginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.skipLoginBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.skipLoginBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
+            this.skipLoginBtn.Location = new System.Drawing.Point(590, 435);
+            this.skipLoginBtn.Name = "skipLoginBtn";
+            this.skipLoginBtn.Size = new System.Drawing.Size(100, 40);
+            this.skipLoginBtn.TabIndex = 5;
+            this.skipLoginBtn.Text = "Skip login";
+            this.skipLoginBtn.UseVisualStyleBackColor = false;
+            this.skipLoginBtn.Click += new System.EventHandler(this.skipLoginBtn_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.skipLoginBtn);
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.passwordTxb);
@@ -120,5 +138,6 @@ namespace TaskManager_BuildingBlocks
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox passwordTxb;
         private System.Windows.Forms.Button loginBtn;
+        private System.Windows.Forms.Button skipLoginBtn;
     }
 }

@@ -30,5 +30,11 @@ namespace TaskManager_BuildingBlocks
             LoggedIn.User = emailTxb.Text; //set user as email
             this.Close();
         }
+
+        private void skipLoginBtn_Click(object sender, EventArgs e)
+        {
+            LoggedIn.User = "timmothy"; //set user as timmothy to skip login
+            this.Close();
+        }
     }
 }

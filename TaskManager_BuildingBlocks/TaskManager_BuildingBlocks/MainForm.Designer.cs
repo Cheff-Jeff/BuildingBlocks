@@ -29,6 +29,8 @@ namespace TaskManager_BuildingBlocks
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.systemComboBox = new System.Windows.Forms.ComboBox();
             this.exceedingSystemDataGrid = new System.Windows.Forms.DataGridView();
             this.System_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,6 +66,7 @@ namespace TaskManager_BuildingBlocks
             this.exceedingSystemDataGrid.BackgroundColor = System.Drawing.SystemColors.Control;
             this.exceedingSystemDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.exceedingSystemDataGrid.ColumnHeadersHeight = 50;
+            this.exceedingSystemDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.exceedingSystemDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.System_Id,
             this.CPU_usage,
@@ -71,14 +74,34 @@ namespace TaskManager_BuildingBlocks
             this.RAM_usage,
             this.Disk_usage,
             this.Network_usage});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.exceedingSystemDataGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.exceedingSystemDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.exceedingSystemDataGrid.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.exceedingSystemDataGrid.Location = new System.Drawing.Point(50, 124);
             this.exceedingSystemDataGrid.Name = "exceedingSystemDataGrid";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.exceedingSystemDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.exceedingSystemDataGrid.RowHeadersVisible = false;
-            this.exceedingSystemDataGrid.Size = new System.Drawing.Size(802, 442);
+            this.exceedingSystemDataGrid.RowHeadersWidth = 50;
+            this.exceedingSystemDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.exceedingSystemDataGrid.Size = new System.Drawing.Size(817, 442);
             this.exceedingSystemDataGrid.TabIndex = 3;
-            this.exceedingSystemDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.exceedingSystemDataGrid_CellContentClick);
+            this.exceedingSystemDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.exceedingSystemDataGrid_CellClick);
+            this.exceedingSystemDataGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.exceedingSystemDataGrid_CellFormatting);
             // 
             // System_Id
             // 

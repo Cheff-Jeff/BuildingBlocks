@@ -32,11 +32,12 @@ namespace TaskManager_BuildingBlocks
             {
 
                 exceedingSystemDataGrid.Rows.Add("server " + i,
-                    "25%> " + random.Next(10, 90).ToString() + " <85%",
-                    "25%> " + random.Next(10, 90).ToString() + " <85%",
-                    "25%> " + random.Next(10, 90).ToString() + " <85%",
-                    "25%> " + random.Next(10, 90).ToString() + " <85%",
-                    "25%> " + random.Next(10, 90).ToString() + " <85%");
+                    "25%>  " + random.Next(10, 90).ToString() + "  <85%",
+                    "25%>  " + random.Next(10, 90).ToString() + "  <85%",
+                    "25%>  " + random.Next(10, 90).ToString() + "  <85%",
+                    "25%>  " + random.Next(10, 90).ToString() + "  <85%",
+                    "25%>  " + random.Next(10, 90).ToString() + "  <85%");
+                exceedingSystemDataGrid.Rows[i - 1].Height += 10;
             }
         }
 
@@ -49,10 +50,19 @@ namespace TaskManager_BuildingBlocks
             this.Show();
         }
 
-        private void exceedingSystemDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void exceedingSystemDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex > 0)
+            {
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+        }
+
+        private void exceedingSystemDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //TODO change rowindex to invisible system ID 
-            DetailForm df = new DetailForm(e.RowIndex+1);
+            if (e.RowIndex == -1) return;
+            DetailForm df = new DetailForm(e.RowIndex + 1);
             this.Hide();
             df.ShowDialog();
             this.Show();
