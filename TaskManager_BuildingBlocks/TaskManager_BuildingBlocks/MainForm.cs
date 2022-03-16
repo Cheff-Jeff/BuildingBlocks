@@ -28,7 +28,7 @@ namespace TaskManager_BuildingBlocks
 
             // exceedingSystemDataGrid.Rows.Add("System name", "CPU", "GPU", "RAM", "DISK", "NETWORK");
             Random random = new Random();
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 2; i++)
             {
 
                 exceedingSystemDataGrid.Rows.Add("server " + i,
