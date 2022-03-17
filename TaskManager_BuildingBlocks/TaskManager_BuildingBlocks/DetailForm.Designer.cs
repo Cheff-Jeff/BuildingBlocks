@@ -45,12 +45,12 @@ namespace TaskManager_BuildingBlocks
             System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.systemComboBox = new System.Windows.Forms.ComboBox();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.CpuChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart5 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CpuChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart4)).BeginInit();
@@ -71,21 +71,21 @@ namespace TaskManager_BuildingBlocks
             this.systemComboBox.Size = new System.Drawing.Size(350, 33);
             this.systemComboBox.TabIndex = 3;
             // 
-            // chart1
+            // CpuChart
             // 
             chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            this.CpuChart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(50, 112);
-            this.chart1.Name = "chart1";
+            this.CpuChart.Legends.Add(legend1);
+            this.CpuChart.Location = new System.Drawing.Point(50, 112);
+            this.CpuChart.Name = "CpuChart";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "CPU";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(300, 258);
-            this.chart1.TabIndex = 4;
-            this.chart1.Text = "chart1";
+            this.CpuChart.Series.Add(series1);
+            this.CpuChart.Size = new System.Drawing.Size(300, 258);
+            this.CpuChart.TabIndex = 4;
+            this.CpuChart.Text = "chart1";
             // 
             // chart2
             // 
@@ -160,13 +160,13 @@ namespace TaskManager_BuildingBlocks
             this.Controls.Add(this.chart4);
             this.Controls.Add(this.chart3);
             this.Controls.Add(this.chart2);
-            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.CpuChart);
             this.Controls.Add(this.systemComboBox);
             this.MaximumSize = new System.Drawing.Size(1280, 720);
             this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "DetailForm";
             this.Text = "DetailForm";
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CpuChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart4)).EndInit();
@@ -178,7 +178,7 @@ namespace TaskManager_BuildingBlocks
         #endregion
 
         private System.Windows.Forms.ComboBox systemComboBox;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart CpuChart;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart3;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart4;

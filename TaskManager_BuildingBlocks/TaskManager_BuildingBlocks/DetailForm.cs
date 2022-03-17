@@ -45,10 +45,10 @@ namespace TaskManager_BuildingBlocks
                 y[i] = random.Next(10, 90);
             }
 
-            chart1.Series[0].ChartType = SeriesChartType.Line;
-            chart1.Series[0].IsValueShownAsLabel = true;
-            chart1.ChartAreas[0].AxisY.ScaleView.Size = 100;
-            for (int i = 0; i < x.Length; i++) chart1.Series[0].Points.AddXY(x[i], y[i]); 
+            CpuChart.Series[0].ChartType = SeriesChartType.Line;
+            CpuChart.Series[0].IsValueShownAsLabel = true;
+            CpuChart.ChartAreas[0].AxisY.ScaleView.Size = 100;
+            for (int i = 0; i < x.Length; i++) CpuChart.Series[0].Points.AddXY(x[i], y[i]); 
         }
 
         private void GenerateGPUChart()
