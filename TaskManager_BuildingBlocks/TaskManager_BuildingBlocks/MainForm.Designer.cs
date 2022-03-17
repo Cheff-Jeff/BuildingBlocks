@@ -29,18 +29,19 @@ namespace TaskManager_BuildingBlocks
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.systemComboBox = new System.Windows.Forms.ComboBox();
             this.exceedingSystemDataGrid = new System.Windows.Forms.DataGridView();
+            this.createUserBtn = new System.Windows.Forms.Button();
+            this.logoutBtn = new System.Windows.Forms.Button();
             this.System_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CPU_usage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GPU_usage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RAM_usage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Disk_usage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Network_usage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createUserBtn = new System.Windows.Forms.Button();
-            this.logoutBtn = new System.Windows.Forms.Button();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.exceedingSystemDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,28 +76,29 @@ namespace TaskManager_BuildingBlocks
             this.GPU_usage,
             this.RAM_usage,
             this.Disk_usage,
-            this.Network_usage});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.exceedingSystemDataGrid.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Network_usage,
+            this.ID});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.exceedingSystemDataGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.exceedingSystemDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.exceedingSystemDataGrid.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.exceedingSystemDataGrid.Location = new System.Drawing.Point(50, 124);
             this.exceedingSystemDataGrid.Name = "exceedingSystemDataGrid";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.exceedingSystemDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.exceedingSystemDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.exceedingSystemDataGrid.RowHeadersVisible = false;
             this.exceedingSystemDataGrid.RowHeadersWidth = 50;
             this.exceedingSystemDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -104,37 +106,6 @@ namespace TaskManager_BuildingBlocks
             this.exceedingSystemDataGrid.TabIndex = 3;
             this.exceedingSystemDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.exceedingSystemDataGrid_CellClick);
             this.exceedingSystemDataGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.exceedingSystemDataGrid_CellFormatting);
-            // 
-            // System_Id
-            // 
-            this.System_Id.HeaderText = "System";
-            this.System_Id.Name = "System_Id";
-            this.System_Id.Width = 300;
-            // 
-            // CPU_usage
-            // 
-            this.CPU_usage.HeaderText = "CPU";
-            this.CPU_usage.Name = "CPU_usage";
-            // 
-            // GPU_usage
-            // 
-            this.GPU_usage.HeaderText = "GPU";
-            this.GPU_usage.Name = "GPU_usage";
-            // 
-            // RAM_usage
-            // 
-            this.RAM_usage.HeaderText = "RAM";
-            this.RAM_usage.Name = "RAM_usage";
-            // 
-            // Disk_usage
-            // 
-            this.Disk_usage.HeaderText = "Disk";
-            this.Disk_usage.Name = "Disk_usage";
-            // 
-            // Network_usage
-            // 
-            this.Network_usage.HeaderText = "Network";
-            this.Network_usage.Name = "Network_usage";
             // 
             // createUserBtn
             // 
@@ -168,6 +139,43 @@ namespace TaskManager_BuildingBlocks
             this.logoutBtn.UseVisualStyleBackColor = false;
             this.logoutBtn.Click += new System.EventHandler(this.logoutBtn_Click);
             // 
+            // System_Id
+            // 
+            this.System_Id.HeaderText = "System";
+            this.System_Id.Name = "System_Id";
+            this.System_Id.Width = 300;
+            // 
+            // CPU_usage
+            // 
+            this.CPU_usage.HeaderText = "CPU";
+            this.CPU_usage.Name = "CPU_usage";
+            // 
+            // GPU_usage
+            // 
+            this.GPU_usage.HeaderText = "GPU";
+            this.GPU_usage.Name = "GPU_usage";
+            // 
+            // RAM_usage
+            // 
+            this.RAM_usage.HeaderText = "RAM";
+            this.RAM_usage.Name = "RAM_usage";
+            // 
+            // Disk_usage
+            // 
+            this.Disk_usage.HeaderText = "Disk";
+            this.Disk_usage.Name = "Disk_usage";
+            // 
+            // Network_usage
+            // 
+            this.Network_usage.HeaderText = "Network";
+            this.Network_usage.Name = "Network_usage";
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,14 +198,15 @@ namespace TaskManager_BuildingBlocks
         #endregion
         private System.Windows.Forms.ComboBox systemComboBox;
         private System.Windows.Forms.DataGridView exceedingSystemDataGrid;
+        private System.Windows.Forms.Button createUserBtn;
+        private System.Windows.Forms.Button logoutBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn System_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn CPU_usage;
         private System.Windows.Forms.DataGridViewTextBoxColumn GPU_usage;
         private System.Windows.Forms.DataGridViewTextBoxColumn RAM_usage;
         private System.Windows.Forms.DataGridViewTextBoxColumn Disk_usage;
         private System.Windows.Forms.DataGridViewTextBoxColumn Network_usage;
-        private System.Windows.Forms.Button createUserBtn;
-        private System.Windows.Forms.Button logoutBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
     }
 }
 

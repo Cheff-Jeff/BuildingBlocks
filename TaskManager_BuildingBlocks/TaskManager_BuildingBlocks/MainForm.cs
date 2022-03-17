@@ -36,14 +36,15 @@ namespace TaskManager_BuildingBlocks
                     "25%>  " + random.Next(10, 90).ToString() + "  <85%",
                     "25%>  " + random.Next(10, 90).ToString() + "  <85%",
                     "25%>  " + random.Next(10, 90).ToString() + "  <85%",
-                    "25%>  " + random.Next(10, 90).ToString() + "  <85%");
+                    "25%>  " + random.Next(10, 90).ToString() + "  <85%",
+                    random.Next(1, 4));
                 exceedingSystemDataGrid.Rows[i - 1].Height += 10;
             }
         }
 
         private void systemComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // TODO get system ID and 
+            // TODO get system ID from invis table
             DetailForm df = new DetailForm(systemComboBox.SelectedIndex); // change to system ID
             this.Hide();
             df.ShowDialog();
@@ -78,6 +79,7 @@ namespace TaskManager_BuildingBlocks
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
+            // Log the user out
             this.Hide();
             LoggedIn.User = "";
             lg.ShowDialog();
