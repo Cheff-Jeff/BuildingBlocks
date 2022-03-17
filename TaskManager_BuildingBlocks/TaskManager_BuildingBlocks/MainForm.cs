@@ -79,6 +79,7 @@ namespace TaskManager_BuildingBlocks
         private void logoutBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
+            LoggedIn.User = "";
             lg.ShowDialog();
             this.Show();
         }

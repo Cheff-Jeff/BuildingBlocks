@@ -18,12 +18,12 @@ namespace TaskManager_BuildingBlocks
         Random random = new Random();
         Chart[] charts;
         int xAmount = 20;
+
         public DetailForm(int systemId)
         {
             InitializeComponent();
             charts = new Chart[] { cpuChart, gpuChart, ramChart, diskChart, networkChart };
             GenerateCharts();
-
         }
 
         private void GenerateCharts()
