@@ -15,6 +15,7 @@ namespace TaskManager_BuildingBlocks
 {
     public partial class DetailForm : Form
     {
+        Random random = new Random();
         public DetailForm(int systemId)
         {
             InitializeComponent();
@@ -37,7 +38,6 @@ namespace TaskManager_BuildingBlocks
             int xAmount = 5;
             string[] x = new string[xAmount];
             int[] y = new int[xAmount];
-            Random random = new Random();
             for (var i = 0; i < xAmount; i++)
             {
                 Console.WriteLine("forloop time " + i);
@@ -45,10 +45,13 @@ namespace TaskManager_BuildingBlocks
                 y[i] = random.Next(10, 90);
             }
 
-            CpuChart.Series[0].ChartType = SeriesChartType.Line;
-            CpuChart.Series[0].IsValueShownAsLabel = true;
-            CpuChart.ChartAreas[0].AxisY.ScaleView.Size = 100;
-            for (int i = 0; i < x.Length; i++) CpuChart.Series[0].Points.AddXY(x[i], y[i]); 
+            cpuChart.Series[0].ChartType = SeriesChartType.Line;
+            cpuChart.Series["Max"].ChartType = SeriesChartType.Line;
+            cpuChart.Series["Min"].ChartType = SeriesChartType.Line;
+            cpuChart.Series[0].IsValueShownAsLabel = true;
+            cpuChart.ChartAreas[0].AxisY.ScaleView.Size = 100;
+            for (int i = 0; i < x.Length; i++) cpuChart.Series[0].Points.AddXY(x[i], y[i]);
+            for (int i = 0; i < x.Length; i++) { cpuChart.Series["Max"].Points.AddXY(x[i], 90); cpuChart.Series["Min"].Points.AddXY(x[i], 15); }
         }
 
         private void GenerateGPUChart()
@@ -58,7 +61,6 @@ namespace TaskManager_BuildingBlocks
             int xAmount = 5;
             string[] x = new string[xAmount];
             int[] y = new int[xAmount];
-            Random random = new Random();
             for (var i = 0; i < xAmount; i++)
             {
                 Console.WriteLine("forloop time " + i);
@@ -66,10 +68,10 @@ namespace TaskManager_BuildingBlocks
                 y[i] = random.Next(10, 90);
             }
 
-            chart2.Series[0].ChartType = SeriesChartType.Line;
-            chart2.Series[0].IsValueShownAsLabel = true;
-            chart2.ChartAreas[0].AxisY.ScaleView.Size = 100;
-            for (int i = 0; i < x.Length; i++) chart2.Series[0].Points.AddXY(x[i], y[i]);
+            gpuChart.Series[0].ChartType = SeriesChartType.Line;
+            gpuChart.Series[0].IsValueShownAsLabel = true;
+            gpuChart.ChartAreas[0].AxisY.ScaleView.Size = 100;
+            for (int i = 0; i < x.Length; i++) gpuChart.Series[0].Points.AddXY(x[i], y[i]);
         }
 
         private void GenerateRAMChart()
@@ -79,7 +81,6 @@ namespace TaskManager_BuildingBlocks
             int xAmount = 5;
             string[] x = new string[xAmount];
             int[] y = new int[xAmount];
-            Random random = new Random();
             for (var i = 0; i < xAmount; i++)
             {
                 Console.WriteLine("forloop time " + i);
@@ -87,10 +88,10 @@ namespace TaskManager_BuildingBlocks
                 y[i] = random.Next(10, 90);
             }
 
-            chart3.Series[0].ChartType = SeriesChartType.Line;
-            chart3.Series[0].IsValueShownAsLabel = true;
-            chart3.ChartAreas[0].AxisY.ScaleView.Size = 100;
-            for (int i = 0; i < x.Length; i++) chart3.Series[0].Points.AddXY(x[i], y[i]);
+            ramChart.Series[0].ChartType = SeriesChartType.Line;
+            ramChart.Series[0].IsValueShownAsLabel = true;
+            ramChart.ChartAreas[0].AxisY.ScaleView.Size = 100;
+            for (int i = 0; i < x.Length; i++) ramChart.Series[0].Points.AddXY(x[i], y[i]);
         }
 
         private void GenerateDiskChart()
@@ -100,7 +101,6 @@ namespace TaskManager_BuildingBlocks
             int xAmount = 5;
             string[] x = new string[xAmount];
             int[] y = new int[xAmount];
-            Random random = new Random();
             for (var i = 0; i < xAmount; i++)
             {
                 Console.WriteLine("forloop time " + i);
@@ -108,10 +108,10 @@ namespace TaskManager_BuildingBlocks
                 y[i] = random.Next(10, 90);
             }
 
-            chart4.Series[0].ChartType = SeriesChartType.Line;
-            chart4.Series[0].IsValueShownAsLabel = true;
-            chart4.ChartAreas[0].AxisY.ScaleView.Size = 100;
-            for (int i = 0; i < x.Length; i++) chart4.Series[0].Points.AddXY(x[i], y[i]); 
+            diskChart.Series[0].ChartType = SeriesChartType.Line;
+            diskChart.Series[0].IsValueShownAsLabel = true;
+            diskChart.ChartAreas[0].AxisY.ScaleView.Size = 100;
+            for (int i = 0; i < x.Length; i++) diskChart.Series[0].Points.AddXY(x[i], y[i]); 
         }
 
         private void GenerateNetworkChart()
@@ -121,7 +121,6 @@ namespace TaskManager_BuildingBlocks
             int xAmount = 5;
             string[] x = new string[xAmount];
             int[] y = new int[xAmount];
-            Random random = new Random();
             for (var i = 0; i < xAmount; i++)
             {
                 Console.WriteLine("forloop time " + i);
@@ -129,10 +128,10 @@ namespace TaskManager_BuildingBlocks
                 y[i] = random.Next(10, 90);
             }
 
-            chart5.Series[0].ChartType = SeriesChartType.Line;
-            chart5.Series[0].IsValueShownAsLabel = true;
-            chart5.ChartAreas[0].AxisY.ScaleView.Size = 100;
-            for (int i = 0; i < x.Length; i++) chart5.Series[0].Points.AddXY(x[i], y[i]); 
+            networkChart.Series[0].ChartType = SeriesChartType.Line;
+            networkChart.Series[0].IsValueShownAsLabel = true;
+            networkChart.ChartAreas[0].AxisY.ScaleView.Size = 100;
+            for (int i = 0; i < x.Length; i++) networkChart.Series[0].Points.AddXY(x[i], y[i]); 
         }
     }
 }
