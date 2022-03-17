@@ -16,5 +16,24 @@ namespace TaskManager_BuildingBlocks
         {
             InitializeComponent();
         }
+
+        private void createUserBtn_Click(object sender, EventArgs e)
+        {
+            CreateUser();
+            this.Close();
+        }
+
+        private void CreateUser()
+        {
+            string email = emailTxb.Text;
+            string password = passTxb.Text;
+            string rePass = rePassTxb.Text;
+            bool isAdmin = isAdminCbx.Checked;
+
+            if (password != rePass) { MessageBox.Show("Passwords do not match"); return; }
+
+            /// TODO check if email exist
+            ///     Add user to DB
+        }
     }
 }
