@@ -67,5 +67,13 @@ namespace TaskManager_BuildingBlocks
             df.ShowDialog();
             this.Show();
         }
+
+        private void createUserBtn_Click(object sender, EventArgs e)
+        {
+            RegisterForm rg = new RegisterForm();
+            this.Hide();
+            rg.ShowDialog();
+            this.Show();
+        }
     }
 }
