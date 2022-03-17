@@ -1,0 +1,6 @@
+﻿connenctionString = @"Data Source=mssqlstud.fhict.local;Database=dbi483908_bblocks;User Id=dbi483908_bblocks;Password=Building@Blocks#Data;";
+
+Host		mssqlstud.fhict.local
+Database	dbi483908_bblocks
+Username	dbi483908_bblocks
+Password	Building@Blocks#Data
