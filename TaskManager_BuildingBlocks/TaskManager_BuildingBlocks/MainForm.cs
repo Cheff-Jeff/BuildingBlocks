@@ -12,6 +12,7 @@ namespace TaskManager_BuildingBlocks
 {
     public partial class MainForm : Form
     {
+        LoginForm lg = new LoginForm();
         public MainForm()
         {
             InitializeComponent();
@@ -19,7 +20,6 @@ namespace TaskManager_BuildingBlocks
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoginForm lg = new LoginForm();
             this.Hide();
             lg.ShowDialog();
 
@@ -73,6 +73,13 @@ namespace TaskManager_BuildingBlocks
             RegisterForm rg = new RegisterForm();
             this.Hide();
             rg.ShowDialog();
+            this.Show();
+        }
+
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            lg.ShowDialog();
             this.Show();
         }
     }

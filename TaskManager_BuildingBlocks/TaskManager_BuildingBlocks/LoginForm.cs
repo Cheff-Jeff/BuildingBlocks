@@ -22,7 +22,9 @@ namespace TaskManager_BuildingBlocks
         private void loginBtn_Click(object sender, EventArgs e)
         {
 
-            //TODO Check Password with email
+            //TODO
+            //  Make inputs red if not correct
+            //  Check Password with email
             if (passwordTxb.Text == "" || emailTxb.Text == "") return; //password or email is empty
             if (!Regex.IsMatch(emailTxb.Text, @"^[a-z\.\-]+@[a-z0-9]+\.[a-z]{2,3}$")) return; //email is not an email
          

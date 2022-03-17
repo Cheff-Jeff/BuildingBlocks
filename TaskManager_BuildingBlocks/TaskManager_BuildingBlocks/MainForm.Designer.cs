@@ -40,6 +40,7 @@ namespace TaskManager_BuildingBlocks
             this.Disk_usage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Network_usage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createUserBtn = new System.Windows.Forms.Button();
+            this.logoutBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.exceedingSystemDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -151,11 +152,28 @@ namespace TaskManager_BuildingBlocks
             this.createUserBtn.UseVisualStyleBackColor = false;
             this.createUserBtn.Click += new System.EventHandler(this.createUserBtn_Click);
             // 
+            // logoutBtn
+            // 
+            this.logoutBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.logoutBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
+            this.logoutBtn.FlatAppearance.BorderSize = 2;
+            this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logoutBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.logoutBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
+            this.logoutBtn.Location = new System.Drawing.Point(897, 56);
+            this.logoutBtn.Name = "logoutBtn";
+            this.logoutBtn.Size = new System.Drawing.Size(138, 40);
+            this.logoutBtn.TabIndex = 12;
+            this.logoutBtn.Text = "Logout";
+            this.logoutBtn.UseVisualStyleBackColor = false;
+            this.logoutBtn.Click += new System.EventHandler(this.logoutBtn_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.logoutBtn);
             this.Controls.Add(this.createUserBtn);
             this.Controls.Add(this.exceedingSystemDataGrid);
             this.Controls.Add(this.systemComboBox);
@@ -179,6 +197,7 @@ namespace TaskManager_BuildingBlocks
         private System.Windows.Forms.DataGridViewTextBoxColumn Disk_usage;
         private System.Windows.Forms.DataGridViewTextBoxColumn Network_usage;
         private System.Windows.Forms.Button createUserBtn;
+        private System.Windows.Forms.Button logoutBtn;
     }
 }
 

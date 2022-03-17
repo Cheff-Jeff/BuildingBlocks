@@ -32,7 +32,9 @@ namespace TaskManager_BuildingBlocks
 
             if (password != rePass) { MessageBox.Show("Passwords do not match"); return; }
 
-            /// TODO check if email exist
+            /// TODO 
+            ///     Make inputs red if not correct
+            ///     check if email exist
             ///     Add user to DB
         }
     }
