@@ -85,5 +85,17 @@ namespace TaskManager_BuildingBlocks
             lg.ShowDialog();
             this.Show();
         }
+
+        private void systemComboBox_TextUpdate(object sender, EventArgs e)
+        {
+            systemComboBox.DroppedDown = true;
+
+
+            ///
+            /// string[] filteredList;
+            /// foreach 
+            /// systemComboBox.Items.Clear();
+            /// systemComboBox.Items.AddRange(filteredList)
+        }
     }
 }
