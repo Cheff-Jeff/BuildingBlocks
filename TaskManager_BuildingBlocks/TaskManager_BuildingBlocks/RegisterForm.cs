@@ -42,33 +42,66 @@ namespace TaskManager_BuildingBlocks
             else { Register(salt, email, password, isAdmin); }
             /// TODO 
             ///     Make inputs red if not correct
-            ///     check if email exist
-            ///     Add user to DB
         }
 
         private void Register(byte[] salt, string email, string password, bool isAdmin)
         {
+            if (CheckUserExist(email))
+            { MessageBox.Show("This user already exists."); }
+            else
+            {
+                DbConnection conn = new DbConnection();
+                string query = "INSERT INTO Users (Email, Password, Salt, IsAdmin) VALUES (@email, @pass, @salt, @admin)";
+                SqlCommand cmd;
+
+                try
+                {
+                    int intSalt = BitConverter.ToInt32(salt, 0); //reset to byte[] => BitConverter.GetBytes;
+                    byte admin = 0;
+
+                    if (isAdmin) { admin = 1; }
+
+                    DbConnection.OpenDbConnenction();
+                    cmd = new SqlCommand(query, DbConnection.cnn);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@pass", password);
+                    cmd.Parameters.AddWithValue("@salt", intSalt);
+                    cmd.Parameters.AddWithValue("@admin", admin);
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine("Inner Exception: " + ex.Message);
+                    Console.WriteLine();
+                    Console.WriteLine("Query Executed: " + query);
+                    Console.WriteLine();
+                    throw;
+                }
+            }
+        }
+
+        private bool CheckUserExist(string email)
+        {
             DbConnection conn = new DbConnection();
-            string query = "INSERT INTO Users (Email, Password, Salt, IsAdmin) VALUES (@email, @pass, @salt, @admin)";
+            string query = "SELECT Email FROM Users WHERE Email = (@email)";
             SqlCommand cmd;
 
             try
             {
-                int intSalt = BitConverter.ToInt32(salt, 0); //reset to byte[] => BitConverter.GetBytes;
-                byte admin = 0;
-
-                if (isAdmin) { admin = 1; }
-
                 DbConnection.OpenDbConnenction();
                 cmd = new SqlCommand(query, DbConnection.cnn);
                 cmd.Parameters.AddWithValue("@email", email);
-                cmd.Parameters.AddWithValue("@pass", password);
-                cmd.Parameters.AddWithValue("@salt", intSalt);
-                cmd.Parameters.AddWithValue("@admin", admin);
 
-                cmd.ExecuteNonQuery();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        return true;
+                    }
+                }
 
-                Console.WriteLine("User has been created.");
+                return false;
             }
             catch (SqlException ex)
             {
