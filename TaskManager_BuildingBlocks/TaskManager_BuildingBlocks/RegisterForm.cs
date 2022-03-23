@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,8 +28,7 @@ namespace TaskManager_BuildingBlocks
 
         private void CreateUser()
         {
-            // generate a 128-bit salt using a cryptographically strong random sequence of nonzero values
-            byte[] salt = new byte[128 / 8];
+            byte[] salt = AddSalt();
 
             string email = emailTxb.Text;
             string password = hash(passTxb.Text, salt);
@@ -56,7 +54,7 @@ namespace TaskManager_BuildingBlocks
 
                 try
                 {
-                    int intSalt = BitConverter.ToInt32(salt, 0); //reset to byte[] => BitConverter.GetBytes;
+                    string sSalt = Convert.ToBase64String(salt);
                     byte admin = 0;
 
                     if (isAdmin) { admin = 1; }
@@ -65,7 +63,7 @@ namespace TaskManager_BuildingBlocks
                     cmd = new SqlCommand(query, DbConnection.cnn);
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@pass", password);
-                    cmd.Parameters.AddWithValue("@salt", intSalt);
+                    cmd.Parameters.AddWithValue("@salt", sSalt);
                     cmd.Parameters.AddWithValue("@admin", admin);
 
                     cmd.ExecuteNonQuery();
@@ -115,20 +113,21 @@ namespace TaskManager_BuildingBlocks
 
         private string hash(string pass, byte[] salt)
         {
+            var rfc2898DeriveBytes = new Rfc2898DeriveBytes(pass, salt, 10000);           
+            string hashed = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
+            return hashed;
+        }
+
+        private byte[] AddSalt()
+        {
+            // generate a 128-bit salt using a cryptographically strong random sequence of nonzero values
+            byte[] salt = new byte[128 / 8];
             using (var rngCsp = new RNGCryptoServiceProvider())
             {
                 rngCsp.GetNonZeroBytes(salt);
             }
 
-            // derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: pass,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 100000,
-                numBytesRequested: 256 / 8));
-
-            return hashed;
+            return salt;
         }
     }
 }
