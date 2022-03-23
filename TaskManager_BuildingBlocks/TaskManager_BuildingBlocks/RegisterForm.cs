@@ -35,7 +35,7 @@ namespace TaskManager_BuildingBlocks
             string rePass = rePassTxb.Text;
             bool isAdmin = isAdminCbx.Checked;
 
-            if (password != rePass && !Regex.IsMatch(emailTxb.Text, @"^[a-z\.\-]+@[a-z0-9]+\.[a-z]{2,3}$")) 
+            if (passTxb.Text != rePass && !Regex.IsMatch(emailTxb.Text, @"^[a-z\.\-]+@[a-z0-9]+\.[a-z]{2,3}$")) 
             { MessageBox.Show("Passwords do not match"); return; }
             else { Register(salt, email, password, isAdmin); }
             /// TODO 
