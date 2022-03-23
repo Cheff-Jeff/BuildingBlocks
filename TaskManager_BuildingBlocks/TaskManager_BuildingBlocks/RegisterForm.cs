@@ -30,12 +30,12 @@ namespace TaskManager_BuildingBlocks
         {
             byte[] salt = AddSalt();
 
-            string email = emailTxb.Text;
+            string email = emailTxb.Text.ToLower();
             string password = hash(passTxb.Text, salt);
             string rePass = rePassTxb.Text;
             bool isAdmin = isAdminCbx.Checked;
 
-            if (passTxb.Text != rePass && !Regex.IsMatch(emailTxb.Text, @"^[a-z\.\-]+@[a-z0-9]+\.[a-z]{2,3}$")) 
+            if (passTxb.Text != rePass && !Regex.IsMatch(emailTxb.Text, @"^[a-z0-9\.\-]+@[a-z0-9]+\.[a-z]{2,3}$")) 
             { MessageBox.Show("Passwords do not match"); return; }
             else { Register(salt, email, password, isAdmin); }
             /// TODO 
@@ -45,7 +45,7 @@ namespace TaskManager_BuildingBlocks
         private void Register(byte[] salt, string email, string password, bool isAdmin)
         {
             if (CheckUserExist(email))
-            { MessageBox.Show("This user already exists."); }
+            { MessageBox.Show("This user already exists."); return; }
             else
             {
                 DbConnection conn = new DbConnection();

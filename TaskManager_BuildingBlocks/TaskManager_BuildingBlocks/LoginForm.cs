@@ -23,14 +23,16 @@ namespace TaskManager_BuildingBlocks
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-
+            Console.WriteLine("Tets1");
             //TODO
             //  Make inputs red if not correct
             if (passwordTxb.Text == "" || emailTxb.Text == "") return; //password or email is empty
-            if (!Regex.IsMatch(emailTxb.Text, @"^[a-z\.\-]+@[a-z0-9]+\.[a-z]{2,3}$")) return; //email is not an email
-
+            if (!Regex.IsMatch(emailTxb.Text.ToLower(), @"^[a-z0-9\.\-]+@[a-z0-9]+\.[a-z]{2,3}$")) { MessageBox.Show("Email fout"); return; }; //email is not an email
+            
+            Console.WriteLine("Tets");
             User user = GetUserByEmail(emailTxb.Text);
             bool validUser = VerifyPassword(passwordTxb.Text, user.Salt, user.Password);
+            Console.WriteLine(validUser);
 
             if (!validUser) return;
             LoggedIn.User = user.Email;
@@ -46,6 +48,7 @@ namespace TaskManager_BuildingBlocks
         //hash password input and check.
         private bool VerifyPassword(string password, string sSalt, string userPass)
         {
+            Console.WriteLine("in");
             var salt = Convert.FromBase64String(sSalt);
             var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, salt, 10000);
             
@@ -58,6 +61,8 @@ namespace TaskManager_BuildingBlocks
          */
         private User GetUserByEmail(string email)
         {
+            Console.WriteLine("in2");
+
             DbConnection conn = new DbConnection();
             string query = "SELECT Email, Password, Salt FROM Users WHERE Email = (@email)";
             SqlCommand cmd;
