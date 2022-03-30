@@ -125,5 +125,12 @@ namespace TaskManager_BuildingBlocks
             for (int i = 0; i < x.Length; i++) networkChart.Series[0].Points.AddXY(x[i], y[i]);
             for (int i = 0; i < x.Length; i++) { networkChart.Series["Max"].Points.AddXY(x[i], 90); networkChart.Series["Min"].Points.AddXY(x[i], 15); }
         }
+
+        private void HomeBtn_Click(object sender, EventArgs e)
+        {
+            MainForm home = new MainForm();
+            //home.Show();
+            this.Close();
+        }
     }
 }
