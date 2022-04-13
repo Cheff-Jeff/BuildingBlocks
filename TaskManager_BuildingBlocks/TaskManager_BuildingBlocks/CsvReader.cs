@@ -9,34 +9,38 @@ namespace TaskManager_BuildingBlocks
 {
     internal class CsvReader
     {
-        public List<int> GetData()
+        //gets data from a csv file and returns it in a list.
+        public List<double[]> GetData()
         {
+            List<double[]> statslist = new List<double[]>();
+
             using (var reader = new StreamReader(@"\Properties\Data_Numbers_Outsource.csv"))
-            //using (var reader = new StreamReader(@"..\..\..\..\Solitaire\Properties\solitaire1.csv"))
-
-
             {
-                List<string> listA = new List<string>();
-                List<string> listB = new List<string>();
-                List<string> listC = new List<string>();
+                List<double> listA = new List<double>();
+                List<double> listB = new List<double>();
+                List<double> listC = new List<double>();
+                List<double> listD = new List<double>();
+                List<double> listE = new List<double>();
+
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(',');
 
-                    listA.Add(values[1]);
-                    listB.Add(values[2]);
-                    listC.Add(values[3]);
+                    listA.Add(Convert.ToDouble(values[1]));
+                    listB.Add(Convert.ToDouble(values[2]));
+                    listC.Add(Convert.ToDouble(values[3]));
+                    listD.Add(Convert.ToDouble(values[4]));
+                    listE.Add(Convert.ToDouble(values[5]));
                 }
-
-                for (int cardcount = 0; cardcount < 52; cardcount++)
+               
+                for (int statcount = 0; statcount < 52; statcount++)
                 {
-                    Card card = new Card(listA[cardcount], listB[cardcount], Convert.ToInt32(listC[cardcount]), false);
-                    this.cards.Add(card);
+                    double[] stat = { listA[statcount], listB[statcount], listC[statcount], listD[statcount], listE[statcount] };
+                    statslist.Add(stat);
                 }
-
             }
-            return cards;
+            return statslist;
         }
     }
 }

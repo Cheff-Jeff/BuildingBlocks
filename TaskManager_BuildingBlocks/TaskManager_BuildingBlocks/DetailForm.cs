@@ -132,5 +132,10 @@ namespace TaskManager_BuildingBlocks
             //home.Show();
             this.Close();
         }
+
+        private void cpuChart_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
