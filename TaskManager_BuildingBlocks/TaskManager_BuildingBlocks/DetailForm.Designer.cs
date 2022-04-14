@@ -89,6 +89,7 @@ namespace TaskManager_BuildingBlocks
             this.Chart1.Size = new System.Drawing.Size(507, 318);
             this.Chart1.TabIndex = 15;
             this.Chart1.Text = "chart5";
+            this.Chart1.Click += new System.EventHandler(this.Chart1_Click);
             // 
             // ChartLbl
             // 

@@ -44,13 +44,14 @@ namespace TaskManager_BuildingBlocks
                     charts[i].Series[j].IsVisibleInLegend = false;
                     charts[i].Series[j].BorderWidth = 2;
                     charts[i].Series[j].ChartType = SeriesChartType.Line;
+                    charts[i].Series[0].Color = Color.Black;
                 }
             }
-            
         }
 
         private void DataToChart(List<int> data, int min, int max)
         {
+            Chart1.Series[0].MarkerStyle = MarkerStyle.Diamond;
             string[] x = new string[xAmount];
             int[] y = new int[xAmount];
             for (var i = 0; i < xAmount; i++)
@@ -65,6 +66,22 @@ namespace TaskManager_BuildingBlocks
             {
                 Chart1.Series["Max"].Points.AddXY(0, max); Chart1.Series["Min"].Points.AddXY(0, min);
             }
+            foreach(var point in Chart1.Series[0].Points)
+            {
+                if(Convert.ToInt32(point.YValues[0]) < min || Convert.ToInt32(point.YValues[0]) > max)
+                {
+                    point.MarkerColor = Color.Red;
+                }
+                else
+                {
+                    point.MarkerColor = Color.Green;
+                }
+            }
+        }
+
+        public void AddPoint()
+        {
+
         }
 
         private void ClearChart()
@@ -88,6 +105,7 @@ namespace TaskManager_BuildingBlocks
                 case "Ram":
                     ChartLbl.Text = "Ram";
                     ClearChart();
+                    Chart1.ForeColor = Color.Purple;
                     DataToChart(alldata.Ram, 1500, 7500);
                     break;
                 case "CPU":
@@ -111,6 +129,11 @@ namespace TaskManager_BuildingBlocks
                     DataToChart(alldata.Network, 2500, 9500);
                     break;
             }
+        }
+
+        private void Chart1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
