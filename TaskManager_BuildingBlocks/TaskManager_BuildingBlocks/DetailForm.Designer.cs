@@ -44,6 +44,9 @@ namespace TaskManager_BuildingBlocks
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.systemComboBox = new System.Windows.Forms.ComboBox();
             this.cpuChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.gpuChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -56,11 +59,14 @@ namespace TaskManager_BuildingBlocks
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.HomeBtn = new System.Windows.Forms.Button();
+            this.Chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.ChartLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cpuChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpuChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ramChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diskChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.networkChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // systemComboBox
@@ -68,15 +74,17 @@ namespace TaskManager_BuildingBlocks
             this.systemComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.systemComboBox.FormattingEnabled = true;
             this.systemComboBox.Items.AddRange(new object[] {
-            "System 1",
-            "System 2",
-            "System 3",
-            "System 4"});
+            "CPU",
+            "GPU",
+            "Ram",
+            "Disk",
+            "Network"});
             this.systemComboBox.Location = new System.Drawing.Point(67, 74);
-            this.systemComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.systemComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.systemComboBox.Name = "systemComboBox";
             this.systemComboBox.Size = new System.Drawing.Size(465, 39);
             this.systemComboBox.TabIndex = 3;
+            this.systemComboBox.SelectedIndexChanged += new System.EventHandler(this.systemComboBox_SelectedIndexChanged);
             // 
             // cpuChart
             // 
@@ -84,8 +92,8 @@ namespace TaskManager_BuildingBlocks
             this.cpuChart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.cpuChart.Legends.Add(legend1);
-            this.cpuChart.Location = new System.Drawing.Point(67, 138);
-            this.cpuChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cpuChart.Location = new System.Drawing.Point(61, 138);
+            this.cpuChart.Margin = new System.Windows.Forms.Padding(4);
             this.cpuChart.Name = "cpuChart";
             series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
@@ -95,7 +103,6 @@ namespace TaskManager_BuildingBlocks
             this.cpuChart.Size = new System.Drawing.Size(507, 318);
             this.cpuChart.TabIndex = 4;
             this.cpuChart.Text = "Cpu";
-            this.cpuChart.Click += new System.EventHandler(this.cpuChart_Click);
             // 
             // gpuChart
             // 
@@ -104,7 +111,7 @@ namespace TaskManager_BuildingBlocks
             legend2.Name = "Legend1";
             this.gpuChart.Legends.Add(legend2);
             this.gpuChart.Location = new System.Drawing.Point(581, 138);
-            this.gpuChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpuChart.Margin = new System.Windows.Forms.Padding(4);
             this.gpuChart.Name = "gpuChart";
             series2.BorderWidth = 2;
             series2.ChartArea = "ChartArea1";
@@ -122,7 +129,7 @@ namespace TaskManager_BuildingBlocks
             legend3.Name = "Legend1";
             this.ramChart.Legends.Add(legend3);
             this.ramChart.Location = new System.Drawing.Point(67, 487);
-            this.ramChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ramChart.Margin = new System.Windows.Forms.Padding(4);
             this.ramChart.Name = "ramChart";
             series3.BorderWidth = 2;
             series3.ChartArea = "ChartArea1";
@@ -140,7 +147,7 @@ namespace TaskManager_BuildingBlocks
             legend4.Name = "Legend1";
             this.diskChart.Legends.Add(legend4);
             this.diskChart.Location = new System.Drawing.Point(581, 487);
-            this.diskChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.diskChart.Margin = new System.Windows.Forms.Padding(4);
             this.diskChart.Name = "diskChart";
             series4.BorderWidth = 2;
             series4.ChartArea = "ChartArea1";
@@ -158,7 +165,7 @@ namespace TaskManager_BuildingBlocks
             legend5.Name = "Legend1";
             this.networkChart.Legends.Add(legend5);
             this.networkChart.Location = new System.Drawing.Point(1096, 138);
-            this.networkChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.networkChart.Margin = new System.Windows.Forms.Padding(4);
             this.networkChart.Name = "networkChart";
             series5.ChartArea = "ChartArea1";
             series5.Legend = "Legend1";
@@ -232,7 +239,7 @@ namespace TaskManager_BuildingBlocks
             this.HomeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.HomeBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
             this.HomeBtn.Location = new System.Drawing.Point(67, 15);
-            this.HomeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.HomeBtn.Margin = new System.Windows.Forms.Padding(4);
             this.HomeBtn.Name = "HomeBtn";
             this.HomeBtn.Size = new System.Drawing.Size(184, 49);
             this.HomeBtn.TabIndex = 14;
@@ -240,11 +247,42 @@ namespace TaskManager_BuildingBlocks
             this.HomeBtn.UseVisualStyleBackColor = false;
             this.HomeBtn.Click += new System.EventHandler(this.HomeBtn_Click);
             // 
+            // Chart1
+            // 
+            chartArea6.Name = "ChartArea1";
+            this.Chart1.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.Chart1.Legends.Add(legend6);
+            this.Chart1.Location = new System.Drawing.Point(1096, 487);
+            this.Chart1.Margin = new System.Windows.Forms.Padding(4);
+            this.Chart1.Name = "Chart1";
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Network";
+            this.Chart1.Series.Add(series6);
+            this.Chart1.Size = new System.Drawing.Size(507, 318);
+            this.Chart1.TabIndex = 15;
+            this.Chart1.Text = "chart5";
+            // 
+            // ChartLbl
+            // 
+            this.ChartLbl.AutoSize = true;
+            this.ChartLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.ChartLbl.Location = new System.Drawing.Point(1096, 460);
+            this.ChartLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ChartLbl.Name = "ChartLbl";
+            this.ChartLbl.Size = new System.Drawing.Size(54, 25);
+            this.ChartLbl.TabIndex = 16;
+            this.ChartLbl.Text = "GPU";
+            this.ChartLbl.Click += new System.EventHandler(this.label6_Click);
+            // 
             // DetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1683, 828);
+            this.Controls.Add(this.ChartLbl);
+            this.Controls.Add(this.Chart1);
             this.Controls.Add(this.HomeBtn);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -257,7 +295,7 @@ namespace TaskManager_BuildingBlocks
             this.Controls.Add(this.gpuChart);
             this.Controls.Add(this.cpuChart);
             this.Controls.Add(this.systemComboBox);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximumSize = new System.Drawing.Size(1701, 875);
             this.MinimumSize = new System.Drawing.Size(1701, 875);
             this.Name = "DetailForm";
@@ -268,6 +306,7 @@ namespace TaskManager_BuildingBlocks
             ((System.ComponentModel.ISupportInitialize)(this.ramChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diskChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.networkChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,5 +326,7 @@ namespace TaskManager_BuildingBlocks
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button HomeBtn;
+        private System.Windows.Forms.DataVisualization.Charting.Chart Chart1;
+        private System.Windows.Forms.Label ChartLbl;
     }
 }

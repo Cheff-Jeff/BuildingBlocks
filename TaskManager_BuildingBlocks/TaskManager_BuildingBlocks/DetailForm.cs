@@ -17,16 +17,17 @@ namespace TaskManager_BuildingBlocks
     {
         Random random = new Random();
         Chart[] charts;
-        int xAmount = 20;
+        int xAmount = 10;
 
         public DetailForm(int systemId)
         {
+            
             InitializeComponent();
             charts = new Chart[] { cpuChart, gpuChart, ramChart, diskChart, networkChart };
-            GenerateCharts();
+            GenerateCharts(systemId);
         }
 
-        private void GenerateCharts()
+        private void GenerateCharts(int id)
         {
             for (int i = 0; i < charts.Length; i++)
             {
@@ -46,17 +47,17 @@ namespace TaskManager_BuildingBlocks
 
             CsvReader csvReader = new CsvReader();
 
-            PcData alldata = csvReader.GetData();
+            PcData alldata = csvReader.GetData(id);
             
 
-            GenerateCPUChart(alldata.CPU);
-            GenerateGPUChart(alldata.GPU);
-            GenerateRAMChart(alldata.Ram);
-            GenerateDiskChart(alldata.Disk);
-            GenerateNetworkChart(alldata.Network);
+            GenerateCPUChart(alldata.CPU, 3000, 8000);
+            GenerateGPUChart(alldata.GPU, 2500, 9000);
+            GenerateRAMChart(alldata.Ram, 1500, 7500);
+            GenerateDiskChart(alldata.Disk, 3500, 7300);
+            GenerateNetworkChart(alldata.Network, 2500, 9500);
         }
 
-        private void GenerateCPUChart(List<int> data)
+        private void GenerateCPUChart(List<int> data, int min, int max)
         {
             string[] x = new string[xAmount];
             int[] y = new int[xAmount];
@@ -68,10 +69,10 @@ namespace TaskManager_BuildingBlocks
             }
 
             for (int i = 0; i < x.Length; i++) cpuChart.Series[0].Points.AddXY(x[i], y[i]);
-            for (int i = 0; i < x.Length; i++) { cpuChart.Series["Max"].Points.AddXY(x[i], data.Max()); cpuChart.Series["Min"].Points.AddXY(x[i], data.Min()); }
+            for (int i = 0; i < x.Length; i++) { cpuChart.Series["Max"].Points.AddXY(x[i], max); cpuChart.Series["Min"].Points.AddXY(x[i], min); }
         }
 
-        private void GenerateGPUChart(List<int> data)
+        private void GenerateGPUChart(List<int> data, int min, int max)
         {
             string[] x = new string[xAmount];
             int[] y = new int[xAmount];
@@ -83,10 +84,10 @@ namespace TaskManager_BuildingBlocks
             }
 
             for (int i = 0; i < x.Length; i++) gpuChart.Series[0].Points.AddXY(x[i], y[i]);
-            for (int i = 0; i < x.Length; i++) { gpuChart.Series["Max"].Points.AddXY(x[i], data.Max()); gpuChart.Series["Min"].Points.AddXY(x[i], data.Min()); }
+            for (int i = 0; i < x.Length; i++) { gpuChart.Series["Max"].Points.AddXY(x[i], max); gpuChart.Series["Min"].Points.AddXY(x[i], min); }
         }
 
-        private void GenerateRAMChart(List<int> data)
+        private void GenerateRAMChart(List<int> data, int min, int max)
         {
             string[] x = new string[xAmount];
             int[] y = new int[xAmount];
@@ -98,10 +99,10 @@ namespace TaskManager_BuildingBlocks
             }
 
             for (int i = 0; i < x.Length; i++) ramChart.Series[0].Points.AddXY(x[i], y[i]);
-            for (int i = 0; i < x.Length; i++) { ramChart.Series["Max"].Points.AddXY(x[i], data.Max()); ramChart.Series["Min"].Points.AddXY(x[i], data.Min()); }
+            for (int i = 0; i < x.Length; i++) { ramChart.Series["Max"].Points.AddXY(x[i], max); ramChart.Series["Min"].Points.AddXY(x[i], min); }
         }
 
-        private void GenerateDiskChart(List<int> data)
+        private void GenerateDiskChart(List<int> data, int min, int max)
         {
             string[] x = new string[xAmount];
             int[] y = new int[xAmount];
@@ -113,10 +114,10 @@ namespace TaskManager_BuildingBlocks
             }
 
             for (int i = 0; i < x.Length; i++) diskChart.Series[0].Points.AddXY(x[i], y[i]);
-            for (int i = 0; i < x.Length; i++) { diskChart.Series["Max"].Points.AddXY(x[i], data.Max()); diskChart.Series["Min"].Points.AddXY(x[i], data.Min()); }
+            for (int i = 0; i < x.Length; i++) { diskChart.Series["Max"].Points.AddXY(x[i], max); diskChart.Series["Min"].Points.AddXY(x[i], min); }
         }
 
-        private void GenerateNetworkChart(List<int> data)
+        private void GenerateNetworkChart(List<int> data, int min, int max)
         {
             string[] x = new string[xAmount];
             int[] y = new int[xAmount];
@@ -128,7 +129,7 @@ namespace TaskManager_BuildingBlocks
             }
 
             for (int i = 0; i < x.Length; i++) networkChart.Series[0].Points.AddXY(x[i], y[i]);
-            for (int i = 0; i < x.Length; i++) { networkChart.Series["Max"].Points.AddXY(x[i], data.Max()); networkChart.Series["Min"].Points.AddXY(x[i], data.Min()); }
+            for (int i = 0; i < x.Length; i++) { networkChart.Series["Max"].Points.AddXY(x[i], max); networkChart.Series["Min"].Points.AddXY(x[i], min); }
         }
 
         private void HomeBtn_Click(object sender, EventArgs e)
@@ -138,7 +139,32 @@ namespace TaskManager_BuildingBlocks
             this.Close();
         }
 
-        private void cpuChart_Click(object sender, EventArgs e)
+        private void systemComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (systemComboBox.SelectedItem.ToString())
+            {
+                case "Ram":
+                    ChartLbl.Text = "Ram";
+                    break;
+                case "CPU":
+                    ChartLbl.Text = "CPU";
+                    break;
+                case "GPU":
+                    ChartLbl.Text = "GPU";
+                    break;
+                case "Disk":
+                    ChartLbl.Text = "Disk";
+                    break;
+                case "Network":
+                    ChartLbl.Text = "Network";
+                    break;
+                default:
+                    ChartLbl.Text = "GPU";
+                    break;
+            }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
         {
 
         }

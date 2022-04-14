@@ -10,30 +10,28 @@ namespace TaskManager_BuildingBlocks
     internal class CsvReader
     {
         //gets data from a csv file and returns it in a list.
-        public PcData GetData()
+        public PcData GetData(int id)
         {
             PcData data = new PcData();
 
             using (var reader = new StreamReader(@"..\..\Properties\Datasheet.csv"))
             {
-                List<int> listA = new List<int>();
-                List<int> listB = new List<int>();
-                List<int> listC = new List<int>();
-                List<int> listD = new List<int>();
-                List<int> listE = new List<int>();
-                List<int> listF = new List<int>();
 
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(',');
 
-                    data.id.Add(Convert.ToInt32(values[0]));
-                    data.CPU.Add(Convert.ToInt32(values[1]));
-                    data.GPU.Add(Convert.ToInt32(values[2]));
-                    data.Ram.Add(Convert.ToInt32(values[3]));
-                    data.Disk.Add(Convert.ToInt32(values[4]));
-                    data.Network.Add(Convert.ToInt32(values[5]));
+                    if(id == Convert.ToInt32(values[0]))
+                    {
+                        data.id.Add(Convert.ToInt32(values[0]));
+                        data.CPU.Add(Convert.ToInt32(values[1]));
+                        data.GPU.Add(Convert.ToInt32(values[2]));
+                        data.Ram.Add(Convert.ToInt32(values[3]));
+                        data.Disk.Add(Convert.ToInt32(values[4]));
+                        data.Network.Add(Convert.ToInt32(values[5]));
+                    }
+                    
 
                 }
 
