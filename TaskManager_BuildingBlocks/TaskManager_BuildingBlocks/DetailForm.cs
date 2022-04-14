@@ -44,7 +44,11 @@ namespace TaskManager_BuildingBlocks
                     charts[i].Series[j].IsVisibleInLegend = false;
                     charts[i].Series[j].BorderWidth = 2;
                     charts[i].Series[j].ChartType = SeriesChartType.Line;
-                    charts[i].Series[0].Color = Color.Black;
+                    charts[i].Series[0].Color = Color.Gray;
+                    charts[i].Series["Min"].Color = Color.Orange;
+                    charts[i].Series["Max"].Color = Color.Orange;
+
+
                 }
             }
         }
