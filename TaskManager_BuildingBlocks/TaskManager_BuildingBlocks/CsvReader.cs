@@ -10,37 +10,40 @@ namespace TaskManager_BuildingBlocks
     internal class CsvReader
     {
         //gets data from a csv file and returns it in a list.
-        public List<double[]> GetData()
+        public PcData GetData()
         {
-            List<double[]> statslist = new List<double[]>();
+            PcData data = new PcData();
 
-            using (var reader = new StreamReader(@"\Properties\Data_Numbers_Outsource.csv"))
+            using (var reader = new StreamReader(@"..\..\Properties\Datasheet.csv"))
             {
-                List<double> listA = new List<double>();
-                List<double> listB = new List<double>();
-                List<double> listC = new List<double>();
-                List<double> listD = new List<double>();
-                List<double> listE = new List<double>();
+                List<int> listA = new List<int>();
+                List<int> listB = new List<int>();
+                List<int> listC = new List<int>();
+                List<int> listD = new List<int>();
+                List<int> listE = new List<int>();
+                List<int> listF = new List<int>();
 
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(',');
 
-                    listA.Add(Convert.ToDouble(values[1]));
-                    listB.Add(Convert.ToDouble(values[2]));
-                    listC.Add(Convert.ToDouble(values[3]));
-                    listD.Add(Convert.ToDouble(values[4]));
-                    listE.Add(Convert.ToDouble(values[5]));
+                    data.id.Add(Convert.ToInt32(values[0]));
+                    data.CPU.Add(Convert.ToInt32(values[1]));
+                    data.GPU.Add(Convert.ToInt32(values[2]));
+                    data.Ram.Add(Convert.ToInt32(values[3]));
+                    data.Disk.Add(Convert.ToInt32(values[4]));
+                    data.Network.Add(Convert.ToInt32(values[5]));
+
                 }
-               
-                for (int statcount = 0; statcount < 52; statcount++)
-                {
-                    double[] stat = { listA[statcount], listB[statcount], listC[statcount], listD[statcount], listE[statcount] };
-                    statslist.Add(stat);
-                }
+
+                //for (int statcount = 0; statcount < listA.Count; statcount++)
+                //{
+                //    PcData stat = new PcData( listA[statcount], listB[statcount], listC[statcount], listD[statcount], listE[statcount], listF[statcount] );
+                //    statslist.Add(stat);
+                //}
             }
-            return statslist;
+            return data;
         }
     }
 }
