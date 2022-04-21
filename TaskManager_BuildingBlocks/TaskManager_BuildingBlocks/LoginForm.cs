@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 using System.Data.SqlClient;
+using BusinessLogicLayer;
 
 namespace TaskManager_BuildingBlocks
 {

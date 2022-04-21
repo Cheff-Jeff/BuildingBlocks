@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLogicLayer;
 
 namespace ViewLayer
 {
@@ -100,8 +101,8 @@ namespace ViewLayer
 
         private void btManageusers_Click(object sender, EventArgs e)
         {
-            //UserManagerForm umForm = new UserManagerForm();
-            //umForm.ShowDialog();
+            UserManagerForm umForm = new UserManagerForm();
+            umForm.ShowDialog();
         }
     }
 }

@@ -7,30 +7,43 @@ namespace DataAccesLayer
 {
     public class LoginDAL : SqlConnect
     {
+        public bool userexists = false;
+        public LoginDAL()
+        {
+            Initialize();
+        }
 
-        public void GetUserByEmail(string email)
+        public List<LoginDTO> GetUserByEmail(string email)
         {
 
             try
             {
                 OpenConnect();
 
+                cmd.Parameters.Clear();
+
                 cmd.CommandText = "SELECT Email, Password, Salt FROM Users WHERE Email = (@email)";
-                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@Email", email);
 
-                List<LoginDTO> listall = new List<LoginDTO>();
+                using SqlDataReader rdr = cmd.ExecuteReader();
 
-                using (SqlDataReader rdr = cmd.ExecuteReader())
+                List<LoginDTO> listone = new List<LoginDTO>();
+                
+                if (rdr.HasRows)
                 {
-                    while (rdr.Read())
-                    {
-                        //Ema = rdr["Id"].ToString();
-                        //p = rdr["Firstname"].ToString();
-                        //userlastname = rdr["Lastname"].ToString();
-                    }
-                }
+                    userexists = true;
 
-                //return new User("", "", "");
+                    rdr.Read();
+                    LoginDTO user = new LoginDTO()
+                    {
+                        Email = (rdr["Email"].ToString()),
+                        Password = (rdr["Password"].ToString()),
+                        Salt = (rdr["Salt"].ToString()),
+                    };
+                    listone.Add(user);
+                }
+                CloseConnect();
+                return listone;
             }
             catch (SqlException ex)
             {

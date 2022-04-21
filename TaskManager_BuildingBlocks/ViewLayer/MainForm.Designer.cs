@@ -40,7 +40,6 @@ namespace ViewLayer
             this.Disk_usage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Network_usage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createUserBtn = new System.Windows.Forms.Button();
             this.logoutBtn = new System.Windows.Forms.Button();
             this.btManageusers = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.exceedingSystemDataGrid)).BeginInit();
@@ -48,15 +47,15 @@ namespace ViewLayer
             // 
             // systemComboBox
             // 
-            this.systemComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.systemComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.systemComboBox.FormattingEnabled = true;
             this.systemComboBox.Items.AddRange(new object[] {
             "System 1",
             "System 2",
             "System 3",
             "System 4"});
-            this.systemComboBox.Location = new System.Drawing.Point(67, 74);
-            this.systemComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.systemComboBox.Location = new System.Drawing.Point(67, 92);
+            this.systemComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.systemComboBox.Name = "systemComboBox";
             this.systemComboBox.Size = new System.Drawing.Size(465, 39);
             this.systemComboBox.TabIndex = 2;
@@ -83,7 +82,7 @@ namespace ViewLayer
             this.ID});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -92,12 +91,12 @@ namespace ViewLayer
             this.exceedingSystemDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.exceedingSystemDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.exceedingSystemDataGrid.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.exceedingSystemDataGrid.Location = new System.Drawing.Point(67, 153);
-            this.exceedingSystemDataGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.exceedingSystemDataGrid.Location = new System.Drawing.Point(67, 191);
+            this.exceedingSystemDataGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.exceedingSystemDataGrid.Name = "exceedingSystemDataGrid";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.WindowText;
@@ -106,7 +105,7 @@ namespace ViewLayer
             this.exceedingSystemDataGrid.RowHeadersVisible = false;
             this.exceedingSystemDataGrid.RowHeadersWidth = 50;
             this.exceedingSystemDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.exceedingSystemDataGrid.Size = new System.Drawing.Size(1191, 544);
+            this.exceedingSystemDataGrid.Size = new System.Drawing.Size(1191, 680);
             this.exceedingSystemDataGrid.TabIndex = 3;
             this.exceedingSystemDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.exceedingSystemDataGrid_CellClick);
             this.exceedingSystemDataGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.exceedingSystemDataGrid_CellFormatting);
@@ -161,35 +160,18 @@ namespace ViewLayer
             this.ID.Visible = false;
             this.ID.Width = 125;
             // 
-            // createUserBtn
-            // 
-            this.createUserBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.createUserBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
-            this.createUserBtn.FlatAppearance.BorderSize = 2;
-            this.createUserBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.createUserBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.createUserBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
-            this.createUserBtn.Location = new System.Drawing.Point(1388, 69);
-            this.createUserBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.createUserBtn.Name = "createUserBtn";
-            this.createUserBtn.Size = new System.Drawing.Size(184, 49);
-            this.createUserBtn.TabIndex = 11;
-            this.createUserBtn.Text = "Create User";
-            this.createUserBtn.UseVisualStyleBackColor = false;
-            this.createUserBtn.Click += new System.EventHandler(this.createUserBtn_Click);
-            // 
             // logoutBtn
             // 
             this.logoutBtn.BackColor = System.Drawing.SystemColors.Control;
             this.logoutBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
             this.logoutBtn.FlatAppearance.BorderSize = 2;
             this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.logoutBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.logoutBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.logoutBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
-            this.logoutBtn.Location = new System.Drawing.Point(1196, 69);
-            this.logoutBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.logoutBtn.Location = new System.Drawing.Point(1196, 86);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.logoutBtn.Name = "logoutBtn";
-            this.logoutBtn.Size = new System.Drawing.Size(184, 49);
+            this.logoutBtn.Size = new System.Drawing.Size(184, 61);
             this.logoutBtn.TabIndex = 12;
             this.logoutBtn.Text = "Logout";
             this.logoutBtn.UseVisualStyleBackColor = false;
@@ -201,12 +183,12 @@ namespace ViewLayer
             this.btManageusers.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
             this.btManageusers.FlatAppearance.BorderSize = 2;
             this.btManageusers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btManageusers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.btManageusers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btManageusers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
-            this.btManageusers.Location = new System.Drawing.Point(1388, 126);
-            this.btManageusers.Margin = new System.Windows.Forms.Padding(4);
+            this.btManageusers.Location = new System.Drawing.Point(1388, 86);
+            this.btManageusers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btManageusers.Name = "btManageusers";
-            this.btManageusers.Size = new System.Drawing.Size(184, 49);
+            this.btManageusers.Size = new System.Drawing.Size(184, 61);
             this.btManageusers.TabIndex = 13;
             this.btManageusers.Text = "Manage Users";
             this.btManageusers.UseVisualStyleBackColor = false;
@@ -214,17 +196,16 @@ namespace ViewLayer
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1683, 828);
+            this.ClientSize = new System.Drawing.Size(1683, 1035);
             this.Controls.Add(this.btManageusers);
             this.Controls.Add(this.logoutBtn);
-            this.Controls.Add(this.createUserBtn);
             this.Controls.Add(this.exceedingSystemDataGrid);
             this.Controls.Add(this.systemComboBox);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.MaximumSize = new System.Drawing.Size(1701, 875);
-            this.MinimumSize = new System.Drawing.Size(1701, 875);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximumSize = new System.Drawing.Size(1701, 1082);
+            this.MinimumSize = new System.Drawing.Size(1701, 1028);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainWindow";
@@ -237,7 +218,6 @@ namespace ViewLayer
         #endregion
         private System.Windows.Forms.ComboBox systemComboBox;
         private System.Windows.Forms.DataGridView exceedingSystemDataGrid;
-        private System.Windows.Forms.Button createUserBtn;
         private System.Windows.Forms.Button logoutBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn System_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn CPU_usage;
