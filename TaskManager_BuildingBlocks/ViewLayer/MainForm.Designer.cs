@@ -1,5 +1,5 @@
 ﻿
-namespace TaskManager_BuildingBlocks
+namespace ViewLayer
 {
     partial class MainForm
     {

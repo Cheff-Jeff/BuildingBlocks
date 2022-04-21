@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TaskManager_BuildingBlocks
+namespace ViewLayer
 {
     public partial class MainForm : Form
     {
@@ -45,10 +45,10 @@ namespace TaskManager_BuildingBlocks
         private void systemComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // TODO get system ID from invis table
-            DetailForm df = new DetailForm(systemComboBox.SelectedIndex); // change to system ID
-            this.Hide();
-            df.ShowDialog();
-            this.Show();
+            //DetailForm df = new DetailForm(systemComboBox.SelectedIndex); // change to system ID
+            //this.Hide();
+            //df.ShowDialog();
+            //this.Show();
         }
 
         private void exceedingSystemDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -63,18 +63,18 @@ namespace TaskManager_BuildingBlocks
         {
             //TODO change rowindex to invisible system ID 
             if (e.RowIndex == -1) return;
-            DetailForm df = new DetailForm(e.RowIndex + 1);
-            this.Hide();
-            df.ShowDialog();
-            this.Show();
+            //DetailForm df = new DetailForm(e.RowIndex + 1);
+            //this.Hide();
+            //df.ShowDialog();
+            //this.Show();
         }
 
         private void createUserBtn_Click(object sender, EventArgs e)
         {
-            RegisterForm rg = new RegisterForm();
-            this.Hide();
-            rg.ShowDialog();
-            this.Show();
+            //RegisterForm rg = new RegisterForm();
+            //this.Hide();
+            //rg.ShowDialog();
+            //this.Show();
         }
 
         private void logoutBtn_Click(object sender, EventArgs e)

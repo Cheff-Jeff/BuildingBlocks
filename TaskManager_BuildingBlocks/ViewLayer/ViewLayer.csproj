@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="UserManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UserManagerForm.Designer.cs">
+      <DependentUpon>UserManagerForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="UserManagerForm.resx">
+      <DependentUpon>UserManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
