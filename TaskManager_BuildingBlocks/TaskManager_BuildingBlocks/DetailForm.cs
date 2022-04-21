@@ -15,18 +15,21 @@ namespace TaskManager_BuildingBlocks
 {
     public partial class DetailForm : Form
     {
-        Random random = new Random();
+        int xAmount = 10;
+        PcData alldata;
         Chart[] charts;
-        int xAmount = 20;
 
         public DetailForm(int systemId)
         {
             InitializeComponent();
-            charts = new Chart[] { cpuChart, gpuChart, ramChart, diskChart, networkChart };
-            GenerateCharts();
+            charts = new Chart[] { Chart1 };
+            CsvReader csvReader = new CsvReader();
+            alldata = csvReader.GetData(systemId);
+            GenerateChart();
+            DataToChart(alldata.GPU, 2500, 9000);
         }
 
-        private void GenerateCharts()
+        private void GenerateChart()
         {
             for (int i = 0; i < charts.Length; i++)
             {
@@ -35,95 +38,61 @@ namespace TaskManager_BuildingBlocks
                 Series srMn = new Series("Min");
                 charts[i].Series.Add(srMx);
                 charts[i].Series.Add(srMn);
-                charts[i].ChartAreas[0].AxisY.ScaleView.Size = 100;
+                charts[i].ChartAreas[0].AxisY.ScaleView.Size = 10000;
                 for (int j = 0; j <= 2; j++)
                 {
                     charts[i].Series[j].IsVisibleInLegend = false;
                     charts[i].Series[j].BorderWidth = 2;
                     charts[i].Series[j].ChartType = SeriesChartType.Line;
+                    charts[i].Series[0].Color = Color.Gray;
+                    charts[i].Series["Min"].Color = Color.Orange;
+                    charts[i].Series["Max"].Color = Color.Orange;
+
+
                 }
             }
-
-            GenerateCPUChart();
-            GenerateGPUChart();
-            GenerateRAMChart();
-            GenerateDiskChart();
-            GenerateNetworkChart();
         }
 
-        private void GenerateCPUChart()
+        private void DataToChart(List<int> data, int min, int max)
         {
+            Chart1.Series[0].MarkerStyle = MarkerStyle.Diamond;
             string[] x = new string[xAmount];
             int[] y = new int[xAmount];
             for (var i = 0; i < xAmount; i++)
             {
                 Console.WriteLine("forloop time " + i);
                 x[i] = i.ToString();
-                y[i] = random.Next(10, 90);
+                y[i] = data[i];
             }
 
-            for (int i = 0; i < x.Length; i++) cpuChart.Series[0].Points.AddXY(x[i], y[i]);
-            for (int i = 0; i < x.Length; i++) { cpuChart.Series["Max"].Points.AddXY(x[i], 90); cpuChart.Series["Min"].Points.AddXY(x[i], 15); }
+            for (int i = 0; i < x.Length; i++) Chart1.Series[0].Points.AddXY(x[i], y[i]);
+            for (int i = 0; i < x.Length; i++)
+            {
+                Chart1.Series["Max"].Points.AddXY(0, max); Chart1.Series["Min"].Points.AddXY(0, min);
+            }
+            foreach(var point in Chart1.Series[0].Points)
+            {
+                if(Convert.ToInt32(point.YValues[0]) < min || Convert.ToInt32(point.YValues[0]) > max)
+                {
+                    point.MarkerColor = Color.Red;
+                }
+                else
+                {
+                    point.MarkerColor = Color.Green;
+                }
+            }
         }
 
-        private void GenerateGPUChart()
+        public void AddPoint()
         {
-            string[] x = new string[xAmount];
-            int[] y = new int[xAmount];
-            for (var i = 0; i < xAmount; i++)
-            {
-                Console.WriteLine("forloop time " + i);
-                x[i] = i.ToString();
-                y[i] = random.Next(10, 90);
-            }
 
-            for (int i = 0; i < x.Length; i++) gpuChart.Series[0].Points.AddXY(x[i], y[i]);
-            for (int i = 0; i < x.Length; i++) { gpuChart.Series["Max"].Points.AddXY(x[i], 90); gpuChart.Series["Min"].Points.AddXY(x[i], 15); }
         }
 
-        private void GenerateRAMChart()
+        private void ClearChart()
         {
-            string[] x = new string[xAmount];
-            int[] y = new int[xAmount];
-            for (var i = 0; i < xAmount; i++)
-            {
-                Console.WriteLine("forloop time " + i);
-                x[i] = i.ToString();
-                y[i] = random.Next(10, 90);
-            }
-
-            for (int i = 0; i < x.Length; i++) ramChart.Series[0].Points.AddXY(x[i], y[i]);
-            for (int i = 0; i < x.Length; i++) { ramChart.Series["Max"].Points.AddXY(x[i], 90); ramChart.Series["Min"].Points.AddXY(x[i], 15); }
-        }
-
-        private void GenerateDiskChart()
-        {
-            string[] x = new string[xAmount];
-            int[] y = new int[xAmount];
-            for (var i = 0; i < xAmount; i++)
-            {
-                Console.WriteLine("forloop time " + i);
-                x[i] = i.ToString();
-                y[i] = random.Next(10, 90);
-            }
-
-            for (int i = 0; i < x.Length; i++) diskChart.Series[0].Points.AddXY(x[i], y[i]);
-            for (int i = 0; i < x.Length; i++) { diskChart.Series["Max"].Points.AddXY(x[i], 90); diskChart.Series["Min"].Points.AddXY(x[i], 15); }
-        }
-
-        private void GenerateNetworkChart()
-        {
-            string[] x = new string[xAmount];
-            int[] y = new int[xAmount];
-            for (var i = 0; i < xAmount; i++)
-            {
-                Console.WriteLine("forloop time " + i);
-                x[i] = i.ToString();
-                y[i] = random.Next(10, 90);
-            }
-
-            for (int i = 0; i < x.Length; i++) networkChart.Series[0].Points.AddXY(x[i], y[i]);
-            for (int i = 0; i < x.Length; i++) { networkChart.Series["Max"].Points.AddXY(x[i], 90); networkChart.Series["Min"].Points.AddXY(x[i], 15); }
+            Chart1.Series[0].Points.Clear();
+            Chart1.Series["Max"].Points.Clear();
+            Chart1.Series["Min"].Points.Clear();
         }
 
         private void HomeBtn_Click(object sender, EventArgs e)
@@ -131,6 +100,44 @@ namespace TaskManager_BuildingBlocks
             MainForm home = new MainForm();
             //home.Show();
             this.Close();
+        }
+
+        private void systemComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (systemComboBox.SelectedItem.ToString())
+            {
+                case "Ram":
+                    ChartLbl.Text = "Ram";
+                    ClearChart();
+                    Chart1.ForeColor = Color.Purple;
+                    DataToChart(alldata.Ram, 1500, 7500);
+                    break;
+                case "CPU":
+                    ChartLbl.Text = "CPU";
+                    ClearChart();
+                    DataToChart(alldata.CPU, 3000, 8000);
+                    break;
+                case "GPU":
+                    ChartLbl.Text = "GPU";
+                    ClearChart();
+                    DataToChart(alldata.GPU, 2500, 9000);
+                    break;
+                case "Disk":
+                    ChartLbl.Text = "Disk";
+                    ClearChart();
+                    DataToChart(alldata.Disk, 3500, 7300);
+                    break;
+                case "Network":
+                    ChartLbl.Text = "Network";
+                    ClearChart();
+                    DataToChart(alldata.Network, 2500, 9500);
+                    break;
+            }
+        }
+
+        private void Chart1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
