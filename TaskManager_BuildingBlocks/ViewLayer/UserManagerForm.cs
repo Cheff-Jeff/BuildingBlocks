@@ -26,6 +26,7 @@ namespace ViewLayer
             InitializeComponent();
             userContainer = new UserContainer();
 
+            dgvUsers.ReadOnly = true;
             //datagridview opmaak.
             dgvUsers.ColumnCount = 4;
             dgvUsers.Columns[0].Name = "UserId";
@@ -73,8 +74,8 @@ namespace ViewLayer
             if (dgvUsers.Columns[e.ColumnIndex].HeaderText == "Edit")
             {
                 UserEdit user = new UserEdit();
-                user.btSaveCreate.Visible = true;
-                user.btSaveEdit.Visible = false;
+                user.btSaveCreate.Visible = false;
+                user.btSaveEdit.Visible = true;
                 user.ShowDialog();
                 FillGridView();
             }

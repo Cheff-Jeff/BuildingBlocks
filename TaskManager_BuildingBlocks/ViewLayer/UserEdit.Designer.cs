@@ -44,7 +44,7 @@ namespace ViewLayer
             // 
             // btExit
             // 
-            this.btExit.Location = new System.Drawing.Point(342, 229);
+            this.btExit.Location = new System.Drawing.Point(348, 237);
             this.btExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btExit.Name = "btExit";
             this.btExit.Size = new System.Drawing.Size(114, 31);
@@ -55,7 +55,7 @@ namespace ViewLayer
             // 
             // btCancel
             // 
-            this.btCancel.Location = new System.Drawing.Point(102, 229);
+            this.btCancel.Location = new System.Drawing.Point(108, 237);
             this.btCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(114, 31);
@@ -66,7 +66,7 @@ namespace ViewLayer
             // 
             // btSaveEdit
             // 
-            this.btSaveEdit.Location = new System.Drawing.Point(222, 230);
+            this.btSaveEdit.Location = new System.Drawing.Point(228, 238);
             this.btSaveEdit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btSaveEdit.Name = "btSaveEdit";
             this.btSaveEdit.Size = new System.Drawing.Size(114, 31);
@@ -78,11 +78,11 @@ namespace ViewLayer
             // lbAdress
             // 
             this.lbAdress.AutoSize = true;
-            this.lbAdress.Location = new System.Drawing.Point(15, 109);
+            this.lbAdress.Location = new System.Drawing.Point(15, 112);
             this.lbAdress.Name = "lbAdress";
-            this.lbAdress.Size = new System.Drawing.Size(125, 20);
+            this.lbAdress.Size = new System.Drawing.Size(132, 20);
             this.lbAdress.TabIndex = 69;
-            this.lbAdress.Text = "Retype password:";
+            this.lbAdress.Text = "Confirm password:";
             // 
             // lbLastname
             // 
@@ -104,7 +104,7 @@ namespace ViewLayer
             // 
             // tbRetypepassword
             // 
-            this.tbRetypepassword.Location = new System.Drawing.Point(140, 109);
+            this.tbRetypepassword.Location = new System.Drawing.Point(148, 109);
             this.tbRetypepassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbRetypepassword.Name = "tbRetypepassword";
             this.tbRetypepassword.Size = new System.Drawing.Size(296, 27);
@@ -112,7 +112,7 @@ namespace ViewLayer
             // 
             // tbPassword
             // 
-            this.tbPassword.Location = new System.Drawing.Point(140, 63);
+            this.tbPassword.Location = new System.Drawing.Point(148, 63);
             this.tbPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(296, 27);
@@ -120,7 +120,7 @@ namespace ViewLayer
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(140, 16);
+            this.tbEmail.Location = new System.Drawing.Point(148, 16);
             this.tbEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(296, 27);
@@ -129,7 +129,7 @@ namespace ViewLayer
             // rbIsadmin
             // 
             this.rbIsadmin.AutoSize = true;
-            this.rbIsadmin.Location = new System.Drawing.Point(234, 164);
+            this.rbIsadmin.Location = new System.Drawing.Point(243, 161);
             this.rbIsadmin.Name = "rbIsadmin";
             this.rbIsadmin.Size = new System.Drawing.Size(84, 24);
             this.rbIsadmin.TabIndex = 77;
@@ -139,7 +139,7 @@ namespace ViewLayer
             // 
             // btSaveCreate
             // 
-            this.btSaveCreate.Location = new System.Drawing.Point(222, 229);
+            this.btSaveCreate.Location = new System.Drawing.Point(228, 237);
             this.btSaveCreate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btSaveCreate.Name = "btSaveCreate";
             this.btSaveCreate.Size = new System.Drawing.Size(114, 31);
