@@ -46,10 +46,10 @@ namespace ViewLayer
         private void systemComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // TODO get system ID from invis table
-            //DetailForm df = new DetailForm(systemComboBox.SelectedIndex); // change to system ID
-            //this.Hide();
-            //df.ShowDialog();
-            //this.Show();
+            DetailForm df = new DetailForm(systemComboBox.SelectedIndex); // change to system ID
+            this.Hide();
+            df.ShowDialog();
+            this.Show();
         }
 
         private void exceedingSystemDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

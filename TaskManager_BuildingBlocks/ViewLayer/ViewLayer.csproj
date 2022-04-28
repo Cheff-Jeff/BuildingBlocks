@@ -7,10 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HIC.System.Windows.Forms.DataVisualization" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="DetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UserManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
