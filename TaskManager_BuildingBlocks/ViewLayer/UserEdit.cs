@@ -9,7 +9,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLogicLayer;
+using BusinessLayer;
+using DataLayer;
 
 namespace ViewLayer
 {
@@ -21,8 +22,8 @@ namespace ViewLayer
         public UserEdit()
         {
             InitializeComponent();
-            user = new User();
-            userContainer = new UserContainer();
+            user = new User(new UserDAL());
+            userContainer = new UserContainer(new UserDAL());
 
             tbEmail.Text = UserManagerForm.Email;
         }
@@ -71,7 +72,8 @@ namespace ViewLayer
 
                     else
                     {
-                        user.EditOneUser(salt, UserManagerForm.Id, Email, Password, isAdmin);
+                        User us = new User(salt, UserManagerForm.Id, Email, Password, isAdmin);
+                        user.EditOneUser(us);
                         MessageBox.Show(string.Format("User has been edited new userinfo: " + Environment.NewLine + "Email: {0}" + Environment.NewLine + "Password: ******" + Environment.NewLine + " IsAdmin: {1}", Email, isAdmin, "Edit user", MessageBoxButtons.OK, MessageBoxIcon.Information));
                         this.Hide();
                     }
@@ -111,15 +113,16 @@ namespace ViewLayer
 
                     else
                     {
-                        userContainer.CheckUserExists(Email);
-                        if(userContainer.check == true)
+                        User us = new User(Email);
+                        if (userContainer.CheckUserExists(us) == true)
                         {
                             MessageBox.Show("User (Email) already exists", "Create user", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
 
-                        else if(userContainer.check == false)
+                        else
                         {
-                            userContainer.UserRegister(salt, Email, Password, isAdmin);
+                            User us1 = new User(salt, Email, Password, isAdmin);
+                            userContainer.UserRegister(us1);
 
                             MessageBox.Show(string.Format("User has been created userinfo: " + Environment.NewLine + "Email: {0}" + Environment.NewLine + "Password: ******" + Environment.NewLine + " IsAdmin: {1}", Email, isAdmin, "Create user", MessageBoxButtons.OK, MessageBoxIcon.Information));
                             this.Hide();

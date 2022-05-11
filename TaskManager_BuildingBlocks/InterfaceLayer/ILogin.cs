@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace InterfaceLayer
 {
-    public interface IUser
+    public interface ILogin
     {
-        public void EditOne(UserDTO dto);
+        public List<LoginDTO> GetUserByEmail(LoginDTO dto);
+
+        public bool LoginUserCheck(LoginDTO dto);
     }
 }

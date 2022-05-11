@@ -10,7 +10,8 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 using System.Data.SqlClient;
-using BusinessLogicLayer;
+using BusinessLayer;
+using DataLayer;
 
 namespace ViewLayer
 {
@@ -21,7 +22,7 @@ namespace ViewLayer
         public LoginForm()
         {
             InitializeComponent();
-            login = new Login();
+            login = new Login(new LoginDAL());
 
             passwordTxb.ForeColor = Color.Orange;
             passwordTxb.UseSystemPasswordChar = true;
@@ -37,16 +38,18 @@ namespace ViewLayer
             {
                 // email is not an email
                 MessageBox.Show("Email fout"); return; 
-            } 
+            }
 
-            login.GetUserByEmail(emailTxb.Text);
-            if(login.userexists == false)
+            Login log = new Login(emailTxb.Text);
+            if(login.LoginUserCheck(log) == false)
             {
                 MessageBox.Show("Incorrect Email or Password"); return;
             }
 
-            else if(login.userexists == true)
+            else
             {
+                Login log1 = new Login(emailTxb.Text);
+                login.GetUserByEmail(log1);
                 bool validUser = login.VerifyPassword(passwordTxb.Text, Login.usersalt, Login.userpassword);
                 if (!validUser) return;
                 LoggedIn.User = Login.useremail;

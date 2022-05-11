@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Windows.Forms.DataVisualization.Charting;
-using BusinessLogicLayer;
+using BusinessLayer;
 
 namespace ViewLayer
 {

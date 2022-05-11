@@ -8,7 +8,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLogicLayer;
+using BusinessLayer;
+using DataLayer;
 
 namespace ViewLayer
 {
@@ -24,7 +25,7 @@ namespace ViewLayer
         public UserManagerForm()
         {
             InitializeComponent();
-            userContainer = new UserContainer();
+            userContainer = new UserContainer(new UserDAL());
 
             dgvUsers.ReadOnly = true;
             //datagridview opmaak.
@@ -85,7 +86,8 @@ namespace ViewLayer
                 var res = MessageBox.Show("Are you sure you want to delete user", "Delete user", MessageBoxButtons.YesNo);
                 if (res == DialogResult.Yes)
                 {
-                    userContainer.DeleteOneAccount(Id);
+                    User us = new User(Id);
+                    userContainer.DeleteOneAccount(us);
                     MessageBox.Show(string.Format("User with Email: {0} has been deleted", Email, "Delete user", MessageBoxButtons.OK, MessageBoxIcon.Information));
                     FillGridView();
                 }
