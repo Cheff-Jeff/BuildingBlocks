@@ -103,5 +103,11 @@ namespace ViewLayer
             UserManagerForm umForm = new UserManagerForm();
             umForm.ShowDialog();
         }
+
+        private void btTestForm_Click(object sender, EventArgs e)
+        {
+            DBTest test = new DBTest();
+            test.ShowDialog();
+        }
     }
 }
