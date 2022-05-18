@@ -1,0 +1,23 @@
+﻿html,
+body,
+main{
+    height: 100%;
+}
+
+.logo-wrap {
+    width: 15%;
+    margin: 0 auto 40px;
+}
+
+.logo-wrap svg {
+    width: 100%;
+}
+
+.custom-input-wrapper .form-control {
+    width: 85%;
+    margin: auto;
+}
+
+.custom-input-wrapper input {
+    border: 1px solid #ff8300;
+}
