@@ -13,5 +13,13 @@ namespace InterfaceLayer.DTO
         public int SystemId;
         public int Value;
         public DateTime Date;
+        public MetricDTO(int id, string name, int systemId, int value, DateTime date)
+        {
+            MetricId = id;
+            Name = name;
+            SystemId = systemId;
+            Value = value;
+            Date = date;
+        }
     }
 }
