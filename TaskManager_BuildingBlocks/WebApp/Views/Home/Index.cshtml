@@ -12,7 +12,13 @@
 }
 <div class="container h-100 d-flex flex-row align-items-center justify-content-center">
     <div class="inner-size">
-        <form asp-controller="Home" asp-action="Login" method="post" class="custom-input-wrapper">
+        @if (@ViewBag.error != null)
+        {
+            <div class="alert alert-danger w-50 m-auto" role="alert">
+                <span>@ViewBag.error</span>
+            </div>
+        }
+        <form asp-controller="Home" asp-action="Index" method="post" class="custom-input-wrapper mt-5">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-12">
                     <div class="logo-wrap">
@@ -26,25 +32,25 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-7">
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input 
                             type="email" 
                             class="form-control text-center" 
                             placeholder="Email" 
                             asp-for="Email"
                         />
-                        <span asp-validation-for="Email"></span>
+                        <span asp-validation-for="Email" class="text-danger error-masage"></span>
                     </div>
                 </div>
                 <div class="col-12 col-md-7">
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input 
                             type="password" 
                             class="form-control text-center" 
                             placeholder="Password" 
                             asp-for="Password"
                         />
-                        <span asp-validation-for="Password"></span>
+                        <span asp-validation-for="Password" class="text-danger error-masage"></span>
                     </div>
                 </div>
                 <div class="col-12 col-md-7">

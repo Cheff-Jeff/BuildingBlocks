@@ -6,8 +6,9 @@ html, body, h1, h2, h3, h4, h5, h6, p, span, b, a, input, button {
 }
 
 .btn-custom {
+    white-space: nowrap;
     margin: auto;
-    width: 100px;
+    width: fit-content;
     height: auto;
     display: block;
     border: solid 2px #ff8300;
@@ -32,9 +33,12 @@ a.navbar-brand {
     word-break: break-all;
 }
 
+a.navbar-brand svg {
+    width: 55px !important;
+}
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {

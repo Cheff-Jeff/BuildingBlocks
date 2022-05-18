@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Users";
+}
+<div class="container">
+    @if (Context.Session.GetInt32("isAdmin") == 1)
+    {
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-custom" asp-controller="Account" asp-action="Register">
+                    <span>Add User</span>
+                </a>
+            </div>
+        </div>
+    }
+</div>

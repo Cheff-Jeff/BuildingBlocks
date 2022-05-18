@@ -19,5 +19,25 @@ main{
 }
 
 .custom-input-wrapper input {
-    border: 1px solid #ff8300;
+    border: 2px solid #ff8300;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 20px;
+    color: #ff8300 !important;
+    letter-spacing: .5px;
+}
+
+.custom-input-wrapper input::placeholder {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 20px;
+    color: #ff8300 !important;
+    font-style: italic;
+}
+
+.error-masage {
+    margin-top: 3px;
+    display: block;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 16px;
+    font-style: italic;
+    letter-spacing: .5px;
 }
