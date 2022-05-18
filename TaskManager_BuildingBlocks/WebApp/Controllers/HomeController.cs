@@ -31,7 +31,7 @@ namespace WebApp.Controllers
             return View();
         }
 
-        //[HttpPost]
+        [HttpPost]
         public IActionResult Post([FromQuery] string Name, int SystemId, int Value)
         {
             //process the form data
