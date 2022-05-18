@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32407.343
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager_BuildingBlocks", "TaskManager_BuildingBlocks\TaskManager_BuildingBlocks.csproj", "{8D486105-D16D-4750-BE5D-68C54D9E390C}"
 EndProject
@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{18F5FB55-82EF-4B59-932A-1728851C33E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{AC8A0E04-F3FF-4E42-96FB-72C17DD909FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{AC8A0E04-F3FF-4E42-96FB-72C17DD909FA}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BBAPI", "BBAPI\BBAPI.vbproj", "{234BAB02-B8DA-4229-B233-728D6EF17802}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{AC8A0E04-F3FF-4E42-96FB-72C17DD909FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC8A0E04-F3FF-4E42-96FB-72C17DD909FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC8A0E04-F3FF-4E42-96FB-72C17DD909FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{234BAB02-B8DA-4229-B233-728D6EF17802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{234BAB02-B8DA-4229-B233-728D6EF17802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{234BAB02-B8DA-4229-B233-728D6EF17802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{234BAB02-B8DA-4229-B233-728D6EF17802}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
