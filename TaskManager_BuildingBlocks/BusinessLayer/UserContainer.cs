@@ -12,20 +12,15 @@ namespace BusinessLayer
     {
         IUserContainer IUserContainer;
 
-        public UserContainer()
-        {
-        }
-
         public UserContainer(IUserContainer dal)
         {
             IUserContainer = dal;
         }
 
         //methode om te checken of er al een account bestaat met email.
-        public bool CheckUserExists(User user)
+        public bool CheckUserExists(string email)
         {
-            UserDTO dto = user.ToDTO();
-            return IUserContainer.CheckUserExist(dto);
+            return IUserContainer.CheckUserExist(email);
         }
 
         //methode om een account met bijbehorende gegevens te verwijderen.
@@ -40,6 +35,12 @@ namespace BusinessLayer
         {
             UserDTO dto = user.ToDTO();
             IUserContainer.DeleteOne(dto);
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            //list aanmaken en vullen.
+            return new User(IUserContainer.GetUserByEmail(email));
         }
 
         //list aanmaken om alle accounts met bijbehorende gegevens op te halen.
@@ -73,6 +74,17 @@ namespace BusinessLayer
             var rfc2898DeriveBytes = new Rfc2898DeriveBytes(pass, salt, 10000);
             string hashed = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
             return hashed;
+        }
+
+
+        //hash password input and check.
+        public bool VerifyPassword(string email, string userPass)
+        {
+            UserDTO user = IUserContainer.GetUserByEmail(email);
+            var salt = Convert.FromBase64String(user.Salt);
+            var rfc2898DeriveBytes = new Rfc2898DeriveBytes(userPass, salt, 10000);
+
+            return Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256)) == user.Password;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace WebApp.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "This input is required")]
-        [StringLength(100, MinimumLength = 1, ErrorMessage = "Your password must be between 1 and 100 characters long.")]
+        //[StringLength(100, MinimumLength = 1, ErrorMessage = "Your password must be between 1 and 100 characters long.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }

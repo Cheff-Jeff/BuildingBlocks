@@ -17,12 +17,9 @@ namespace ViewLayer
 {
     public partial class LoginForm : Form
     {
-        Login login;
-
         public LoginForm()
         {
             InitializeComponent();
-            login = new Login(new LoginDAL());
 
             passwordTxb.ForeColor = Color.Orange;
             passwordTxb.UseSystemPasswordChar = true;
@@ -30,31 +27,32 @@ namespace ViewLayer
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            //TODO
-            //  Make inputs red if not correct
-            if (passwordTxb.Text == "" || emailTxb.Text == "") return; //password or email is empty
+            ////TODO
+            ////  Make inputs red if not correct
+            //if (passwordTxb.Text == "" || emailTxb.Text == "") return; //password or email is empty
 
-            if (!Regex.IsMatch(emailTxb.Text.ToLower(), @"^[a-z0-9\.\-]+@[a-z0-9]+\.[a-z]{2,3}$")) 
-            {
-                // email is not an email
-                MessageBox.Show("Email fout"); return; 
-            }
+            //if (!Regex.IsMatch(emailTxb.Text.ToLower(), @"^[a-z0-9\.\-]+@[a-z0-9]+\.[a-z]{2,3}$")) 
+            //{
+            //    // email is not an email
+            //    MessageBox.Show("Email fout"); return; 
+            //}
 
-            Login log = new Login(emailTxb.Text);
-            if(login.LoginUserCheck(log) == false)
-            {
-                MessageBox.Show("Incorrect Email or Password"); return;
-            }
+            //Login log = new Login(emailTxb.Text);
+            //if(login.LoginUserCheck(log) == false)
+            //{
+            //    MessageBox.Show("Incorrect Email or Password"); return;
+            //}
 
-            else
-            {
-                Login log1 = new Login(emailTxb.Text);
-                login.GetUserByEmail(log1);
-                bool validUser = login.VerifyPassword(passwordTxb.Text, Login.usersalt, Login.userpassword);
-                if (!validUser) return;
-                LoggedIn.User = Login.useremail;
-                this.Close();
-            }
+            //else
+            //{
+            //    Login log1 = new Login(emailTxb.Text);
+            //    //log1.GetUserByEmail();
+            //    //login.GetUserByEmail(log1);
+            //    //bool validUser = login.VerifyPassword(passwordTxb.Text, Login.usersalt, Login.userpassword);
+            //    //if (!validUser) return;
+            //    LoggedIn.User = Login.useremail;
+            //    this.Close();
+            //}
             
         }
 
