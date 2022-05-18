@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessLayer;
+using DataLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +15,8 @@ namespace ViewLayer
     public partial class MainForm : Form
     {
         LoginForm lg = new LoginForm();
+        MetricContainer mc = new MetricContainer(new MetricDAL());
+        Random rd = new Random();
         public MainForm()
         {
             InitializeComponent();
@@ -108,6 +112,11 @@ namespace ViewLayer
         {
             DBTest test = new DBTest();
             test.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            mc.CreateMetric(new NewMetric("GPU", 1, rd.Next(100), DateTime.Now));
         }
     }
 }
