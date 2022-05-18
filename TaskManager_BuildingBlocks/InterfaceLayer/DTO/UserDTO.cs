@@ -9,7 +9,16 @@ namespace InterfaceLayer
         public int UserId;
         public string Email;
         public string Password;
-        public byte[] salt;
+        public string Salt;
         public bool IsAdmin;
+
+        public UserDTO(int userId, string email, string password, string salt, bool isAdmin)
+        {
+            UserId = userId;
+            Email = email;
+            Password = password;
+            Salt = salt;
+            IsAdmin = isAdmin;
+        }
     }
 }

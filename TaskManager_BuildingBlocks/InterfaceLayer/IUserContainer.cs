@@ -8,13 +8,14 @@ namespace InterfaceLayer
 {
     public interface IUserContainer
     {
-        public bool CheckUserExist(UserDTO dto);
+        public bool CheckUserExist(string email);
 
         public void Register(UserDTO dto);
 
         public void DeleteOne(UserDTO dto);
 
         public List<UserDTO> GetAll();
+        public UserDTO GetUserByEmail(string email);
 
         //public byte[] AddSalt()
 

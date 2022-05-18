@@ -1,6 +1,7 @@
 ﻿using InterfaceLayer;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace BusinessLayer
@@ -10,7 +11,7 @@ namespace BusinessLayer
         public int UserId { get; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public byte[] salt { get; set; }
+        public string Salt { get; set; }
         public bool IsAdmin { get; set; }
 
         IUser IUser;
@@ -34,17 +35,17 @@ namespace BusinessLayer
             this.Email = email;
         }
 
-        public User(byte[]salt, string Email, string Password, bool isAdmin)
+        public User(string salt, string Email, string Password, bool isAdmin)
         {
-            this.salt = salt;
+            this.Salt = salt;
             this.Email = Email;
             this.Password = Password;
             this.IsAdmin = isAdmin;
         }
 
-        public User(byte[] salt, int userId, string Email, string Password, bool isAdmin)
+        public User(string salt, int userId, string Email, string Password, bool isAdmin)
         {
-            this.salt = salt;
+            this.Salt = salt;
             this.UserId = userId;
             this.Email = Email;
             this.Password = Password;
@@ -56,19 +57,13 @@ namespace BusinessLayer
             this.UserId = user.UserId;
             this.Email = user.Email;
             this.Password = user.Password;
-            this.salt = user.salt;
+            this.Salt = user.Salt;
             this.IsAdmin = user.IsAdmin;
         }
 
         public UserDTO ToDTO()
         {
-            UserDTO dto = new UserDTO();
-            dto.UserId = UserId;
-            dto.Email = Email;
-            dto.Password = Password;
-            dto.salt = salt;
-            dto.IsAdmin = IsAdmin;
-
+            UserDTO dto = new UserDTO(UserId, Email, Password, Salt, IsAdmin);
             return dto;
         }
 
@@ -78,5 +73,7 @@ namespace BusinessLayer
             UserDTO dto = user.ToDTO();
             IUser.EditOne(dto);
         }
+
+
     }
 }
