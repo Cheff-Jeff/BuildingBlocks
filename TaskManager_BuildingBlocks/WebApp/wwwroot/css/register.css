@@ -1,0 +1,62 @@
+﻿html,
+body,
+main {
+    height: calc(100% - 80px);
+}
+
+.logo-wrap {
+    width: 10%;
+    margin: 0 auto 40px;
+}
+
+.logo-wrap svg {
+    width: 100%;
+}
+
+.custom-input-wrapper .form-control {
+    width: 85%;
+    margin: auto;
+}
+
+p {
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 400;
+    font-size: 25px;
+    color: #ff8300 !important;
+    letter-spacing: .5px;
+}
+
+.custom-input-wrapper input {
+    border: 2px solid #ff8300;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 20px;
+    color: #ff8300 !important;
+    letter-spacing: .5px;
+}
+
+.custom-input-wrapper input::placeholder {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 20px;
+    color: #ff8300 !important;
+    font-style: italic;
+}
+
+.error-masage {
+    margin-top: 3px;
+    display: block;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 16px;
+    font-style: italic;
+    letter-spacing: .5px;
+}
+
+.check-wrap {
+    width: fit-content;
+    margin: auto;
+}
+
+.check-wrap label {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 20px;
+    color: #ff8300 !important;
+}
