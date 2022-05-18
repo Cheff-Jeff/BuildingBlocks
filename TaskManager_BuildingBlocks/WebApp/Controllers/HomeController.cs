@@ -33,6 +33,22 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        public IActionResult Post([FromQuery] string Name, int SystemId, int Value)
+        {
+            //process the query data
+            try
+            {
+                MetricContainer mc = new MetricContainer(new MetricDAL());
+                mc.CreateMetric(new NewMetric(Name, SystemId, Value, DateTime.Now));
+                return Ok("Added successfully");
+            }
+            catch
+            {
+                return Ok("Not Succesfull");
+            }
+        }
+
+        [HttpPost]
         public IActionResult Login(LoginViewModel user)
         {
             if (ModelState.IsValid)
