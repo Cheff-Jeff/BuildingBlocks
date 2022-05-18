@@ -43,6 +43,7 @@ namespace ViewLayer
             this.logoutBtn = new System.Windows.Forms.Button();
             this.btManageusers = new System.Windows.Forms.Button();
             this.btTestForm = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.exceedingSystemDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,10 +56,10 @@ namespace ViewLayer
             "System 2",
             "System 3",
             "System 4"});
-            this.systemComboBox.Location = new System.Drawing.Point(67, 92);
-            this.systemComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.systemComboBox.Location = new System.Drawing.Point(59, 69);
+            this.systemComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.systemComboBox.Name = "systemComboBox";
-            this.systemComboBox.Size = new System.Drawing.Size(465, 39);
+            this.systemComboBox.Size = new System.Drawing.Size(407, 33);
             this.systemComboBox.TabIndex = 2;
             this.systemComboBox.SelectedIndexChanged += new System.EventHandler(this.systemComboBox_SelectedIndexChanged);
             this.systemComboBox.TextUpdate += new System.EventHandler(this.systemComboBox_TextUpdate);
@@ -92,8 +93,8 @@ namespace ViewLayer
             this.exceedingSystemDataGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.exceedingSystemDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.exceedingSystemDataGrid.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.exceedingSystemDataGrid.Location = new System.Drawing.Point(67, 191);
-            this.exceedingSystemDataGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.exceedingSystemDataGrid.Location = new System.Drawing.Point(59, 143);
+            this.exceedingSystemDataGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.exceedingSystemDataGrid.Name = "exceedingSystemDataGrid";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
@@ -106,7 +107,7 @@ namespace ViewLayer
             this.exceedingSystemDataGrid.RowHeadersVisible = false;
             this.exceedingSystemDataGrid.RowHeadersWidth = 50;
             this.exceedingSystemDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.exceedingSystemDataGrid.Size = new System.Drawing.Size(1191, 680);
+            this.exceedingSystemDataGrid.Size = new System.Drawing.Size(1042, 510);
             this.exceedingSystemDataGrid.TabIndex = 3;
             this.exceedingSystemDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.exceedingSystemDataGrid_CellClick);
             this.exceedingSystemDataGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.exceedingSystemDataGrid_CellFormatting);
@@ -169,10 +170,10 @@ namespace ViewLayer
             this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.logoutBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
-            this.logoutBtn.Location = new System.Drawing.Point(1196, 86);
-            this.logoutBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.logoutBtn.Location = new System.Drawing.Point(1046, 64);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.logoutBtn.Name = "logoutBtn";
-            this.logoutBtn.Size = new System.Drawing.Size(184, 61);
+            this.logoutBtn.Size = new System.Drawing.Size(161, 46);
             this.logoutBtn.TabIndex = 12;
             this.logoutBtn.Text = "Logout";
             this.logoutBtn.UseVisualStyleBackColor = false;
@@ -186,10 +187,10 @@ namespace ViewLayer
             this.btManageusers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btManageusers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btManageusers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
-            this.btManageusers.Location = new System.Drawing.Point(1388, 86);
-            this.btManageusers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btManageusers.Location = new System.Drawing.Point(1214, 64);
+            this.btManageusers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btManageusers.Name = "btManageusers";
-            this.btManageusers.Size = new System.Drawing.Size(184, 61);
+            this.btManageusers.Size = new System.Drawing.Size(161, 46);
             this.btManageusers.TabIndex = 13;
             this.btManageusers.Text = "Manage Users";
             this.btManageusers.UseVisualStyleBackColor = false;
@@ -203,28 +204,46 @@ namespace ViewLayer
             this.btTestForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btTestForm.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btTestForm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
-            this.btTestForm.Location = new System.Drawing.Point(1388, 157);
-            this.btTestForm.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btTestForm.Location = new System.Drawing.Point(1214, 118);
+            this.btTestForm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btTestForm.Name = "btTestForm";
-            this.btTestForm.Size = new System.Drawing.Size(184, 61);
+            this.btTestForm.Size = new System.Drawing.Size(161, 46);
             this.btTestForm.TabIndex = 14;
             this.btTestForm.Text = "Test Form";
             this.btTestForm.UseVisualStyleBackColor = false;
             this.btTestForm.Click += new System.EventHandler(this.btTestForm_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
+            this.button1.FlatAppearance.BorderSize = 2;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(131)))), ((int)(((byte)(0)))));
+            this.button1.Location = new System.Drawing.Point(630, 56);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(161, 46);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Logout";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1683, 1035);
+            this.ClientSize = new System.Drawing.Size(1474, 776);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btTestForm);
             this.Controls.Add(this.btManageusers);
             this.Controls.Add(this.logoutBtn);
             this.Controls.Add(this.exceedingSystemDataGrid);
             this.Controls.Add(this.systemComboBox);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MaximumSize = new System.Drawing.Size(1701, 1082);
-            this.MinimumSize = new System.Drawing.Size(1701, 1028);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximumSize = new System.Drawing.Size(1490, 821);
+            this.MinimumSize = new System.Drawing.Size(1490, 781);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainWindow";
@@ -247,6 +266,7 @@ namespace ViewLayer
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.Button btManageusers;
         private System.Windows.Forms.Button btTestForm;
+        private System.Windows.Forms.Button button1;
     }
 }
 

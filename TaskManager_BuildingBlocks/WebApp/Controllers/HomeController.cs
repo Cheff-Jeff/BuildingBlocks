@@ -6,8 +6,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Models;
-using BusinessLayer;
 using DataLayer;
+using BusinessLayer;
+using WebApp.Controllers;
 using Microsoft.AspNetCore.Http;
 
 namespace WebApp.Controllers
@@ -32,7 +33,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(LoginViewModel user)
+        public IActionResult Login(LoginViewModel user)
         {
             if (ModelState.IsValid)
             {

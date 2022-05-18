@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLogicLayer;
 
 namespace TaskManager_BuildingBlocks
 {
@@ -24,8 +23,8 @@ namespace TaskManager_BuildingBlocks
             this.Hide();
             lg.ShowDialog();
 
-            if (LoggedIn.User == "") { this.Close(); return; }
-            else this.Show();
+            //if (LoggedIn.User == "") { this.Close(); return; }
+            //else this.Show();
 
             // exceedingSystemDataGrid.Rows.Add("System name", "CPU", "GPU", "RAM", "DISK", "NETWORK");
             Random random = new Random();
@@ -82,7 +81,7 @@ namespace TaskManager_BuildingBlocks
         {
             // Log the user out
             this.Hide();
-            LoggedIn.User = "";
+            //LoggedIn.User = "";
             lg.ShowDialog();
             this.Show();
         }
@@ -103,6 +102,11 @@ namespace TaskManager_BuildingBlocks
         {
             //UserManagerForm umForm = new UserManagerForm();
             //umForm.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
