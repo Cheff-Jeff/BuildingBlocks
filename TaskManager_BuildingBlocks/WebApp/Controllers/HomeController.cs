@@ -49,7 +49,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel user)
+        public IActionResult Index(LoginViewModel user)
         {
             if (ModelState.IsValid)
             {
