@@ -16,6 +16,7 @@ namespace WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private UserContainer userContainer = new UserContainer(new UserDAL());
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -49,35 +50,24 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(LoginViewModel user)
+        public IActionResult Index(LoginViewModel loginData)
         {
             if (ModelState.IsValid)
             {
-                Login handler = new Login(new LoginDAL());
-                Login loginData = new Login(user.Email);
-                if (handler.LoginUserCheck(loginData))
+                if (userContainer.CheckUserExists(loginData.Email))
                 {
-                    Login loginData1 = new Login(user.Email);
-                    handler.GetUserByEmail(loginData1);
-                    bool loginChecker = handler.VerifyPassword(user.Password, Login.usersalt, Login.userpassword);
-                    if (!loginChecker)
-                    {
-                        ViewBag.error = "You're password or email was incorrect.";
-                        return View();
-                    }
+                    bool loginChecker = userContainer.VerifyPassword(loginData.Email, loginData.Password);
+
+                    if (!loginChecker) { ViewBag.error = "You're password or email was incorrect."; return View(); }
                     else
                     {
                         HttpContext.Session.SetInt32("isAdmin", 1);
                         return RedirectToAction("Privacy", "Home");
                     }
                 }
-                else 
-                {
-                    ViewBag.error = "There is no user with this email.";
-                    return View();
-                }
+                else { ViewBag.error = "There is no user with this email."; return View(); }
             }
-            return View();        
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

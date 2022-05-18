@@ -8,8 +8,5 @@ namespace InterfaceLayer
 {
     public interface ILogin
     {
-        public List<LoginDTO> GetUserByEmail(LoginDTO dto);
-
-        public bool LoginUserCheck(LoginDTO dto);
     }
 }

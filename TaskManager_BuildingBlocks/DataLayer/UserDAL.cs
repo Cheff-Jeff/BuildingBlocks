@@ -18,14 +18,14 @@ namespace DataLayer
             Initialize();
         }
 
-        public bool CheckUserExist(UserDTO dto)
+        public bool CheckUserExist(string email)
         {
             OpenConnect();
 
             cmd.Parameters.Clear();
 
             cmd.CommandText = "SELECT * FROM Users WHERE Email = @Email";
-            cmd.Parameters.AddWithValue("@Email", dto.Email);
+            cmd.Parameters.AddWithValue("@Email", email);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
 
             //Dataset aanmaken en controlleren of de ingevulde email al bestaat.
@@ -59,7 +59,7 @@ namespace DataLayer
                 cmd.Parameters.Clear();
 
                 cmd.CommandText = "INSERT INTO Users (Email, Password, Salt, IsAdmin) VALUES (@email, @pass, @salt, @admin)";
-                string sSalt = Convert.ToBase64String(dto.salt);
+                string sSalt = dto.Salt;
                 byte admin = 0;
 
                 if (dto.IsAdmin) { admin = 1; }
@@ -89,7 +89,7 @@ namespace DataLayer
 
             cmd.Parameters.Clear();
 
-            string sSalt = Convert.ToBase64String(dto.salt);
+            string sSalt = dto.Salt;
             byte admin = 0;
 
             if (dto.IsAdmin) { admin = 1; }
@@ -134,18 +134,33 @@ namespace DataLayer
 
             while (rdr.Read())
             {
-                UserDTO users = new UserDTO()
-                {
-                    UserId = Int32.Parse(rdr["Id"].ToString()),
-                    Email = (rdr["Email"].ToString()),
-                    Password = (rdr["Password"].ToString()),
-                    IsAdmin = bool.Parse(rdr["IsAdmin"].ToString()),
-                };
-                listall.Add(users);
+                UserDTO user = new UserDTO((int)rdr["id"], (string)rdr["Email"], (string)rdr["Password"], rdr["Salt"].ToString(), (bool)rdr["IsAdmin"]);
+                listall.Add(user);
             }
             CloseConnect();
 
             return listall;
+        }
+
+        public UserDTO GetUserByEmail(string email)
+        {
+            OpenConnect();
+            cmd.Parameters.Clear();
+
+            cmd.CommandText = "SELECT * FROM Users WHERE email = @email";
+            cmd.Parameters.AddWithValue("@email", email);
+
+            UserDTO user = new UserDTO(0, "noexist", "noexist", "noexist", false); ;
+
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                user = new UserDTO((int)rdr["id"], (string)rdr["Email"], (string)rdr["Password"], rdr["Salt"].ToString(), (bool)rdr["IsAdmin"]);
+            }
+            CloseConnect();
+
+            return user;
         }
     }
 }
