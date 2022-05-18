@@ -9,15 +9,12 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    class MetricDAL : SqlConnect, IMetric, IMetricContainer
+    public class MetricDAL : SqlConnect, IMetric, IMetricContainer
     {
-        public MetricDAL()
-        {
 
-        }
-
-        public void CreateMetric(MetricDTO metric)
+        public void CreateMetric(NewMetricDTO metric)
         {
+            Initialize();
             try
             {
                 OpenConnect();
@@ -28,7 +25,7 @@ namespace DataLayer
                 cmd.Parameters.AddWithValue("@name", metric.Name);
                 cmd.Parameters.AddWithValue("@systemId", metric.SystemId);
                 cmd.Parameters.AddWithValue("@value", metric.Value);
-                cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                cmd.Parameters.AddWithValue("@date", metric.Date);
 
                 cmd.ExecuteNonQuery();
 

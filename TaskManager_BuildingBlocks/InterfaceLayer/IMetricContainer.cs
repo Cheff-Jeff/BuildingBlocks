@@ -9,6 +9,6 @@ namespace InterfaceLayer
 {
     public interface IMetricContainer
     {
-        public void CreateMetric(MetricDTO metric);
+        public void CreateMetric(NewMetricDTO metric);
     }
 }
