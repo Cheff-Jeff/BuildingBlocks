@@ -33,6 +33,11 @@ namespace WebApp.Controllers
             return View();
         }
 
+        public IActionResult Home()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Post([FromQuery] string Name, int SystemId, int Value)
         {
@@ -61,8 +66,13 @@ namespace WebApp.Controllers
                     if (!loginChecker) { ViewBag.error = "You're password or email was incorrect."; return View(); }
                     else
                     {
+                        User user = userContainer.GetUserByEmail(loginData.Email);
+                        CurrentUser.useremail = user.Email;
+                        CurrentUser.userpassword = user.Password;
+                        CurrentUser.usersalt = user.Salt;
+                        CurrentUser.isadmin = user.IsAdmin;
                         HttpContext.Session.SetInt32("isAdmin", 1);
-                        return RedirectToAction("Privacy", "Home");
+                        return RedirectToAction("Home", "Home");
                     }
                 }
                 else { ViewBag.error = "There is no user with this email."; return View(); }
