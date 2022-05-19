@@ -5,6 +5,76 @@ html, body, h1, h2, h3, h4, h5, h6, p, span, b, a, input, button {
     font-weight: 400;
 }
 
+.form-check-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.form-check-wrapper p {
+    display: block;
+    font-size: 20px;
+    letter-spacing: .5px;
+    margin: 1.5px 0 0 20px;
+}
+
+.form-check-wrapper label {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.form-check-wrapper label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.form-check-wrapper label input:checked ~ span {
+    background-color: #ff8300;
+}
+.form-check-wrapper label input:checked ~ span::before {
+    transform: translateX(26px);
+}
+
+.form-check-wrapper label span{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e0e0e0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.form-check-wrapper label span::before{
+    content: "";
+    position: absolute;
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.form-check-wrapper label:hover span{
+    background-color: #d0d0d0;
+}
+
+.form-check-wrapper label:hover input:checked ~ span{
+    background-color: #e67600;
+}
+
 .btn-custom {
     white-space: nowrap;
     margin: auto;
