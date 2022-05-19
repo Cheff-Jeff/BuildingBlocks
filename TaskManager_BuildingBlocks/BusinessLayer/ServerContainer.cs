@@ -8,38 +8,33 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class SystemContainer
+    public class ServerContainer
     {
         ISystemContainer ISystemContainer;
 
-        public SystemContainer()
-        {
-
-        }
-
-        public SystemContainer(ISystemContainer dal)
+        public ServerContainer(ISystemContainer dal)
         {
             ISystemContainer = dal;
         }
 
-        public List<System> GetAllSystems()
+        public List<Server> GetAllSystems()
         {
             //list aanmaken en vullen.
-            List<System> allsystems = new List<System>();
+            List<Server> allsystems = new List<Server>();
             List<SystemDTO> list = ISystemContainer.GetAllSystems();
             foreach (SystemDTO system in list)
             {
-                System newsystem = new System(system);
+                Server newsystem = new Server(system);
                 allsystems.Add(newsystem);
             }
             return allsystems;
         }
 
-        public System GetOneSystemByName(System system)
+        public Server GetOneSystemByName(Server system)
         {
             SystemDTO dto = system.ToDTO();
 
-            System sys = new System();
+            Server sys = new Server();
             SystemDTO Dto = ISystemContainer.GetOneSystemByName(dto);
             sys.SystemId = Dto.SystemId;
             sys.SystemName = Dto.SystemName;
@@ -47,11 +42,11 @@ namespace BusinessLayer
             return sys;
         }
 
-        public System GetOneSystemNameById(System system)
+        public Server GetOneSystemNameById(Server system)
         {
             SystemDTO dto = system.ToDTO();
 
-            System sys = new System();
+            Server sys = new Server();
             SystemDTO Dto = ISystemContainer.GetOneSystemNameById(dto);
             sys.SystemId = Dto.SystemId;
             sys.SystemName = Dto.SystemName;

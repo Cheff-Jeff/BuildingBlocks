@@ -8,40 +8,40 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class System
+    public class Server
     {
         public int SystemId { get; set; }
         public string SystemName { get; set; }
 
         ISystem ISystem;
 
-        public System()
+        public Server()
         {
 
         }
 
-        public System(int id)
+        public Server(int id)
         {
             this.SystemId = id;
         }
 
-        public System(string name)
+        public Server(string name)
         {
             this.SystemName = name;
         }
 
-        public System(int id, string name)
+        public Server(int id, string name)
         {
             this.SystemId = id;
             this.SystemName = name;
         }
 
-        public System(ISystem dal)
+        public Server(ISystem dal)
         {
             ISystem = dal;
         }
 
-        public System(SystemDTO dto)
+        public Server(SystemDTO dto)
         {
             this.SystemId = dto.SystemId;
             this.SystemName = dto.SystemName;

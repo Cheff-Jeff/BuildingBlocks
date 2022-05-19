@@ -14,8 +14,8 @@ namespace ViewLayer
 {
     public partial class DBTest : Form
     {
-        BusinessLayer.System system = new BusinessLayer.System(new SystemDAL());
-        SystemContainer systemContainer = new SystemContainer(new SystemDAL());
+        BusinessLayer.Server system = new BusinessLayer.Server(new SystemDAL());
+        ServerContainer systemContainer = new ServerContainer(new SystemDAL());
 
         public DBTest()
         {
@@ -26,7 +26,7 @@ namespace ViewLayer
 
         public void FillComboBox()
         {
-            foreach(BusinessLayer.System system in systemContainer.GetAllSystems())
+            foreach(BusinessLayer.Server system in systemContainer.GetAllSystems())
             {
                 //var test = system.SystemId;
                 //BusinessLayer.System sys = new BusinessLayer.System(test);
@@ -38,8 +38,8 @@ namespace ViewLayer
         private void cbSystems_SelectedIndexChanged(object sender, EventArgs e)
         {
             var system = cbSystems.SelectedItem.ToString();
-            BusinessLayer.System sys = new BusinessLayer.System(system);
-            BusinessLayer.System sys1 = systemContainer.GetOneSystemByName(sys);
+            BusinessLayer.Server sys = new BusinessLayer.Server(system);
+            BusinessLayer.Server sys1 = systemContainer.GetOneSystemByName(sys);
             lbSelectedId.Text = "SystemId= " + Convert.ToString(sys1.SystemId);
         }
     }

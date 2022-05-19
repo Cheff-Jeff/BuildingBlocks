@@ -10,25 +10,25 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    public class SystemDAL : SqlConnect, ISystem, ISystemContainer
+    public class SystemDAL : SqlConnect, IServer, IServerContainer
     {
         public SystemDAL()
         {
             Initialize();
         }
 
-        public List<SystemDTO> GetAllSystems()
+        public List<ServerDTO> GetAllSystems()
         {
             OpenConnect();
 
             cmd.CommandText = "SELECT * FROM Systems";
             using SqlDataReader rdr = cmd.ExecuteReader();
 
-            List<SystemDTO> listall = new List<SystemDTO>();
+            List<ServerDTO> listall = new List<ServerDTO>();
 
             while (rdr.Read())
             {
-                SystemDTO system = new SystemDTO()
+                ServerDTO system = new ServerDTO()
                 {
                     SystemId = rdr.GetInt32("Id"),
                     SystemName = rdr.GetString("Name"),
@@ -40,7 +40,7 @@ namespace DataLayer
             return listall;
         }
 
-        public SystemDTO GetOneSystemByName(SystemDTO dto)
+        public ServerDTO GetOneSystemByName(ServerDTO dto)
         {
             OpenConnect();
 
@@ -53,7 +53,7 @@ namespace DataLayer
 
             rdr.Read();
 
-            SystemDTO system = new SystemDTO()
+            ServerDTO system = new ServerDTO()
             {
                 SystemId = rdr.GetInt32("Id"),
                 SystemName = rdr.GetString("Name"),
@@ -62,7 +62,7 @@ namespace DataLayer
             return system;
         }
 
-        public SystemDTO GetOneSystemNameById(SystemDTO dto)
+        public ServerDTO GetOneSystemNameById(ServerDTO dto)
         {
             OpenConnect();
 
@@ -75,13 +75,34 @@ namespace DataLayer
 
             rdr.Read();
 
-            SystemDTO system = new SystemDTO()
+            ServerDTO system = new ServerDTO()
             {
                 SystemId = rdr.GetInt32("Id"),
                 SystemName = rdr.GetString("Name"),
             };
             CloseConnect();
             return system;
+        }
+
+        public Dictionary<ServerDTO, List<MetricDTO>> GetMetricsFromServer(int serverId)
+        {
+            OpenConnect();
+
+            Dictionary<ServerDTO, List<MetricDTO>> dict = new Dictionary<ServerDTO, List<MetricDTO>>();
+
+            cmd.Parameters.Clear();
+
+            cmd.CommandText = "SELECT DISTINCT Name FROM Metrics WHERE SytemId = @systemId";
+            cmd.Parameters.AddWithValue("@systemId", serverId);
+
+            using SqlDataReader metricReader = cmd.ExecuteReader();
+
+            while(metricReader.Read()){
+                
+            }
+
+            CloseConnect();
+            return dict;
         }
     }
 }
