@@ -34,27 +34,29 @@
                 <div class="col-12 col-md-7">
                     <div class="form-group text-center">
                         <input 
+                            id="emailInput"
                             type="email" 
                             class="form-control text-center" 
                             placeholder="Email" 
                             asp-for="Email"
                         />
-                        <span asp-validation-for="Email" class="text-danger error-masage"></span>
+                        <span asp-validation-for="Email" id="emailError" class="text-danger error-masage"></span>
                     </div>
                 </div>
                 <div class="col-12 col-md-7">
                     <div class="form-group text-center">
                         <input 
+                            id="passwordInput"
                             type="password" 
                             class="form-control text-center" 
                             placeholder="Password" 
                             asp-for="Password"
                         />
-                        <span asp-validation-for="Password" class="text-danger error-masage"></span>
+                        <span asp-validation-for="Password" id="passError" class="text-danger error-masage"></span>
                     </div>
                 </div>
                 <div class="col-12 col-md-7">
-                    <button class="btn btn-custom" type="submit">
+                    <button id="submit" class="btn btn-custom" type="submit">
                         <span>Login</span>
                     </button>
                 </div>
