@@ -38,9 +38,9 @@ namespace WebApp.Controllers
                 string Email = user.Email.ToLower();
                 var Password = userContainer.hash(user.Password, salt);
 
-                if (!userContainer.CheckUserExists(new User(user.Email.ToLower())))
+                if (!userContainer.CheckUserExists(user.Email.ToLower()))
                 {
-                    userContainer.UserRegister(new User(salt, user.Email, Password, user.IsAdmin));
+                    userContainer.UserRegister(new User(salt.ToString(), user.Email, Password, user.IsAdmin));
                     TempData["seccesss"] = "New user has been added.";
                     return RedirectToAction("Index", "Account");
                 }
