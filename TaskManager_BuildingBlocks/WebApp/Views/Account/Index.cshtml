@@ -3,6 +3,12 @@
     ViewData["Title"] = "Users";
 }
 <div class="container">
+    @if (@ViewBag.succes != null)
+    {
+        <div class="alert alert-success w-50 m-auto" role="alert">
+            <span>@ViewBag.succes</span>
+        </div>
+    }
     @if (Context.Session.GetInt32("isAdmin") == 1)
     {
         <div class="row">
