@@ -10,10 +10,10 @@ namespace BusinessLayer
 {
     public class Server
     {
-        public int SystemId { get; set; }
-        public string SystemName { get; set; }
+        public int ServerId { get; set; }
+        public string ServerName { get; set; }
 
-        ISystem ISystem;
+        IServer ISystem;
 
         public Server()
         {
@@ -22,36 +22,36 @@ namespace BusinessLayer
 
         public Server(int id)
         {
-            this.SystemId = id;
+            this.ServerId = id;
         }
 
         public Server(string name)
         {
-            this.SystemName = name;
+            this.ServerName = name;
         }
 
         public Server(int id, string name)
         {
-            this.SystemId = id;
-            this.SystemName = name;
+            this.ServerId = id;
+            this.ServerName = name;
         }
 
-        public Server(ISystem dal)
+        public Server(IServer dal)
         {
             ISystem = dal;
         }
 
-        public Server(SystemDTO dto)
+        public Server(ServerDTO dto)
         {
-            this.SystemId = dto.SystemId;
-            this.SystemName = dto.SystemName;
+            this.ServerId = dto.SystemId;
+            this.ServerName = dto.SystemName;
         }
 
-        public SystemDTO ToDTO()
+        public ServerDTO ToDTO()
         {
-            SystemDTO dto = new SystemDTO();
-            dto.SystemId = SystemId;
-            dto.SystemName = SystemName;
+            ServerDTO dto = new ServerDTO();
+            dto.SystemId = ServerId;
+            dto.SystemName = ServerName;
             return dto;
         }
     }

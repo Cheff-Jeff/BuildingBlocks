@@ -14,8 +14,8 @@ namespace ViewLayer
 {
     public partial class DBTest : Form
     {
-        BusinessLayer.Server system = new BusinessLayer.Server(new SystemDAL());
-        ServerContainer systemContainer = new ServerContainer(new SystemDAL());
+        BusinessLayer.Server system = new BusinessLayer.Server(new ServerDAL());
+        ServerContainer systemContainer = new ServerContainer(new ServerDAL());
 
         public DBTest()
         {
@@ -31,7 +31,7 @@ namespace ViewLayer
                 //var test = system.SystemId;
                 //BusinessLayer.System sys = new BusinessLayer.System(test);
                 //BusinessLayer.System sys1 = systemContainer.GetOneSystemNameById(sys);
-                cbSystems.Items.Add(system.SystemName);
+                cbSystems.Items.Add(system.ServerName);
             }
         }
 
@@ -40,7 +40,7 @@ namespace ViewLayer
             var system = cbSystems.SelectedItem.ToString();
             BusinessLayer.Server sys = new BusinessLayer.Server(system);
             BusinessLayer.Server sys1 = systemContainer.GetOneSystemByName(sys);
-            lbSelectedId.Text = "SystemId= " + Convert.ToString(sys1.SystemId);
+            lbSelectedId.Text = "SystemId= " + Convert.ToString(sys1.ServerId);
         }
     }
 }

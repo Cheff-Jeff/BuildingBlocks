@@ -10,19 +10,19 @@ namespace BusinessLayer
 {
     public class ServerContainer
     {
-        ISystemContainer ISystemContainer;
+        IServerContainer IServer;
 
-        public ServerContainer(ISystemContainer dal)
+        public ServerContainer(IServerContainer dal)
         {
-            ISystemContainer = dal;
+            IServer = dal;
         }
 
         public List<Server> GetAllSystems()
         {
             //list aanmaken en vullen.
             List<Server> allsystems = new List<Server>();
-            List<SystemDTO> list = ISystemContainer.GetAllSystems();
-            foreach (SystemDTO system in list)
+            List<ServerDTO> list = IServer.GetAllSystems();
+            foreach (ServerDTO system in list)
             {
                 Server newsystem = new Server(system);
                 allsystems.Add(newsystem);
@@ -32,26 +32,33 @@ namespace BusinessLayer
 
         public Server GetOneSystemByName(Server system)
         {
-            SystemDTO dto = system.ToDTO();
+            ServerDTO dto = system.ToDTO();
 
             Server sys = new Server();
-            SystemDTO Dto = ISystemContainer.GetOneSystemByName(dto);
-            sys.SystemId = Dto.SystemId;
-            sys.SystemName = Dto.SystemName;
+            ServerDTO Dto = IServer.GetOneSystemByName(dto);
+            sys.ServerId = Dto.SystemId;
+            sys.ServerName = Dto.SystemName;
 
             return sys;
         }
 
         public Server GetOneSystemNameById(Server system)
         {
-            SystemDTO dto = system.ToDTO();
+            ServerDTO dto = system.ToDTO();
 
             Server sys = new Server();
-            SystemDTO Dto = ISystemContainer.GetOneSystemNameById(dto);
-            sys.SystemId = Dto.SystemId;
-            sys.SystemName = Dto.SystemName;
+            ServerDTO Dto = IServer.GetOneSystemNameById(dto);
+            sys.ServerId = Dto.SystemId;
+            sys.ServerName = Dto.SystemName;
 
             return sys;
+        }
+
+        public List<Metric> GetExceedingMetricsFromServer(int serverId)
+        {
+            List<Metric> metrics = new List<Metric>();
+            IServer.GetExceedingMetricsFromServer(serverId).ForEach(r => metrics.Add(new Metric(r)));
+            return metrics;
         }
     }
 }

@@ -9,18 +9,24 @@ using System.Threading.Tasks;
 
 namespace WebApp.Controllers
 {
-    public class SystemController : Controller
+    public class ServerController : Controller
     {
         // GET: SystemController
         public ActionResult Index()
         {
-            ServerContainer sc = new ServerContainer(new SystemDAL());
-            Dictionary<Server, List<Metric>> serverValues = new Dictionary<Server, List<Metric>>();
+            ServerContainer sc = new ServerContainer(new ServerDAL());
+            List<Server> allServers = sc.GetAllSystems();
+            List<Metric> metrics = new List<Metric>();
 
-            sc.GetAllSystems().ForEach(s =>
-            {
-                
+            var exceedingMetrics = new Dictionary<Server, List<Metric>>();
+            allServers.ForEach(s => { 
+                metrics = sc.GetExceedingMetricsFromServer(s.ServerId);
+                if (metrics.Count > 0)
+                {
+                    exceedingMetrics.Add(s, metrics);
+                }
             });
+            ViewData["ExceedingMetrics"] = exceedingMetrics;
             return View();
         }
 

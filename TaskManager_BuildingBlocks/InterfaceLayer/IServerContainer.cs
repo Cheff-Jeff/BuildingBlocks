@@ -15,6 +15,6 @@ namespace InterfaceLayer
 
         public ServerDTO GetOneSystemNameById(ServerDTO dto);
 
-        public Dictionary<ServerDTO, List<MetricDTO>> GetMetricsFromServer(int serverId);
+        public List<MetricDTO> GetExceedingMetricsFromServer(int serverId);
     }
 }
