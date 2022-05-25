@@ -70,7 +70,7 @@ namespace DataLayer
             cmd.Dispose();
 
             cmd.Parameters.Clear();
-            cmd.CommandText = "SELECT TOP " + amount + " * FROM Metrics WHERE SystemId = @systemId AND Name = '@name' ORDER BY Date DESC";
+            cmd.CommandText = "SELECT TOP " + amount + " * FROM Metrics WHERE SystemId = @systemId AND Name = @name ORDER BY Date DESC";
             cmd.Parameters.AddWithValue("@systemId", serverId);
             cmd.Parameters.AddWithValue("@name", name);
 

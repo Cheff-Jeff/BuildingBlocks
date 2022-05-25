@@ -39,9 +39,9 @@ namespace WebApp.Controllers
             return View();
         }
 
-        public ActionResult Get(int serverId, string name, int amount)
+        public ActionResult Get(int id, string name, int amount)
         {
-            ViewData["metricData"] = mc.GetAllMetricsFromServerWithName(serverId, name, amount);
+            ViewData["metricData"] = mc.GetAllMetricsFromServerWithName(id, name, amount);
             return View();
         }
 
