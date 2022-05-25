@@ -1,0 +1,7 @@
+﻿@{
+    Layout = "";
+}
+@foreach (var item in ViewData["metricData"] as List<BusinessLayer.Metric>)
+{
+    <text>@item.Value,</text>
+}

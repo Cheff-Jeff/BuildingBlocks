@@ -10,5 +10,7 @@ namespace InterfaceLayer
     public interface IMetricContainer
     {
         public void CreateMetric(NewMetricDTO metric);
+        public List<MetricDTO> GetAllLatestMetricsFromServer(int serverId);
+        public List<MetricDTO> GetAllMetricsFromServerWithName(int serverId, string name, int amount);
     }
 }

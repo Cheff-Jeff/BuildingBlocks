@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterfaceLayer.DTO
 {
-    public class SystemDTO
+    public class ServerDTO
     {
         public int SystemId;
         public string SystemName;

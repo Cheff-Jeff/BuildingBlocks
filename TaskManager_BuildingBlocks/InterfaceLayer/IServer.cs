@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InterfaceLayer
 {
-    public interface ISystem
+    public interface IServer
     {
         
     }

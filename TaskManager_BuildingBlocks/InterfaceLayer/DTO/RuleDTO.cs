@@ -10,9 +10,9 @@ namespace InterfaceLayer.DTO
     {
         public int RuleId;
         public int SystemId;
-        public int MinMax;
-        public int Limit;
-        public int Limit2;
+        public string Name;
+        public int Min;
+        public int Max;
         public string NotifyEmail;
     }
 }

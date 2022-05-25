@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Details";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <h1>Details</h1>
+
+            <div>
+                <h4>@ViewData["currentServer"].GetType().GetProperty("ServerName").GetValue(ViewData["currentServer"])</h4>
+                <hr />
+                <select id="metricNameList" onChange="selectedMetricChange()">
+                    @foreach (var metric in ViewData["currentServerMetricsNames"] as List<BusinessLayer.Metric>)
+                    {
+                        <option value="@metric.Name">@metric.Name</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <canvas id="metricChart" style="width:500px;max-width:700px"></canvas>
+        </div>
+    </div>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script>
+    var select = document.getElementById("metricNameList");
+    var amount = 5;
+    var xlabels = [];
+    var chart;
+
+    selectedMetricChange();
+
+    function selectedMetricChange() {
+        var xyValues = [];
+
+        var metricPoints = "";
+
+        var html = fetch(window.location.origin + "/Server/Get/@ViewData["currentServer"].GetType().GetProperty("ServerId").GetValue(ViewData["currentServer"])?name=" +
+            select.options[select.selectedIndex].value + "&amount=" + amount, { mode: "no-cors" }).then(resp => resp.text()).then(data => GenerateChart(data.split(",")));
+
+    }
+
+    function GenerateChart(metricPoints) {
+        var ylabels = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        console.log(metricPoints.pop())
+        console.log(metricPoints)
+        xlabels = [];
+        for (let i = 0; i < metricPoints.length; i++) { xlabels.push(i) }
+        console.log(xlabels)
+        
+        chart = new Chart("metricChart", {
+            type: "line",
+            data: {
+                labels: xlabels,
+                datasets: [{
+                    label: select.options[select.selectedIndex].value,
+                    pointRadius: 4,
+                    data: metricPoints,
+                    pointBackgroundColor: function (context) {
+                        var index = context.dataIndex;
+                        var value = context.dataset.data[index];
+                        return value < 25 ? 'red' :  // draw negative values in red
+                            value > 60 ? 'red' :    // else, alternate values in blue and green
+                                'green';
+                    },
+                }]
+            }, options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+</script>
