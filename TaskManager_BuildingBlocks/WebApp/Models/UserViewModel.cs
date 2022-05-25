@@ -30,9 +30,6 @@ namespace WebApp.Models
 
         public string HiddenPassword = "******";
 
-
-        public List<UserViewModel> listusers = new List<UserViewModel>();
-
         public UserViewModel()
         {
 

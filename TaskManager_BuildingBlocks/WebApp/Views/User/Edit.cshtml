@@ -1,6 +1,6 @@
 ﻿@model WebApp.Models.UserViewModel;
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Edit";
 }
 @section css
 {
@@ -52,7 +52,7 @@
                     <div class="form-group text-center">
                         <input type="password"
                                class="form-control text-center"
-                               placeholder="Password"
+                               placeholder="RePassword"
                                asp-for="RePassword" />
                         <span asp-validation-for="RePassword" class="text-danger error-masage"></span>
                     </div>
@@ -64,7 +64,7 @@
                                 <input class="form-check-input check-box"
                                        type="checkbox"
                                        asp-for="IsAdmin">
-                                <span><span asp-validation-for="IsAdmin" class="text-danger error-masage"></span></span>
+                                <span></span>
                             </label>
                             <p>Is admin</p>
                         </div>

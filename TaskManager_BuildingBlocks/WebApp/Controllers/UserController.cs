@@ -19,16 +19,15 @@ namespace WebApp.Controllers
         public ActionResult Index()
         {
             UserViewModel userViewmodel = new UserViewModel();
-            UserViewModel list = new UserViewModel();
+            ListViewModel list = new ListViewModel();
 
             foreach (User user in userContainer.GetAllUsers())
             {
                 userViewmodel = new UserViewModel(user.UserId, user.Email, user.IsAdmin);
-                list.listusers.Add(userViewmodel);
+                list.allusers.Add(userViewmodel);
             }
 
-            userViewmodel.listusers = list.listusers;
-            return View(userViewmodel);
+            return View(list.allusers);
         }
 
         // POST: UserController/Create
@@ -97,7 +96,12 @@ namespace WebApp.Controllers
         // GET: UserController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            UserViewModel userViewModel = new UserViewModel();
+
+            User us = new User(id);
+            userContainer.DeleteOneAccount(us);
+
+            return View("Index");
         }
 
         // POST: UserController/Delete/5
