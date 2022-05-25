@@ -25,6 +25,10 @@ namespace BusinessLayer
         {
             return new Rule(irulecontainer.GetRule(id));
         }
+        public Rule GetRuleFromSystem(int systemId)
+        {
+            return new Rule(irulecontainer.GetRuleFromSystem(systemId));
+        }
         public List<Rule> GetRules()
         {
             List<Rule> rules = new List<Rule>();

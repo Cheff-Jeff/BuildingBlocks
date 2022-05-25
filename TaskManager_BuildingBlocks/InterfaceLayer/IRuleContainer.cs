@@ -11,6 +11,7 @@ namespace InterfaceLayer
     {
         public bool AddRule(RuleDTO ruleDTO);
         public RuleDTO GetRule(int id);
+        public RuleDTO GetRuleFromSystem(int systemId);
         public List<RuleDTO> GetRules();
         public bool RemoveRule(RuleDTO ruleDTO);
     }

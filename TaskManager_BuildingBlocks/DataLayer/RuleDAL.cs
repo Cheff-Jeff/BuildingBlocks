@@ -71,6 +71,29 @@ namespace DataLayer
             return rule1;
         }
 
+        public RuleDTO GetRuleFromSystem(int systemId)
+        {
+            OpenConnect();
+
+            cmd.Parameters.Clear();
+
+            cmd.CommandText = "SELECT * FROM Rules WHERE SystemId=@systemid";
+            cmd.Parameters.AddWithValue("@systemid", systemId);
+
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            RuleDTO rule1 = new RuleDTO();
+
+            while (rdr.Read())
+            {
+                RuleDTO rule = new RuleDTO((int)rdr["Id"], (string)rdr["Name"], (int)rdr["SystemId"], (int)rdr["Min"], (int)rdr["Max"], (string)rdr["NotifyEmail"]);
+                rule1 = rule;
+            }
+            CloseConnect();
+
+            return rule1;
+        }
+
         public List<RuleDTO> GetRules()
         {
 
