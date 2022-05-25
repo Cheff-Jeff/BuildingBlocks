@@ -1,15 +1,4 @@
-﻿/*body {
-    color: #ff8300;
-    background: #f5f5f5;
-    font-family: 'Varela Round', sans-serif;
-    font-size: 13px;
-}*/
-
-/*.table-responsive {
-    margin: 30px 0;
-}*/
-
-.table-custom thead p {
+﻿.table-custom thead p {
     margin-bottom: 0;
     font-weight: 600;
     font-size: 19px;
@@ -24,15 +13,10 @@
 }
 
 .table-custom tbody tr {
-    /*display: flex;
-    flex-direction: row;
-    align-items: stretch;*/
     width: 100%;
 }
 
 .table-custom tbody td {
-    /*display: block;
-    flex: 1;*/
     width: 100%;
     padding: 12px 12px !important;
 }
@@ -68,6 +52,16 @@
     width: 25px;
 }
 
+.table-detail-wrap svg{
+    transform: scale(1);
+    transition: all .3s ease-in-out;
+}
+
+.table-detail-wrap svg:hover{
+    transform: scale(1.2);
+    transition: all .3s ease-in-out;
+}
+
 .table-detail-wrap svg path{
     fill: #ff8300;
 }
@@ -94,7 +88,6 @@
     color: #fff;
     padding: 16px 30px;
     min-width: 100%;
-    /*margin: -20px -25px 10px;*/
     border-radius: 3px 3px 0 0;
 }
 
@@ -146,10 +139,6 @@ table.table tr th, table.table tr td {
 
 table.table-striped tbody tr:nth-of-type(odd) {
     background-color: #fcfcfc;
-}
-
-table.table-striped.table-hover tbody tr:hover {
-    background: #f5f5f5;
 }
 
 table.table th i {
