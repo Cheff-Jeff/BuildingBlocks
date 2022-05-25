@@ -119,9 +119,10 @@ namespace DataLayer
 
             cmd.Parameters.Clear();
 
-            cmd.CommandText = "SELECT * FROM Metrics WHERE SystemId = @systemId group by Name, Id, SystemId, Value, Date order by Id desc";
             RuleDTO currentRule = rules.Find(rule => rule.SystemId == serverId);
             List<string> usedNames = new List<string>();
+
+            cmd.CommandText = "SELECT M.* FROM (SELECT Name, Max(Date) AS First FROM Metrics WHERE SystemId = @systemId GROUP BY Name) foo JOIN Metrics M ON foo.Name = M.Name AND foo.First = M.Date";
             cmd.Parameters.AddWithValue("@systemId", serverId);
 
             using SqlDataReader metricReader = cmd.ExecuteReader();
@@ -130,27 +131,22 @@ namespace DataLayer
 
             while (metricReader.Read())
             {
-                metrics.Add(new MetricDTO((int)metricReader["Id"], (string)metricReader["Name"], (int)metricReader["SystemId"], (int)metricReader["Value"], (DateTime)metricReader["Date"]));
+                metrics.Add(new MetricDTO((int)metricReader["Id"], (string)metricReader["Name"], serverId, (int)metricReader["Value"], (DateTime)metricReader["Date"]));
             }
 
             foreach (var metric in metrics)
             {
-                if (!usedNames.Contains(metric.Name))
+                var thisRule = rules.Find(rule => rule.Name == metric.Name);
+                if (thisRule != null)
                 {
-                    var thisRule = rules.Find(rule => rule.Name == metric.Name);
-                    if (thisRule != null)
+                    Console.WriteLine(metric.Value);
+                    Console.WriteLine(metric.MetricId);
+                    if (thisRule.Min > metric.Value || thisRule.Max < metric.Value)
                     {
-                        Console.WriteLine(metric.Value);
-                        Console.WriteLine(metric.MetricId);
-                        if (thisRule.Min > metric.Value || thisRule.Max < metric.Value)
-                        {
-                            exceedingMetrics.Add(metric); Console.WriteLine(metric.Value);
-                        }
+                        exceedingMetrics.Add(metric); Console.WriteLine(metric.Value);
                     }
                 }
-                usedNames.Add(metric.Name);
             }
-
             CloseConnect();
             return exceedingMetrics;
         }
