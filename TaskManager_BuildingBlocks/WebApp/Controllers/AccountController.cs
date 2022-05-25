@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using DataLayer;
 using BusinessLayer;
 using WebApp.Models;
+using System;
 
 namespace WebApp.Controllers
 {
@@ -40,7 +41,7 @@ namespace WebApp.Controllers
 
                 if (!userContainer.CheckUserExists(user.Email.ToLower()))
                 {
-                    userContainer.UserRegister(new User(salt.ToString(), user.Email, Password, user.IsAdmin));
+                    userContainer.UserRegister(new User(Convert.ToBase64String(salt), user.Email, Password, user.IsAdmin));
                     TempData["seccesss"] = "New user has been added.";
                     return RedirectToAction("Index", "Account");
                 }
