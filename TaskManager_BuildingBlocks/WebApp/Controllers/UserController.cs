@@ -19,16 +19,15 @@ namespace WebApp.Controllers
         public ActionResult Index()
         {
             UserViewModel userViewmodel = new UserViewModel();
-            UserViewModel list = new UserViewModel();
+            ListViewModel list = new ListViewModel();
 
             foreach (User user in userContainer.GetAllUsers())
             {
                 userViewmodel = new UserViewModel(user.UserId, user.Email, user.IsAdmin);
-                list.listusers.Add(userViewmodel);
+                list.allusers.Add(userViewmodel);
             }
 
-            userViewmodel.listusers = list.listusers;
-            return View(userViewmodel);
+            return View(list.allusers);
         }
 
         // POST: UserController/Create
@@ -60,22 +59,33 @@ namespace WebApp.Controllers
         // GET: UserController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            UserViewModel userViewModel = new UserViewModel();
+            userViewModel = FetchById(id);
+            return View(userViewModel);
         }
 
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, UserViewModel userViewModel)
         {
-            UserViewModel userViewModel = new UserViewModel();
             try
             {
-                byte[] salt = userContainer.AddSalt();
+                if(userViewModel.RePassword != userViewModel.Password)
+                {
+                    TempData["UserNotEdited"] = "Passwords do not match, user not created!";
 
-                User us = new User(salt.ToString(), userViewModel.UserId, userViewModel.Email, userViewModel.Password, userViewModel.IsAdmin);
-                user.EditOneUser(us);
-                return RedirectToAction(nameof(Index));
+                    return View("Edit");
+                }
+                else
+                {
+                    byte[] salt = userContainer.AddSalt();
+                    var password = userContainer.hash(userViewModel.Password, salt);
+
+                    User us = new User(Convert.ToBase64String(salt), id, userViewModel.Email, password, userViewModel.IsAdmin);
+                    user.EditOneUser(us);
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
@@ -84,24 +94,29 @@ namespace WebApp.Controllers
         }
 
         // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
-            return View();
+            User us = new User(id);
+            userContainer.DeleteOneAccount(us);
+
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: UserController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [NonAction]
+        public UserViewModel FetchById(int id)
         {
-            try
+            UserViewModel userViewModel = new UserViewModel();
+
+            User user = userContainer.GetUserById(id);
             {
-                return RedirectToAction(nameof(Index));
+                userViewModel.UserId = user.UserId;
+                userViewModel.Email = user.Email;
+                userViewModel.Password = user.Password;
+                userViewModel.IsAdmin = user.IsAdmin;
+                userViewModel.Salt = user.Salt;
             }
-            catch
-            {
-                return View();
-            }
+
+            return userViewModel;
         }
     }
 }

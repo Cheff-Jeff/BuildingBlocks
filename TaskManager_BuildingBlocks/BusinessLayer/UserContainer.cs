@@ -37,9 +37,13 @@ namespace BusinessLayer
             IUserContainer.DeleteOne(dto);
         }
 
+        public User GetUserById(int id)
+        {
+            return new User(IUserContainer.GetUserById(id));
+        }
+
         public User GetUserByEmail(string email)
         {
-            //list aanmaken en vullen.
             return new User(IUserContainer.GetUserByEmail(email));
         }
 
