@@ -1,7 +1,4 @@
 ﻿$(document).ready(function () {
-    $('header').empty();
-    $('footer').empty();
-
     $("#emailInput").change(() => {
         const email = $("#emailInput").val();
         checkEmail(email);
@@ -12,7 +9,7 @@
         checkPass(password);
     });
 
-    $("#submit").click((event) => {
+    $("#btnSubmit").click((e) => {
         let emailValit = false;
         let passValit = false;
 
@@ -46,7 +43,12 @@
 
     const checkPass = (password) => {
         if (password == "" || password == " " || password == null) {
-            $("#passError").text("This input is required.");
+            $("#passwordError").text("This input is required.");
+            return false;
+        }
+        else if (password.length < 1 || password.length > 100) {
+            console.log(password.length);
+            $("#passwordError").text("Your password must be between 1 and 100 characters long.");
             return false;
         }
         else {
