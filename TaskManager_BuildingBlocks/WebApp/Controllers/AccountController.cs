@@ -19,6 +19,16 @@ namespace WebApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult Logout()
+        {
+            if (HttpContext.Session.GetInt32("isAdmin") != null)
+            {
+                HttpContext.Session.Remove("isAdmin");
+                return RedirectToAction("Index", "Account");
+            }
+            return RedirectToAction("Index", "Account");
+        }
+
         public IActionResult Register() 
         {
             if (HttpContext.Session.GetInt32("isAdmin") != null && HttpContext.Session.GetInt32("isAdmin") == 1)
