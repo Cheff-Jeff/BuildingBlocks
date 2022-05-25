@@ -98,6 +98,15 @@ background-color: #d0d0d0;
     letter-spacing: .5px;
 }
 
+.btn-custom-danger {
+    border: solid 2px #f2545b;
+    color: #f2545b !important;
+}
+
+.btn-custom-danger span{
+    color: #f2545b !important;
+}
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;

@@ -21,3 +21,9 @@
 		}
 	});
 });
+
+function updateURL(id, email) {
+	$("#modelTitle").text("Delete " + email);
+	var findlink = document.getElementById("btnDelete");
+	findlink.href = "Delete/" + id + "";
+}
