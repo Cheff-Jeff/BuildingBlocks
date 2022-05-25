@@ -286,29 +286,16 @@
         }
     </style>
     <script>
-$(document).ready(function(){
-	// Activate tooltip
-	$('[data-toggle="tooltip"]').tooltip();
-
-	// Select/Deselect checkboxes
-	var checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function(){
-		if(this.checked){
-			checkbox.each(function(){
-				this.checked = true;
-			});
-		} else{
-			checkbox.each(function(){
-				this.checked = false;
-			});
-		}
-	});
-	checkbox.click(function(){
-		if(!this.checked){
-			$("#selectAll").prop("checked", false);
-		}
-	});
-});
+        $(document).ready(function () {
+            // Activate tooltip
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    <script>
+        function updateURL(id) {
+            var findlink = document.getElementById("btnDelete");
+            findlink.href = "Delete/"+id+"";
+        }
     </script>
 </head>
 <body>
@@ -348,9 +335,8 @@ $(document).ready(function(){
                             </td>
                             <td>
                                 <a asp-action="Edit" asp-route-id="@item.UserId">Edit<i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> |
-                                <input type="hidden" asp-for="@item.UserId" />
                                 @*<a asp-action="Delete" asp-route-id="@item.UserId">Delete<i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>*@
-                                <a href="#deleteUser" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="#deleteUser" onclick="updateURL(@item.UserId)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
                         }
@@ -374,7 +360,7 @@ $(document).ready(function(){
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <a asp-action="Delete" asp-route-id="UserId">Delete</a>
+                        <a id="btnDelete" href="User/Delete/">Delete</a>
                     </div>
                 </form>
             </div>
