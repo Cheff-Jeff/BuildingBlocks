@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InterfaceLayer.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace InterfaceLayer
 {
     public interface IRule
     {
+        public bool UpdateRule(RuleDTO ruleDTO);
     }
 }

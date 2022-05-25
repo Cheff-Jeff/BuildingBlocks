@@ -11,10 +11,10 @@ namespace BusinessLayer
     public class Rule
     {
         public int RuleId { get; set; }
+        public string RuleName { get; set; }
         public int SystemId { get; set; }
-        public int MinMax { get; set; }
-        public int Limit { get; set; }
-        public int Limit2 { get; set; }
+        public int Min { get; set; }
+        public int Max { get; set; }
         public string NotifyEmail { get; set; }
 
         IRule IRule;
@@ -24,6 +24,17 @@ namespace BusinessLayer
 
         }
 
+        public Rule(int id, string rulename,int systemid, int min, int max, string notifyemail)
+        {
+            RuleId = id;
+            RuleName = rulename;
+            SystemId = systemid;
+            Min = min;
+            Max = max;
+            NotifyEmail = notifyemail;
+        }
+
+
         public Rule(IRule dal)
         {
             IRule = dal;
@@ -32,11 +43,25 @@ namespace BusinessLayer
         public Rule(RuleDTO dto)
         {
             this.RuleId = dto.RuleId;
+            this.RuleName = dto.RuleName;
             this.SystemId = dto.SystemId;
-            this.MinMax = dto.MinMax;
-            this.Limit = dto.Limit;
-            this.Limit2 = dto.Limit2;
+            this.Min = dto.Min;
+            this.Max = dto.Max;
             this.NotifyEmail = dto.NotifyEmail;
+        }
+
+        public RuleDTO TODTO()
+        {
+            return new RuleDTO(RuleId, RuleName, SystemId, Min, Max, NotifyEmail);
+        }
+
+
+        IRule irule;
+
+        public bool UpdateRule(IRule dal)
+        {
+            irule = dal;
+            return irule.UpdateRule(TODTO());
         }
     }
 }
