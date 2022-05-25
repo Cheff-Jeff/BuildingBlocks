@@ -142,6 +142,27 @@ namespace DataLayer
             return listall;
         }
 
+        public UserDTO GetUserById(int id)
+        {
+            OpenConnect();
+            cmd.Parameters.Clear();
+
+            cmd.CommandText = "SELECT * FROM Users WHERE Id = @Id";
+            cmd.Parameters.AddWithValue("@Id", id);
+
+            UserDTO user = new UserDTO(0, "noexist", "noexist", "noexist", false); ;
+
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                user = new UserDTO((int)rdr["id"], (string)rdr["Email"], (string)rdr["Password"], rdr["Salt"].ToString(), (bool)rdr["IsAdmin"]);
+            }
+            CloseConnect();
+
+            return user;
+        }
+
         public UserDTO GetUserByEmail(string email)
         {
             OpenConnect();

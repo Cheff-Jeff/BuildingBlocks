@@ -18,11 +18,17 @@ namespace WebApp.Models
         [StringLength(20, MinimumLength = 6)]
         public string Password { get; set; }
 
-        public string HiddenPassword = "******";
+        [Required]
+        [StringLength(20, MinimumLength = 6)]
+        public string RePassword { get; set; }
 
         [Required]
         public bool IsAdmin { get; set; }
 
+        public string Salt { get; set; }
+
+
+        public string HiddenPassword = "******";
 
 
         public List<UserViewModel> listusers = new List<UserViewModel>();

@@ -60,22 +60,33 @@ namespace WebApp.Controllers
         // GET: UserController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            UserViewModel userViewModel = new UserViewModel();
+            userViewModel = FetchById(id);
+            return View(userViewModel);
         }
 
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, UserViewModel userViewModel)
         {
-            UserViewModel userViewModel = new UserViewModel();
             try
             {
-                byte[] salt = userContainer.AddSalt();
+                if(userViewModel.RePassword != userViewModel.Password)
+                {
+                    TempData["UserNotEdited"] = "Passwords do not match, user not created!";
 
-                User us = new User(salt.ToString(), userViewModel.UserId, userViewModel.Email, userViewModel.Password, userViewModel.IsAdmin);
-                user.EditOneUser(us);
-                return RedirectToAction(nameof(Index));
+                    return View("Edit");
+                }
+                else
+                {
+                    byte[] salt = userContainer.AddSalt();
+                    var password = userContainer.hash(userViewModel.Password, salt);
+
+                    User us = new User(Convert.ToBase64String(salt), id, userViewModel.Email, password, userViewModel.IsAdmin);
+                    user.EditOneUser(us);
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
@@ -102,6 +113,23 @@ namespace WebApp.Controllers
             {
                 return View();
             }
+        }
+
+        [NonAction]
+        public UserViewModel FetchById(int id)
+        {
+            UserViewModel userViewModel = new UserViewModel();
+
+            User user = userContainer.GetUserById(id);
+            {
+                userViewModel.UserId = user.UserId;
+                userViewModel.Email = user.Email;
+                userViewModel.Password = user.Password;
+                userViewModel.IsAdmin = user.IsAdmin;
+                userViewModel.Salt = user.Salt;
+            }
+
+            return userViewModel;
         }
     }
 }
