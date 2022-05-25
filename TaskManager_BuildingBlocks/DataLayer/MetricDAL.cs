@@ -38,5 +38,53 @@ namespace DataLayer
                 throw;
             }
         }
+        public List<MetricDTO> GetAllLatestMetricsFromServer(int serverId)
+        {
+
+            Initialize();
+            OpenConnect();
+
+            cmd.Dispose();
+
+            cmd.Parameters.Clear();
+            cmd.CommandText = "SELECT M.* FROM (SELECT Name, Max(Date) AS First FROM Metrics WHERE SystemId = @systemId GROUP BY Name) foo JOIN Metrics M ON foo.Name = M.Name AND foo.First = M.Date";
+            cmd.Parameters.AddWithValue("@systemId", serverId);
+
+            using SqlDataReader metricReader = cmd.ExecuteReader();
+
+            List<MetricDTO> metrics = new List<MetricDTO>();
+
+            while (metricReader.Read())
+            {
+                metrics.Add(new MetricDTO((int)metricReader["Id"], (string)metricReader["Name"], serverId, (int)metricReader["Value"], (DateTime)metricReader["Date"]));
+            }
+
+            CloseConnect();
+            return metrics;
+        }
+        public List<MetricDTO> GetAllMetricsFromServerWithName(int serverId, string name, int amount)
+        {
+            Initialize();
+            OpenConnect();
+
+            cmd.Dispose();
+
+            cmd.Parameters.Clear();
+            cmd.CommandText = "SELECT TOP " + amount + " * FROM Metrics WHERE SystemId = @systemId AND Name = '@name' ORDER BY Date DESC";
+            cmd.Parameters.AddWithValue("@systemId", serverId);
+            cmd.Parameters.AddWithValue("@name", name);
+
+            using SqlDataReader metricReader = cmd.ExecuteReader();
+
+            List<MetricDTO> metrics = new List<MetricDTO>();
+
+            while (metricReader.Read())
+            {
+                metrics.Add(new MetricDTO((int)metricReader["Id"], (string)metricReader["Name"], serverId, (int)metricReader["Value"], (DateTime)metricReader["Date"]));
+            }
+
+            CloseConnect();
+            return metrics;
+        }
     }
 }

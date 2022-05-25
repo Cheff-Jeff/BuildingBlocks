@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Details";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <h1>Details</h1>
+
+            <div>
+                <h4>@ViewData["currentServer"].GetType().GetProperty("ServerName").GetValue(ViewData["currentServer"])</h4>
+                <hr />
+                <select id="metricNameList">
+                    @foreach (var metric in ViewData["currentServerMetricsNames"] as List<BusinessLayer.Metric>)
+                    {
+                        <option value="@metric.Name">@metric.Name</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <canvas id="metricChart" style="width:500px;max-width:700px"></canvas>
+        </div>
+    </div>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script>
+    var xyValues = [];
+    var select = document.getElementById("metricNameList");
+    console.log(window)
+    fetch(window.location.origin + "/Server/Get/@ViewData["currentServer"].GetType().GetProperty("ServerId").GetValue(ViewData["currentServer"])?name=" +
+        select.options[select.selectedIndex].value + "&amount=5", { mode: "no-cors" });
+
+    new Chart("metricChart", {
+        type: "line",
+        labels: [],
+        data: {
+            datasets: [{
+                pointRadius: 4,
+                pointBackgroundColor: "rgba(0,0,255,1)",
+                data: xyValues
+            }]
+        },
+        Options: {}
+    });
+</script>

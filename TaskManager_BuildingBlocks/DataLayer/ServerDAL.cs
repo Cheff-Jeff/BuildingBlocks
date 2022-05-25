@@ -62,14 +62,14 @@ namespace DataLayer
             return system;
         }
 
-        public ServerDTO GetOneSystemNameById(ServerDTO dto)
+        public ServerDTO GetOneSystemById(int serverId)
         {
             OpenConnect();
 
             cmd.Parameters.Clear();
 
             cmd.CommandText = "SELECT * FROM Systems WHERE Id = @Id";
-            cmd.Parameters.AddWithValue("@Id", dto.SystemId);
+            cmd.Parameters.AddWithValue("@Id", serverId);
 
             using SqlDataReader rdr = cmd.ExecuteReader();
 

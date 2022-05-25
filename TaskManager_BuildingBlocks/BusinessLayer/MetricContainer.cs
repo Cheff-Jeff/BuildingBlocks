@@ -19,5 +19,19 @@ namespace BusinessLayer
         {
             Metrics.CreateMetric(new NewMetricDTO(metric.Name, metric.SystemId, metric.Value, DateTime.Now));
         }
+
+        public List<Metric> GetAllLatestMetricsFromServer(int serverId)
+        {
+            List<Metric> mets = new List<Metric>();
+            Metrics.GetAllLatestMetricsFromServer(serverId).ForEach(m => mets.Add(new Metric(m)));
+            return mets;
+        }
+
+        public List<Metric> GetAllMetricsFromServerWithName(int id, string name, int amount)
+        {
+            List<Metric> mets = new List<Metric>();
+            Metrics.GetAllMetricsFromServerWithName(id, name, amount).ForEach(m => mets.Add(new Metric(m)));
+            return mets;
+        }
     }
 }

@@ -42,15 +42,9 @@ namespace BusinessLayer
             return sys;
         }
 
-        public Server GetOneSystemNameById(Server system)
+        public Server GetOneSystemById(int serverId)
         {
-            ServerDTO dto = system.ToDTO();
-
-            Server sys = new Server();
-            ServerDTO Dto = IServer.GetOneSystemNameById(dto);
-            sys.ServerId = Dto.SystemId;
-            sys.ServerName = Dto.SystemName;
-
+            Server sys = new Server(IServer.GetOneSystemById(serverId));
             return sys;
         }
 

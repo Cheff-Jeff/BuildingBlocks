@@ -13,7 +13,7 @@ namespace InterfaceLayer
 
         public ServerDTO GetOneSystemByName(ServerDTO dto);
 
-        public ServerDTO GetOneSystemNameById(ServerDTO dto);
+        public ServerDTO GetOneSystemById(int systemId);
 
         public List<MetricDTO> GetExceedingMetricsFromServer(int serverId);
     }

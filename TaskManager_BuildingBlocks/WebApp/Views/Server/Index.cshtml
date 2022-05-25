@@ -10,7 +10,7 @@
     <div class="list-group">
         @foreach (var sys in ViewData["exceedingMetrics"] as Dictionary<BusinessLayer.Server, List<BusinessLayer.Metric>>)
         {
-            <a href="/server/@sys.Key.ServerId" class="list-group-item">
+            <a href="/Server/Details/@sys.Key.ServerId" class="list-group-item">
                 <p>@sys.Key.ServerName</p>
                 @foreach (var val in sys.Value as List<BusinessLayer.Metric>)
                 {

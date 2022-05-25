@@ -11,10 +11,11 @@ namespace WebApp.Controllers
 {
     public class ServerController : Controller
     {
+        private ServerContainer sc = new ServerContainer(new ServerDAL());
+        private MetricContainer mc = new MetricContainer(new MetricDAL());
         // GET: SystemController
         public ActionResult Index()
         {
-            ServerContainer sc = new ServerContainer(new ServerDAL());
             List<Server> allServers = sc.GetAllSystems();
             List<Metric> metrics = new List<Metric>();
 
@@ -33,6 +34,14 @@ namespace WebApp.Controllers
         // GET: SystemController/Details/5
         public ActionResult Details(int id)
         {
+            ViewData["currentServer"] = sc.GetOneSystemById(id);
+            ViewData["currentServerMetricsNames"] = mc.GetAllLatestMetricsFromServer(id);
+            return View();
+        }
+
+        public ActionResult Get(int serverId, string name, int amount)
+        {
+            ViewData["metricData"] = mc.GetAllMetricsFromServerWithName(serverId, name, amount);
             return View();
         }
 
