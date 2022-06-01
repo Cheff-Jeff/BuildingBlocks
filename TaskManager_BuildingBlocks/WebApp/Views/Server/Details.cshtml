@@ -15,13 +15,17 @@
                         <option value="@metric.Name">@metric.Name</option>
                     }
                 </select>
+                <hr />
+                <input type="number" value="5" id="metricAmount" min="1" max="20" />
+                <input type="button" id="refreshBtn" onclick="selectedMetricChange()" class="btn btn-success" value="Refresh" />
             </div>
+            <hr />
             <div>
                 <a asp-action="Index">Back to List</a>
             </div>
         </div>
         <div class="col-md-9">
-            <canvas id="metricChart" style="width:500px;max-width:700px"></canvas>
+            <canvas id="metricChart"></canvas>
         </div>
     </div>
 
@@ -37,29 +41,33 @@
 
     function selectedMetricChange() {
         var xyValues = [];
-
+        amount = document.querySelector("#metricAmount").value
         var metricPoints = "";
 
         var html = fetch(window.location.origin + "/Server/Get/@ViewData["currentServer"].GetType().GetProperty("ServerId").GetValue(ViewData["currentServer"])?name=" +
             select.options[select.selectedIndex].value + "&amount=" + amount, { mode: "no-cors" }).then(resp => resp.text()).then(data => GenerateChart(data))
-
-            console.log(data);
     }
-@*{0: {Id: 122, Value: 52},1: {Id: 124, Value: 55},2: {Id: 123, Value: 52},3: {Id: 2, Value: 68},4: {Id: 13, Value: 1},TypeData:{Name: 'GPU',Min: 25,Max: 85}}*@
 
     function GenerateChart(fetchedJsonData) {
+        let canvas = document.getElementById('metricChart');
+        const context = canvas.getContext("2d");
+        console.log(context)
+        context.Chart = null
         let jsonData = JSON.parse(fetchedJsonData.replaceAll("\\", ""))
         let metricPoints = [];
+        let maxPoints = [];
+        let minPoints = [];
         let xlabels = [];
         for (let i = 0; i < amount; i++) {
-            metricPoints.push(jsonData[i.toString()]["Value"]);
-            xlabels.push(jsonData[i.toString()]["Date"])
+            if (jsonData[i.toString()] != null) {
+                metricPoints.push(jsonData[i.toString()]["Value"])
+                maxPoints.push(jsonData["TypeData"]["Max"])
+                minPoints.push(jsonData["TypeData"]["Min"])
+                xlabels.push(jsonData[i.toString()]["Date"])
+            }
         }
-        console.log(jsonData["TypeData"]["Max"]);
 
         var ylabels = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-        console.log(metricPoints)
-        console.log(xlabels)
 
         chart = new Chart("metricChart", {
             type: "line",
@@ -69,21 +77,51 @@
                     label: select.options[select.selectedIndex].value,
                     pointRadius: 4,
                     data: metricPoints.reverse(),
+                    borderColor: 'darkblue',
                     pointBackgroundColor: function (context) {
                         var index = context.dataIndex;
                         var value = context.dataset.data[index];
                         return value < jsonData["TypeData"]["Min"] ? 'red' :  // draw negative values in red
                             value > jsonData["TypeData"]["Max"] ? 'red' :    // else, alternate values in blue and green
-                                'green';
+                                'lightgreen';
                     },
-                }]
+                }, {
+                    type: "line",
+                    data: maxPoints,
+                    label: "Max",
+                    borderColor: "red",
+                    pointRadius: 0,
+                    pointHoverRadius: 0,
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    hitRadius: 0
+                    }, {
+                    type: "line",
+                    data: minPoints,
+                    label: "Min",
+                    borderColor: "red",
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    pointRadius: 0,
+                    pointHoverRadius: 0,
+                    hitRadius: 0
+                    }]
             }, options: {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            max: 100,
+                            min: 0
                         }
                     }]
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: 'rgb(255, 99, 132)'
+                        }
+                    }
                 }
             }
         });
