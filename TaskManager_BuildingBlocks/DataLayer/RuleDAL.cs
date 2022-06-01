@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    class RuleDAL : SqlConnect, IRule, IRuleContainer
+    public class RuleDAL : SqlConnect, IRule, IRuleContainer
     {
         public List<RuleDTO> GetAllRules()
         {
+            Initialize();
             OpenConnect();
 
             List<RuleDTO> rules = new List<RuleDTO>();
@@ -42,6 +43,7 @@ namespace DataLayer
 
         public List<RuleDTO> GetAllRulesFromServer(int serverId)
         {
+            Initialize();
             OpenConnect();
 
             List<RuleDTO> rules = new List<RuleDTO>();
@@ -72,6 +74,7 @@ namespace DataLayer
 
         public RuleDTO GetRuleTypeFromServer(int serverId, string typeName)
         {
+            Initialize();
             OpenConnect();
 
             RuleDTO rule = new RuleDTO();
