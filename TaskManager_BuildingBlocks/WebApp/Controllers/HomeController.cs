@@ -28,14 +28,13 @@ namespace WebApp.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         public IActionResult Home()
         {
-            return View();
+            if (HttpContext.Session.GetInt32("isAdmin") != null)
+            { 
+                return RedirectToAction("Index", "Server");
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

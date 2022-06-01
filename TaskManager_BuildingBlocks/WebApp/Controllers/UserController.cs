@@ -18,16 +18,20 @@ namespace WebApp.Controllers
         // GET: UserController
         public ActionResult Index()
         {
-            UserViewModel userViewmodel = new UserViewModel();
-            ListViewModel list = new ListViewModel();
-
-            foreach (User user in userContainer.GetAllUsers())
+            if (HttpContext.Session.GetInt32("isAdmin") != null)
             {
-                userViewmodel = new UserViewModel(user.UserId, user.Email, user.IsAdmin);
-                list.allusers.Add(userViewmodel);
-            }
+                UserViewModel userViewmodel = new UserViewModel();
+                ListViewModel list = new ListViewModel();
 
-            return View(list.allusers);
+                foreach (User user in userContainer.GetAllUsers())
+                {
+                    userViewmodel = new UserViewModel(user.UserId, user.Email, user.IsAdmin);
+                    list.allusers.Add(userViewmodel);
+                }
+
+                return View(list.allusers);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: UserController/Create
@@ -59,9 +63,13 @@ namespace WebApp.Controllers
         // GET: UserController/Edit/5
         public ActionResult Edit(int id)
         {
-            UserViewModel userViewModel = new UserViewModel();
-            userViewModel = FetchById(id);
-            return View(userViewModel);
+            if (HttpContext.Session.GetInt32("isAdmin") != null)
+            {
+                UserViewModel userViewModel = new UserViewModel();
+                userViewModel = FetchById(id);
+                return View(userViewModel);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: UserController/Edit/5
