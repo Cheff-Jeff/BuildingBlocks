@@ -2,6 +2,7 @@
 using DataLayer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SelectPdf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -117,6 +118,18 @@ namespace WebApp.Controllers
             }
 
             return userViewModel;
+        }
+
+        public IActionResult PdfEmployeeManager()
+        {
+            var desktop = new HtmlToPdf();
+            desktop.Options.WebPageWidth = 1920;
+
+            var pdf = desktop.ConvertUrl("https://localhost:44368/user/index");
+
+            var pdfBytes = pdf.Save();
+
+            return File(pdfBytes, "Application/pdf");
         }
     }
 }
