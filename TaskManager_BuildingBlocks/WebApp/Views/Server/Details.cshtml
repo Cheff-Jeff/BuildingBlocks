@@ -43,6 +43,7 @@
         var html = fetch(window.location.origin + "/Server/Get/@ViewData["currentServer"].GetType().GetProperty("ServerId").GetValue(ViewData["currentServer"])?name=" +
             select.options[select.selectedIndex].value + "&amount=" + amount, { mode: "no-cors" }).then(resp => resp.text()).then(data => GenerateChart(data.split(",")));
 
+            console.log(data);
     }
 
     function GenerateChart(metricPoints) {
