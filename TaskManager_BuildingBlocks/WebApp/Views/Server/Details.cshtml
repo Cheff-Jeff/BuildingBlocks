@@ -24,7 +24,7 @@
                 <a asp-action="Index">Back to List</a>
             </div>
         </div>
-        <div class="col-md-9">
+        <div id="graphContainer" class="col-md-9">
             <canvas id="metricChart"></canvas>
         </div>
     </div>
@@ -48,11 +48,17 @@
             select.options[select.selectedIndex].value + "&amount=" + amount, { mode: "no-cors" }).then(resp => resp.text()).then(data => GenerateChart(data))
     }
 
+    var resetCanvas = function () {
+        $('#metricChart').remove(); // this is my <canvas> element
+        $('#graphContainer').append('<canvas id="metricChart"><canvas>');
+    };
+
     function GenerateChart(fetchedJsonData) {
+        resetCanvas();
         let canvas = document.getElementById('metricChart');
         const context = canvas.getContext("2d");
         console.log(context)
-        context.Chart = null
+        context.clearRect(0,0,canvas.width,canvas.height)
         let jsonData = JSON.parse(fetchedJsonData.replaceAll("\\", ""))
         let metricPoints = [];
         let maxPoints = [];
