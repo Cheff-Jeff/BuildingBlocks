@@ -16,27 +16,36 @@ namespace WebApp.Controllers
         // GET: SystemController
         public ActionResult Index()
         {
-            List<Server> allServers = sc.GetAllSystems();
-            List<Metric> metrics = new List<Metric>();
+            if (HttpContext.Session.GetInt32("isAdmin") != null) 
+            {
+                List<Server> allServers = sc.GetAllSystems();
+                List<Metric> metrics = new List<Metric>();
 
-            var exceedingMetrics = new Dictionary<Server, List<Metric>>();
-            allServers.ForEach(s => { 
-                metrics = sc.GetExceedingMetricsFromServer(s.ServerId);
-                if (metrics.Count > 0)
-                {
-                    exceedingMetrics.Add(s, metrics);
-                }
-            });
-            ViewData["ExceedingMetrics"] = exceedingMetrics;
-            return View();
+                var exceedingMetrics = new Dictionary<Server, List<Metric>>();
+                allServers.ForEach(s => {
+                    metrics = sc.GetExceedingMetricsFromServer(s.ServerId);
+                    if (metrics.Count > 0)
+                    {
+                        exceedingMetrics.Add(s, metrics);
+                    }
+                });
+
+                ViewData["ExceedingMetrics"] = exceedingMetrics;
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: SystemController/Details/5
         public ActionResult Details(int id)
         {
-            ViewData["currentServer"] = sc.GetOneSystemById(id);
-            ViewData["currentServerMetricsNames"] = mc.GetAllLatestMetricsFromServer(id);
-            return View();
+            if (HttpContext.Session.GetInt32("isAdmin") != null)
+            {
+                ViewData["currentServer"] = sc.GetOneSystemById(id);
+                ViewData["currentServerMetricsNames"] = mc.GetAllLatestMetricsFromServer(id);
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Get(int id, string name, int amount)

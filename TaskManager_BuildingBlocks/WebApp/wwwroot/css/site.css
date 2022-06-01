@@ -5,6 +5,51 @@ html, body, h1, h2, h3, h4, h5, h6, p, span, b, a, input, button {
     font-weight: 400;
 }
 
+.mix-list {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+.mix-list li{
+    margin-right: 15px;
+}
+
+.link-custom {
+    position: relative;
+    color: #000 !important;
+    transition: color ease-in-out .4s;
+}
+ 
+.link-custom::before, .link-custom::after {
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 1px;
+    background: #ff8300;
+    transition: width ease-in-out .3s;
+}
+
+.link-custom:hover{
+    color: #ff8300!important;
+    transition: color ease-in-out .4s;
+}
+
+.link-custom::before{
+    left: 0;
+    bottom: 7px;
+}
+
+.link-custom::after {
+    right: 0;
+    bottom: 2px;
+}
+
+.link-custom:hover::before, .link-custom:hover::after{
+    width: 100%;
+    transition: width ease-in-out .3s;
+}
+
 .form-check-wrapper {
     display: flex;
     justify-content: flex-start;
