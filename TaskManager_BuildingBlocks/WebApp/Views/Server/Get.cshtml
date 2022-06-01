@@ -1,7 +1,10 @@
 ﻿@{
     Layout = "";
+    int i = 0;
 }
-@foreach (var item in ViewData["metricData"] as List<BusinessLayer.Metric>)
+{@foreach (var item in ViewData["metricData"] as List<BusinessLayer.Metric>)
 {
-    <text>@item.Value,</text>
+    <text>\"@i\": {\"Id\": @item.MetricId, \"Value\": @item.Value, \"Date\": \"@item.Date\"},</text>
+    i += 1;
 }
+\"TypeData\":{\"Name\": \"@ViewData["metricTypeDataName"]\",\"Min\": @ViewData["metricTypeDataMin"],\"Max\": @ViewData["metricTypeDataMax"]}}

@@ -41,31 +41,38 @@
         var metricPoints = "";
 
         var html = fetch(window.location.origin + "/Server/Get/@ViewData["currentServer"].GetType().GetProperty("ServerId").GetValue(ViewData["currentServer"])?name=" +
-            select.options[select.selectedIndex].value + "&amount=" + amount, { mode: "no-cors" }).then(resp => resp.text()).then(data => GenerateChart(data.split(",")));
+            select.options[select.selectedIndex].value + "&amount=" + amount, { mode: "no-cors" }).then(resp => resp.text()).then(data => GenerateChart(data))
 
     }
+@*{0: {Id: 122, Value: 52},1: {Id: 124, Value: 55},2: {Id: 123, Value: 52},3: {Id: 2, Value: 68},4: {Id: 13, Value: 1},TypeData:{Name: 'GPU',Min: 25,Max: 85}}*@
 
-    function GenerateChart(metricPoints) {
+    function GenerateChart(fetchedJsonData) {
+        let jsonData = JSON.parse(fetchedJsonData.replaceAll("\\", ""))
+        let metricPoints = [];
+        let xlabels = [];
+        for (let i = 0; i < amount; i++) {
+            metricPoints.push(jsonData[i.toString()]["Value"]);
+            xlabels.push(jsonData[i.toString()]["Date"])
+        }
+        console.log(jsonData["TypeData"]["Max"]);
+
         var ylabels = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-        console.log(metricPoints.pop())
         console.log(metricPoints)
-        xlabels = [];
-        for (let i = 0; i < metricPoints.length; i++) { xlabels.push(i) }
         console.log(xlabels)
-        
+
         chart = new Chart("metricChart", {
             type: "line",
             data: {
-                labels: xlabels,
+                labels: xlabels.reverse(),
                 datasets: [{
                     label: select.options[select.selectedIndex].value,
                     pointRadius: 4,
-                    data: metricPoints,
+                    data: metricPoints.reverse(),
                     pointBackgroundColor: function (context) {
                         var index = context.dataIndex;
                         var value = context.dataset.data[index];
-                        return value < 25 ? 'red' :  // draw negative values in red
-                            value > 60 ? 'red' :    // else, alternate values in blue and green
+                        return value < jsonData["TypeData"]["Min"] ? 'red' :  // draw negative values in red
+                            value > jsonData["TypeData"]["Max"] ? 'red' :    // else, alternate values in blue and green
                                 'green';
                     },
                 }]

@@ -13,6 +13,7 @@ namespace WebApp.Controllers
     {
         private ServerContainer sc = new ServerContainer(new ServerDAL());
         private MetricContainer mc = new MetricContainer(new MetricDAL());
+        private RuleContainer rc = new RuleContainer(new RuleDAL());
         // GET: SystemController
         public ActionResult Index()
         {
@@ -42,6 +43,11 @@ namespace WebApp.Controllers
         public ActionResult Get(int id, string name, int amount)
         {
             ViewData["metricData"] = mc.GetAllMetricsFromServerWithName(id, name, amount);
+            var rule = rc.GetRuleTypeFromServer(id, name);
+
+            ViewData["metricTypeDataName"] = rule.Name; 
+            ViewData["metricTypeDataMin"] = rule.Min;
+            @ViewData["metricTypeDataMax"] = rule.Max;
             return View();
         }
 

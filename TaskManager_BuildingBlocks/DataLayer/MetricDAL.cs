@@ -47,7 +47,7 @@ namespace DataLayer
             cmd.Dispose();
 
             cmd.Parameters.Clear();
-            cmd.CommandText = "SELECT M.* FROM (SELECT Name, Max(Date) AS First FROM Metrics WHERE SystemId = @systemId GROUP BY Name) foo JOIN Metrics M ON foo.Name = M.Name AND foo.First = M.Date";
+            cmd.CommandText = "SELECT M.* FROM (SELECT Name, Min(Date) AS First FROM Metrics WHERE SystemId = @systemId GROUP BY Name) foo JOIN Metrics M ON foo.Name = M.Name AND foo.First = M.Date";
             cmd.Parameters.AddWithValue("@systemId", serverId);
 
             using SqlDataReader metricReader = cmd.ExecuteReader();
