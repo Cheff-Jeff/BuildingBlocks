@@ -47,7 +47,7 @@ namespace WebApp.Controllers
 
             ViewData["metricTypeDataName"] = rule.Name; 
             ViewData["metricTypeDataMin"] = rule.Min;
-            @ViewData["metricTypeDataMax"] = rule.Max;
+            ViewData["metricTypeDataMax"] = rule.Max;
             return View();
         }
 
