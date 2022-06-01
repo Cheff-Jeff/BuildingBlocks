@@ -49,7 +49,7 @@ namespace BusinessLayer
             this.UserId = userId;
             this.Email = Email;
             this.Password = Password;
-            this.IsAdmin = IsAdmin;
+            this.IsAdmin = isAdmin;
         }
 
         public User(UserDTO user)

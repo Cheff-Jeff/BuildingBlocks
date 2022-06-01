@@ -15,6 +15,9 @@ namespace InterfaceLayer
         public void DeleteOne(UserDTO dto);
 
         public List<UserDTO> GetAll();
+
+        public UserDTO GetUserById(int id);
+
         public UserDTO GetUserByEmail(string email);
 
         //public byte[] AddSalt()

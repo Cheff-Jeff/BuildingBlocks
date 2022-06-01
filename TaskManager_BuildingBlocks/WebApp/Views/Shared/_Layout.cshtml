@@ -35,12 +35,27 @@
                         @if (Context.Session.GetInt32("isAdmin") == 1)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Manage Users</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Manage employees</a>
                             </li>
+                        }
+                        @if (Context.Session.GetInt32("isAdmin") == 0 || Context.Session.GetInt32("isAdmin") == 1)
+                        {
                             <li>
-                                <a class="btn btn-custom" asp-area="" asp-controller="Account" asp-action="Logout">
-                                    <span>Logout</span>
-                                </a>
+                                <ul class="navbar-nav">
+                                    @if (Context.Session.GetInt32("isAdmin") == 1)
+                                    {
+                                        <li class="mr-3">
+                                            <a class="btn btn-custom" asp-controller="Account" asp-action="Register">
+                                                <span>New employee</span>
+                                            </a>
+                                        </li>
+                                    }
+                                   <li>
+                                       <a class="btn btn-custom" asp-area="" asp-controller="Account" asp-action="Logout">
+                                         <span>Logout</span>
+                                        </a>
+                                   </li> 
+                                </ul>
                             </li>
                         }
                     </ul>

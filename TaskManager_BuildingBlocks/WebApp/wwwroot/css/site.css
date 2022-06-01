@@ -39,11 +39,12 @@ html, body, h1, h2, h3, h4, h5, h6, p, span, b, a, input, button {
 .form-check-wrapper label input:checked ~ span {
     background-color: #ff8300;
 }
+
 .form-check-wrapper label input:checked ~ span::before {
     transform: translateX(26px);
 }
 
-.form-check-wrapper label span{
+.form-check-wrapper label span {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -55,7 +56,7 @@ html, body, h1, h2, h3, h4, h5, h6, p, span, b, a, input, button {
     border-radius: 34px;
 }
 
-.form-check-wrapper label span::before{
+.form-check-wrapper label span::before {
     content: "";
     position: absolute;
     height: 26px;
@@ -67,11 +68,11 @@ html, body, h1, h2, h3, h4, h5, h6, p, span, b, a, input, button {
     border-radius: 50%;
 }
 
-.form-check-wrapper label:hover span{
-    background-color: #d0d0d0;
+.form-check-wrapper label:hover span {
+background-color: #d0d0d0;
 }
 
-.form-check-wrapper label:hover input:checked ~ span{
+.form-check-wrapper label:hover input:checked ~ span {
     background-color: #e67600;
 }
 
@@ -95,6 +96,15 @@ html, body, h1, h2, h3, h4, h5, h6, p, span, b, a, input, button {
     font-size: 20px;
     color: #ff8300;
     letter-spacing: .5px;
+}
+
+.btn-custom-danger {
+    border: solid 2px #f2545b;
+    color: #f2545b !important;
+}
+
+.btn-custom-danger span{
+    color: #f2545b !important;
 }
 
 a.navbar-brand {

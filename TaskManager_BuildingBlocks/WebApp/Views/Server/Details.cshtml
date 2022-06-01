@@ -43,6 +43,7 @@
         var html = fetch(window.location.origin + "/Server/Get/@ViewData["currentServer"].GetType().GetProperty("ServerId").GetValue(ViewData["currentServer"])?name=" +
             select.options[select.selectedIndex].value + "&amount=" + amount, { mode: "no-cors" }).then(resp => resp.text()).then(data => GenerateChart(data))
 
+            console.log(data);
     }
 @*{0: {Id: 122, Value: 52},1: {Id: 124, Value: 55},2: {Id: 123, Value: 52},3: {Id: 2, Value: 68},4: {Id: 13, Value: 1},TypeData:{Name: 'GPU',Min: 25,Max: 85}}*@
 

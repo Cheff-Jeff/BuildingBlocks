@@ -71,7 +71,14 @@ namespace WebApp.Controllers
                         CurrentUser.userpassword = user.Password;
                         CurrentUser.usersalt = user.Salt;
                         CurrentUser.isadmin = user.IsAdmin;
-                        HttpContext.Session.SetInt32("isAdmin", 1);
+                        if (CurrentUser.isadmin)
+                        {
+                            HttpContext.Session.SetInt32("isAdmin", 1);
+                        }
+                        else 
+                        {
+                            HttpContext.Session.SetInt32("isAdmin", 0);
+                        }
                         return RedirectToAction("Home", "Home");
                     }
                 }
