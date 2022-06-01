@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
@@ -20,6 +21,7 @@ namespace WebApp.Controllers
             {
                 List<Server> allServers = sc.GetAllSystems();
                 List<Metric> metrics = new List<Metric>();
+                List<ServerViewModel> servers = new List<ServerViewModel>();
 
                 var exceedingMetrics = new Dictionary<Server, List<Metric>>();
                 allServers.ForEach(s => {
@@ -30,8 +32,20 @@ namespace WebApp.Controllers
                     }
                 });
 
+
+                foreach (Server server in allServers)
+                {
+                    ServerViewModel system = new ServerViewModel()
+                    { 
+                        ServerId = server.ServerId,
+                        ServerName = server.ServerName,
+                    };
+
+                    servers.Add(system);
+                }
+
                 ViewData["ExceedingMetrics"] = exceedingMetrics;
-                return View();
+                return View(servers);
             }
             return RedirectToAction("Index", "Home");
         }

@@ -1,22 +1,64 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<WebApp.Models.ServerViewModel>;
 @{
     ViewData["Title"] = "Servers";
 }
+@section css
+{
+    <link rel="stylesheet" href="~/css/server.css" />
+}
 <div class="container">
-    <h1>@ViewData["Title"]</h1>
+    <div class="title-wrap d-flex justify-content-between">
+        <h1 class="title">@ViewData["Title"]</h1>
 
-    <div class="list-group">
-        @foreach (var sys in ViewData["exceedingMetrics"] as Dictionary<BusinessLayer.Server, List<BusinessLayer.Metric>>)
-        {
-            <a href="/Server/Details/@sys.Key.ServerId" class="list-group-item">
-                <p>@sys.Key.ServerName</p>
-                @foreach (var val in sys.Value as List<BusinessLayer.Metric>)
-                {
-                    <p>@val.Name - @val.Value</p>
-                }
+        <div class="dropdown show">
+            <a class="btn btn-custom dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>All servers</span>
             </a>
-        }
+
+            <div class="dropdown-menu drop-custom" aria-labelledby="dropdownMenuLink">
+                @foreach (var system in Model)
+                {
+                    <a href="/Server/Details/@system.ServerId" class="dropdown-item link-custom">@system.ServerName</a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-wrapper">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-head">
+                            <p>Exceeding Systems</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="table-body">
+                            @foreach (var sys in ViewData["exceedingMetrics"] as Dictionary<BusinessLayer.Server, List<BusinessLayer.Metric>>)
+                            {
+                                <div class="table-row">
+                                     <a href="/Server/Details/@sys.Key.ServerId" class="list-group-item">
+                                        <div class="title-wrap">
+                                            <p>@sys.Key.ServerName</p>
+                                        </div>
+                                        <div class="metrics">
+                                            @foreach (var val in sys.Value as List<BusinessLayer.Metric>)
+                                            {
+                                                <p>@val.Name - @val.Value</p>
+                                            }
+                                        </div>
+                                    </a>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M502.6 278.6l-128 128c-12.51 12.51-32.76 12.49-45.25 0c-12.5-12.5-12.5-32.75 0-45.25L402.8 288H32C14.31 288 0 273.7 0 255.1S14.31 224 32 224h370.8l-73.38-73.38c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l128 128C515.1 245.9 515.1 266.1 502.6 278.6z"/></svg>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="list-group">
+        
     </div>
 </div>
