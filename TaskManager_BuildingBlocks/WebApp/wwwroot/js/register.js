@@ -31,7 +31,7 @@
             $("#emailError").text("This input is required.");
             return false;
         }
-        else if (!/^[a-z0-9\.\-]+@[a-z0-9]+\.[a-z]{2,3}$/.test(email)) {
+        else if (!/^[a-zA-Z0-9\.\-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test(email)) {
             $("#emailError").text("Please enter a valid email.");
             return false;
         }

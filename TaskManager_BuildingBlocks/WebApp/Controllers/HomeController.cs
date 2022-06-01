@@ -63,7 +63,7 @@ namespace WebApp.Controllers
                 {
                     bool loginChecker = userContainer.VerifyPassword(loginData.Email, loginData.Password);
 
-                    if (!loginChecker) { ViewBag.error = "You're password or email was incorrect."; return View(); }
+                    if (!loginChecker) { ViewBag.error = "Your password or email was incorrect."; return View(); }
                     else
                     {
                         User user = userContainer.GetUserByEmail(loginData.Email);
