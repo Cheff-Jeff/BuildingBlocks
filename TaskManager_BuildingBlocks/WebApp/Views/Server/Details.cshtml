@@ -7,6 +7,7 @@
             <h1>Details</h1>
 
             <div>
+@*Display current server data*@
                 <h4>@ViewData["currentServer"].GetType().GetProperty("ServerName").GetValue(ViewData["currentServer"])</h4>
                 <hr />
                 <select id="metricNameList" onChange="selectedMetricChange()">
@@ -32,49 +33,68 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script>
+    /// Create variables of the 
+    /// - Dropdown
+    /// - Default Value
+    /// - Chart for global use
     var select = document.getElementById("metricNameList");
     var amount = 5;
-    var xlabels = [];
     var chart;
 
+    // Execute the generation of the graph once when entering the page
     selectedMetricChange();
 
     function selectedMetricChange() {
-        var xyValues = [];
+        // ^ Generating the graph
+        // Get the amount of points wanting to display
         amount = document.querySelector("#metricAmount").value
-        var metricPoints = "";
 
+        // Get the Data from an API
+        // This fetch request goes to /Server/Get/{serverId}?name={dataTypeName}&amount={amountPointsVisible}
+        // Then excecute method GenerateChart(Json) with the data gotten
         var html = fetch(window.location.origin + "/Server/Get/@ViewData["currentServer"].GetType().GetProperty("ServerId").GetValue(ViewData["currentServer"])?name=" +
             select.options[select.selectedIndex].value + "&amount=" + amount, { mode: "no-cors" }).then(resp => resp.text()).then(data => GenerateChart(data))
     }
 
+    // Resets the canvas (emptying)
     var resetCanvas = function () {
-        $('#metricChart').remove(); // this is my <canvas> element
+        $('#metricChart').remove(); // this is the <canvas> element
         $('#graphContainer').append('<canvas id="metricChart"><canvas>');
     };
 
     function GenerateChart(fetchedJsonData) {
+        //Reset the canvas (doesn't do anything on first launch)
         resetCanvas();
+        // Get canvas again and clear the image
         let canvas = document.getElementById('metricChart');
         const context = canvas.getContext("2d");
         console.log(context)
-        context.clearRect(0,0,canvas.width,canvas.height)
+        context.clearRect(0, 0, canvas.width, canvas.height)
+
+        // Convert the json text to a json object
         let jsonData = JSON.parse(fetchedJsonData.replaceAll("\\", ""))
+
+        // Declaring arrays
         let metricPoints = [];
         let maxPoints = [];
         let minPoints = [];
         let xlabels = [];
+
+        // Foreach metricpoint add its values to arrays
         for (let i = 0; i < amount; i++) {
             if (jsonData[i.toString()] != null) {
+                //Value
                 metricPoints.push(jsonData[i.toString()]["Value"])
+                //Max of system
                 maxPoints.push(jsonData["TypeData"]["Max"])
+                //Min of system
                 minPoints.push(jsonData["TypeData"]["Min"])
+                //Date as label
                 xlabels.push(jsonData[i.toString()]["Date"])
             }
         }
 
-        var ylabels = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-
+        // Generate the chart using Chart.js
         chart = new Chart("metricChart", {
             type: "line",
             data: {
@@ -87,11 +107,12 @@
                     pointBackgroundColor: function (context) {
                         var index = context.dataIndex;
                         var value = context.dataset.data[index];
-                        return value < jsonData["TypeData"]["Min"] ? 'red' :  // draw negative values in red
-                            value > jsonData["TypeData"]["Max"] ? 'red' :    // else, alternate values in blue and green
-                                'lightgreen';
+                        return value < jsonData["TypeData"]["Min"] ? 'red' :  // draw < Min values in red
+                            value > jsonData["TypeData"]["Max"] ? 'red' :    // draw > Max values in red
+                                'lightgreen'; // else light green
                     },
                 }, {
+                    //Max Line
                     type: "line",
                     data: maxPoints,
                     label: "Max",
@@ -101,7 +122,9 @@
                     borderWidth: 1,
                     backgroundColor: 'rgba(0,0,0,0)',
                     hitRadius: 0
-                    }, {
+                    },
+                    //Min Line
+                    {
                     type: "line",
                     data: minPoints,
                     label: "Min",
