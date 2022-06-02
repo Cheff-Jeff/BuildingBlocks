@@ -24,7 +24,7 @@ namespace BusinessLayer
                 mail.Body = "In systeem: " + systeemNaam + " is de volgende fout gevonden: " + foutmelding;
 
                 SmtpServer.Port = 587;
-                SmtpServer.Credentials = new NetworkCredential("test05182022@gmail.com", "Wachtwoord0510");
+                SmtpServer.Credentials = new NetworkCredential("test05182022@gmail.com", "tgnffwunwudseqll");
                 SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
