@@ -107,7 +107,7 @@ namespace DataLayer
                     SystemId = (int)RulesReader["SystemId"],
                     Min = (int)RulesReader["Min"],
                     Max = (int)RulesReader["Max"],
-                    Name = (string)RulesReader["Name"],
+                    RuleName = (string)RulesReader["Name"],
                     NotifyEmail = (string)RulesReader["NotifyEmail"]
                 });
             }
@@ -136,7 +136,7 @@ namespace DataLayer
 
             foreach (var metric in metrics)
             {
-                var thisRule = rules.Find(rule => rule.Name == metric.Name);
+                var thisRule = rules.Find(rule => rule.RuleName == metric.Name);
                 if (thisRule != null)
                 {
                     Console.WriteLine(metric.Value);
