@@ -9,99 +9,163 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    public class RuleDAL : SqlConnect, IRule, IRuleContainer
+    public class RuleDal : SqlConnect, IRule, IRuleContainer
     {
-        public List<RuleDTO> GetAllRules()
+        public RuleDal()
         {
             Initialize();
+        }
+
+        public bool AddRule(RuleDTO ruleDTO)
+        {
+            bool succeeded = false;
+            try
+            {
+                OpenConnect();
+
+                cmd.Parameters.Clear();
+
+                cmd.CommandText = "INSERT INTO Rules (SystemId, Min, Max, NotifyEmail, Name) VALUES (@systemid, @min, @max, @notifyemail, @name)";
+
+                cmd.Parameters.AddWithValue("@systemid", ruleDTO.SystemId);
+                cmd.Parameters.AddWithValue("@name", ruleDTO.RuleName);
+                cmd.Parameters.AddWithValue("@min", ruleDTO.Min);
+                cmd.Parameters.AddWithValue("@max", ruleDTO.Max);
+                cmd.Parameters.AddWithValue("@notifyemail", ruleDTO.NotifyEmail);
+
+                if (cmd.ExecuteNonQuery() > 0) { succeeded = true; }
+                else { succeeded = false; }
+
+                CloseConnect();
+
+                return succeeded;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("Inner Exception: " + ex.Message);
+                Console.WriteLine();
+                throw;
+            }
+        }
+
+        public RuleDTO GetRule(int id)
+        {
             OpenConnect();
 
-            List<RuleDTO> rules = new List<RuleDTO>();
+            cmd.Parameters.Clear();
+
+            cmd.CommandText = "SELECT * FROM Rules WHERE Id=@id";
+            cmd.Parameters.AddWithValue("@id", id);
+
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            RuleDTO rule1 = new RuleDTO();
+
+            while (rdr.Read())
+            {
+                RuleDTO rule = new RuleDTO((int)rdr["Id"], (string)rdr["Name"], (int)rdr["SystemId"], (int)rdr["Min"], (int)rdr["Max"], (string)rdr["NotifyEmail"]);
+                rule1 = rule;
+            }
+            CloseConnect();
+
+            return rule1;
+        }
+
+        public RuleDTO GetRuleFromSystem(int systemId)
+        {
+            OpenConnect();
+
+            cmd.Parameters.Clear();
+
+            cmd.CommandText = "SELECT * FROM Rules WHERE SystemId=@systemid";
+            cmd.Parameters.AddWithValue("@systemid", systemId);
+
+            using SqlDataReader rdr = cmd.ExecuteReader();
+
+            RuleDTO rule1 = new RuleDTO();
+
+            while (rdr.Read())
+            {
+                RuleDTO rule = new RuleDTO((int)rdr["Id"], (string)rdr["Name"], (int)rdr["SystemId"], (int)rdr["Min"], (int)rdr["Max"], (string)rdr["NotifyEmail"]);
+                rule1 = rule;
+            }
+            CloseConnect();
+
+            return rule1;
+        }
+
+        public List<RuleDTO> GetRules()
+        {
+
+            OpenConnect();
 
             cmd.Parameters.Clear();
 
             cmd.CommandText = "SELECT * FROM Rules";
 
-            using SqlDataReader RulesReader = cmd.ExecuteReader();
+            using SqlDataReader rdr = cmd.ExecuteReader();
 
-            while (RulesReader.Read())
+            List<RuleDTO> listall = new List<RuleDTO>();
+
+            while (rdr.Read())
             {
-                rules.Add(new RuleDTO()
-                {
-                    RuleId = (int)RulesReader["Id"],
-                    SystemId = (int)RulesReader["SystemId"],
-                    Min = (int)RulesReader["Min"],
-                    Max = (int)RulesReader["Max"],
-                    Name = (string)RulesReader["Name"],
-                    NotifyEmail = (string)RulesReader["NotifyEmail"]
-                });
+                RuleDTO rule = new RuleDTO((int)rdr["Id"], (string)rdr["Name"], (int)rdr["SystemId"], (int)rdr["Min"], (int)rdr["Max"], (string)rdr["NotifyEmail"]);
+                listall.Add(rule);
             }
-
             CloseConnect();
-            return rules;
+
+            return listall;
         }
 
-        public List<RuleDTO> GetAllRulesFromServer(int serverId)
+        public bool RemoveRule(RuleDTO ruleDTO)
         {
-            Initialize();
-            OpenConnect();
+            bool succeeded = false;
 
-            List<RuleDTO> rules = new List<RuleDTO>();
+            OpenConnect();
 
             cmd.Parameters.Clear();
 
-            cmd.CommandText = "SELECT * FROM Rules WHERE SystemId = @systemId";
-            cmd.Parameters.AddWithValue("@systemId", serverId);
+            cmd.CommandText = "DELETE FROM Rules WHERE Id=@id";
 
-            using SqlDataReader RulesReader = cmd.ExecuteReader();
+            cmd.Parameters.AddWithValue("@id", ruleDTO.RuleId);
 
-            while (RulesReader.Read())
+            if (cmd.ExecuteNonQuery() > 0)
             {
-                rules.Add(new RuleDTO()
-                {
-                    RuleId = (int)RulesReader["Id"],
-                    SystemId = (int)RulesReader["SystemId"],
-                    Min = (int)RulesReader["Min"],
-                    Max = (int)RulesReader["Max"],
-                    Name = (string)RulesReader["Name"],
-                    NotifyEmail = (string)RulesReader["NotifyEmail"]
-                });
+                succeeded = true;
             }
+            else { succeeded = false; }
 
             CloseConnect();
-            return rules;
+
+            return succeeded;
         }
 
-        public RuleDTO GetRuleTypeFromServer(int serverId, string typeName)
+        public bool UpdateRule(RuleDTO ruleDTO)
         {
-            Initialize();
-            OpenConnect();
+            bool succeeded = false;
 
-            RuleDTO rule = new RuleDTO();
+            OpenConnect();
 
             cmd.Parameters.Clear();
 
-            cmd.CommandText = "SELECT * FROM Rules WHERE SystemId = @systemId and Name = @name";
-            cmd.Parameters.AddWithValue("@systemId", serverId);
-            cmd.Parameters.AddWithValue("@name", typeName);
+            cmd.CommandText = "UPDATE Rules SET SystemId=(@systemid), Min=(@min), Max=(@max), NotifyEmail=(@notifyemail), Name=(@name) WHERE (Id=@id)";
 
-            using SqlDataReader RulesReader = cmd.ExecuteReader();
+            cmd.Parameters.AddWithValue("@id", ruleDTO.RuleId);
+            cmd.Parameters.AddWithValue("@name", ruleDTO.RuleName);
+            cmd.Parameters.AddWithValue("@systemid", ruleDTO.SystemId);
+            cmd.Parameters.AddWithValue("@min", ruleDTO.Min);
+            cmd.Parameters.AddWithValue("@max", ruleDTO.Max);
+            cmd.Parameters.AddWithValue("@notifyemail", ruleDTO.NotifyEmail);
 
-            while (RulesReader.Read())
+            if (cmd.ExecuteNonQuery() > 0)
             {
-                rule = new RuleDTO()
-                {
-                    RuleId = (int)RulesReader["Id"],
-                    SystemId = (int)RulesReader["SystemId"],
-                    Min = (int)RulesReader["Min"],
-                    Max = (int)RulesReader["Max"],
-                    Name = (string)RulesReader["Name"],
-                    NotifyEmail = (string)RulesReader["NotifyEmail"]
-                };
+                succeeded = true;
             }
+            else { succeeded = false; }
 
             CloseConnect();
-            return rule;
+
+            return succeeded;
         }
     }
 }

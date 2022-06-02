@@ -40,11 +40,27 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult Post([FromQuery] string Name, int SystemId, int Value)
         {
+            RuleContainer ruleContainer = new RuleContainer(new RuleDal());
+            AutoEmail autoEmail = new AutoEmail();
             //process the query data
             try
             {
                 MetricContainer mc = new MetricContainer(new MetricDAL());
                 mc.CreateMetric(new NewMetric(Name, SystemId, Value, DateTime.Now));
+
+                Rule rule = ruleContainer.GetRuleFromSystem(SystemId);
+                if((rule.Min > Value) && (Value < rule.Max))
+                {
+                    if (rule.Min > Value)
+                    {
+                        autoEmail.send_mail(rule.NotifyEmail, "systeem: " + SystemId.ToString(), "Hij gaat "+ (rule.Min-Value) +" onder minimum");
+                    }
+                    if (Value < rule.Max)
+                    {
+                        autoEmail.send_mail(rule.NotifyEmail, "systeem: " + SystemId.ToString(), "Hij gaat " + (Value-rule.Max) + " boven maximum");
+                    }
+                }
+
                 return Ok("Added successfully");
             }
             catch

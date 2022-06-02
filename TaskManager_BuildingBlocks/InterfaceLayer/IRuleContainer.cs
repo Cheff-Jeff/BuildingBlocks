@@ -9,8 +9,10 @@ namespace InterfaceLayer
 {
     public interface IRuleContainer
     {
-        public List<RuleDTO> GetAllRules();
-        public List<RuleDTO> GetAllRulesFromServer(int serverId);
-        public RuleDTO GetRuleTypeFromServer(int serverId, string typeName);
+        public bool AddRule(RuleDTO ruleDTO);
+        public RuleDTO GetRule(int id);
+        public RuleDTO GetRuleFromSystem(int systemId);
+        public List<RuleDTO> GetRules();
+        public bool RemoveRule(RuleDTO ruleDTO);
     }
 }

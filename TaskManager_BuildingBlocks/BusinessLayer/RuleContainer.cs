@@ -1,4 +1,5 @@
 ﻿using InterfaceLayer;
+using InterfaceLayer.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,27 +10,37 @@ namespace BusinessLayer
 {
     public class RuleContainer
     {
-        IRuleContainer IRules;
+        IRuleContainer irulecontainer;
 
-        public RuleContainer(IRuleContainer rule)
+        public RuleContainer(IRuleContainer dal)
         {
-            IRules = rule;
+            irulecontainer = dal;
         }
-        public List<Rule> GetAllRules()
+
+        public bool AddRule(Rule rule)
         {
-            var rules = new List<Rule>();
-            IRules.GetAllRules().ForEach(r => rules.Add(new Rule(r)));
+            return irulecontainer.AddRule(rule.TODTO());
+        }
+        public Rule GetRule(int id)
+        {
+            return new Rule(irulecontainer.GetRule(id));
+        }
+        public Rule GetRuleFromSystem(int systemId)
+        {
+            return new Rule(irulecontainer.GetRuleFromSystem(systemId));
+        }
+        public List<Rule> GetRules()
+        {
+            List<Rule> rules = new List<Rule>();
+            foreach (RuleDTO ruleDTO in irulecontainer.GetRules())
+            {
+                rules.Add(new Rule(ruleDTO));
+            }
             return rules;
         }
-        public List<Rule> GetAllRulesFromServer(int serverId)
+        public bool RemoveRule(Rule rule)
         {
-            var rules = new List<Rule>();
-            IRules.GetAllRulesFromServer(serverId).ForEach(r => rules.Add(new Rule(r)));
-            return rules;
-        }
-        public Rule GetRuleTypeFromServer(int serverId, string typeName)
-        {
-            return new Rule(IRules.GetRuleTypeFromServer(serverId, typeName));
+            return irulecontainer.RemoveRule(rule.TODTO());
         }
     }
 }
