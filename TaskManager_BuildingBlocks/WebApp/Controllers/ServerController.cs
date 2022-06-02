@@ -66,7 +66,7 @@ namespace WebApp.Controllers
         public ActionResult Get(int id, string name, int amount)
         {
             ViewData["metricData"] = mc.GetAllMetricsFromServerWithName(id, name, amount);
-            var rule = rc.GetRule(id);
+            var rule = rc.GetRule(id, name);
 
             ViewData["metricTypeDataName"] = rule.RuleName; 
             ViewData["metricTypeDataMin"] = rule.Min;

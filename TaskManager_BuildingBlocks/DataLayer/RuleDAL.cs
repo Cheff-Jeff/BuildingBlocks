@@ -48,14 +48,15 @@ namespace DataLayer
             }
         }
 
-        public RuleDTO GetRule(int id)
+        public RuleDTO GetRule(int id, string name)
         {
             OpenConnect();
 
             cmd.Parameters.Clear();
 
-            cmd.CommandText = "SELECT * FROM Rules WHERE Id=@id";
+            cmd.CommandText = "SELECT * FROM Rules WHERE SystemId=@id and Name = @name";
             cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@name", name);
 
             using SqlDataReader rdr = cmd.ExecuteReader();
 

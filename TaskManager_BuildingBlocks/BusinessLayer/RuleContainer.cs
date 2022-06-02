@@ -21,9 +21,9 @@ namespace BusinessLayer
         {
             return irulecontainer.AddRule(rule.TODTO());
         }
-        public Rule GetRule(int id)
+        public Rule GetRule(int id, string name)
         {
-            return new Rule(irulecontainer.GetRule(id));
+            return new Rule(irulecontainer.GetRule(id, name));
         }
         public Rule GetRuleFromSystem(int systemId)
         {

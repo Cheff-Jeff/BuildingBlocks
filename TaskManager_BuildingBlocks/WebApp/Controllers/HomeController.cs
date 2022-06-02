@@ -17,6 +17,7 @@ namespace WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private UserContainer userContainer = new UserContainer(new UserDAL());
+        private ServerContainer serverContainer = new ServerContainer(new ServerDAL());
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -31,7 +32,7 @@ namespace WebApp.Controllers
         public IActionResult Home()
         {
             if (HttpContext.Session.GetInt32("isAdmin") != null)
-            { 
+            {
                 return RedirectToAction("Index", "Server");
             }
             return RedirectToAction("Index", "Home");
@@ -49,18 +50,15 @@ namespace WebApp.Controllers
                 mc.CreateMetric(new NewMetric(Name, SystemId, Value, DateTime.Now));
 
                 Rule rule = ruleContainer.GetRuleFromSystem(SystemId);
-                if((rule.Min > Value) && (Value < rule.Max))
+                Server ser = serverContainer.GetOneSystemById(SystemId);
+                if (rule.Min > Value)
                 {
-                    if (rule.Min > Value)
-                    {
-                        autoEmail.send_mail(rule.NotifyEmail, "systeem: " + SystemId.ToString(), "Hij gaat "+ (rule.Min-Value) +" onder minimum");
-                    }
-                    if (Value < rule.Max)
-                    {
-                        autoEmail.send_mail(rule.NotifyEmail, "systeem: " + SystemId.ToString(), "Hij gaat " + (Value-rule.Max) + " boven maximum");
-                    }
+                    autoEmail.send_mail(rule.NotifyEmail, ser.ServerName, Name+" gaat " + (rule.Min - Value) + " onder minimum!");
                 }
-
+                if (rule.Max < Value)
+                {
+                    autoEmail.send_mail(rule.NotifyEmail, ser.ServerName, Name+" gaat " + (Value - rule.Max) + " boven maximum!");
+                }
                 return Ok("Added successfully");
             }
             catch
@@ -90,7 +88,7 @@ namespace WebApp.Controllers
                         {
                             HttpContext.Session.SetInt32("isAdmin", 1);
                         }
-                        else 
+                        else
                         {
                             HttpContext.Session.SetInt32("isAdmin", 0);
                         }
