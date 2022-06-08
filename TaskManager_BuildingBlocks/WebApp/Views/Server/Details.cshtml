@@ -17,11 +17,11 @@
                         Back
                     </span>
                 </a>
-        <div class="col-md-3">
+@*        <div class="col-md-3">
             <h1>Details</h1>
 
             <div>
-@*Display current server data*@
+@*Display current server data
                 <h4>@ViewData["currentServer"].GetType().GetProperty("ServerName").GetValue(ViewData["currentServer"])</h4>
                 <hr />
                 <select id="metricNameList" onChange="selectedMetricChange()">
@@ -34,7 +34,7 @@
                 <input type="number" value="5" id="metricAmount" min="1" max="20" />
                 <input type="button" id="refreshBtn" onclick="selectedMetricChange()" class="btn btn-success" value="Refresh" />
             </div>
-        </div>
+        </div>*@
     </div>
     <div class="container">
         <div class="row">
@@ -57,6 +57,8 @@
                 <canvas id="metricChart"></canvas>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
