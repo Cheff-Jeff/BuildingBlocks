@@ -48,7 +48,7 @@ namespace WebApp.Controllers
             {
                 MetricContainer mc = new MetricContainer(new MetricDAL());
                 mc.CreateMetric(new NewMetric(Name, SystemId, Value, DateTime.Now));
-
+                Server ser = serverContainer.GetOneSystemById(SystemId);
                 Rule rule = ruleContainer.GetRuleFromSystem(SystemId);
 
                 if((rule.Min > Value) && (Value < rule.Max))

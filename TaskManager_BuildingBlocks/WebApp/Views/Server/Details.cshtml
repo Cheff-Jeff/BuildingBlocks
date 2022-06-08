@@ -17,6 +17,13 @@
                         Back
                     </span>
                 </a>
+                </div>
+                    <a asp-action="AddRule" asp-route-id=@ViewData["currentServer"] class="btn btn-custom ml-0 mt-3">
+                        <span>
+                            Create Rule
+                        </span>
+                    </a>
+                <div>
 @*        <div class="col-md-3">
             <h1>Details</h1>
 
@@ -34,9 +41,6 @@
                 <input type="number" value="5" id="metricAmount" min="1" max="20" />
                 <input type="button" id="refreshBtn" onclick="selectedMetricChange()" class="btn btn-success" value="Refresh" />
             </div>
-            </div>
-                <a asp-action="AddRule" asp-route-id=@ViewData["currentServer"]>Create Rule</a>
-            <div>
         </div>*@
     </div>
     <div class="container">
