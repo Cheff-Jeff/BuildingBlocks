@@ -175,6 +175,13 @@ background-color: #d0d0d0;
     letter-spacing: .5px;
 }
 
+.btn-input, .btn-input:hover {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 20px;
+    color: #ff8300;
+    letter-spacing: .5px;
+}
+
 .btn-custom-danger {
     border: solid 2px #f2545b;
     color: #f2545b !important;
