@@ -49,6 +49,7 @@ namespace WebApp.Controllers
                 mc.CreateMetric(new NewMetric(Name, SystemId, Value, DateTime.Now));
 
                 Rule rule = ruleContainer.GetRuleFromSystem(SystemId);
+
                 if((rule.Min > Value) && (Value < rule.Max))
                 {
                     if (rule.Min > Value)

@@ -14,7 +14,7 @@ namespace WebApp.Controllers
     {
         private ServerContainer sc = new ServerContainer(new ServerDAL());
         private MetricContainer mc = new MetricContainer(new MetricDAL());
-        private RuleContainer rc = new RuleContainer(new RuleDAL());
+        private RuleContainer rc = new RuleContainer(new RuleDal());
         // GET: SystemController
         public ActionResult Index()
         {
@@ -66,32 +66,44 @@ namespace WebApp.Controllers
         public ActionResult Get(int id, string name, int amount)
         {
             ViewData["metricData"] = mc.GetAllMetricsFromServerWithName(id, name, amount);
-            var rule = rc.GetRuleTypeFromServer(id, name);
+            var rule = rc.GetRule(id);
 
-            ViewData["metricTypeDataName"] = rule.Name; 
+            ViewData["metricTypeDataName"] = rule.RuleName; 
             ViewData["metricTypeDataMin"] = rule.Min;
             ViewData["metricTypeDataMax"] = rule.Max;
             return View();
         }
 
-        // GET: SystemController/Create
-        public ActionResult Create()
+        // GET: SystemController/AddRule
+        public ActionResult AddRule(int id)
         {
-            return View();
+            RuleModel model = new RuleModel(id);
+
+
+
+            return View(model);
         }
 
-        // POST: SystemController/Create
+        // POST: SystemController/AddRule
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult AddRule(RuleModel ruleModel)
         {
+            
             try
             {
-                return RedirectToAction(nameof(Index));
+                if(ruleModel.Min < ruleModel.Max)
+                {
+                    //rc.AddRule(new Rule(ruleModel.RuleId, ruleModel.RuleName, ruleModel.SystemId, ruleModel.Min, ruleModel.Max, ruleModel.NotifyEmail));
+                    return RedirectToAction(nameof(Details));
+                }
+                else { return View(); }
+
             }
             catch
             {
                 return View();
+                
             }
         }
 
