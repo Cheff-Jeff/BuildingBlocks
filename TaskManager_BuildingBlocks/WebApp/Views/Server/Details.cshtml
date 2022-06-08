@@ -34,6 +34,9 @@
                 <input type="number" value="5" id="metricAmount" min="1" max="20" />
                 <input type="button" id="refreshBtn" onclick="selectedMetricChange()" class="btn btn-success" value="Refresh" />
             </div>
+            </div>
+                <a asp-action="AddRule" asp-route-id=@ViewData["currentServer"]>Create Rule</a>
+            <div>
         </div>*@
     </div>
     <div class="container">

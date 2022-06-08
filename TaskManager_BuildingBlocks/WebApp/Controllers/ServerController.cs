@@ -66,7 +66,7 @@ namespace WebApp.Controllers
         public ActionResult Get(int id, string name, int amount)
         {
             ViewData["metricData"] = mc.GetAllMetricsFromServerWithName(id, name, amount);
-            var rule = rc.GetRule(id, name);
+            var rule = rc.GetRule(id);
 
             ViewData["metricTypeDataName"] = rule.RuleName; 
             ViewData["metricTypeDataMin"] = rule.Min;
@@ -74,24 +74,36 @@ namespace WebApp.Controllers
             return View();
         }
 
-        // GET: SystemController/Create
-        public ActionResult Create()
+        // GET: SystemController/AddRule
+        public ActionResult AddRule(int id)
         {
-            return View();
+            RuleModel model = new RuleModel(id);
+
+
+
+            return View(model);
         }
 
-        // POST: SystemController/Create
+        // POST: SystemController/AddRule
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult AddRule(RuleModel ruleModel)
         {
+            
             try
             {
-                return RedirectToAction(nameof(Index));
+                if(ruleModel.Min < ruleModel.Max)
+                {
+                    //rc.AddRule(new Rule(ruleModel.RuleId, ruleModel.RuleName, ruleModel.SystemId, ruleModel.Min, ruleModel.Max, ruleModel.NotifyEmail));
+                    return RedirectToAction(nameof(Details));
+                }
+                else { return View(); }
+
             }
             catch
             {
                 return View();
+                
             }
         }
 

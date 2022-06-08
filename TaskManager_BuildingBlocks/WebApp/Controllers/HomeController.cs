@@ -50,8 +50,8 @@ namespace WebApp.Controllers
                 mc.CreateMetric(new NewMetric(Name, SystemId, Value, DateTime.Now));
 
                 Rule rule = ruleContainer.GetRuleFromSystem(SystemId);
-                Server ser = serverContainer.GetOneSystemById(SystemId);
-                if (rule.Min > Value)
+
+                if((rule.Min > Value) && (Value < rule.Max))
                 {
                     autoEmail.send_mail(rule.NotifyEmail, ser.ServerName, Name+" gaat " + (rule.Min - Value) + " onder minimum!");
                 }
