@@ -12,65 +12,67 @@
                 <a asp-action="Index" class="btn btn-custom ml-0">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-                            <path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
+                            <path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z" />
                         </svg>
                         Back
                     </span>
                 </a>
-                </div>
-                    <a asp-action="AddRule" asp-route-id=@ViewData["currentServer"] class="btn btn-custom ml-0 mt-3">
-                        <span>
-                            Create Rule
-                        </span>
-                    </a>
-                <div>
-@*        <div class="col-md-3">
-            <h1>Details</h1>
-
+            </div>
+            <a asp-action="AddRule" asp-route-id=@ViewData["currentServer"] class="btn btn-custom ml-0 mt-3">
+                <span>
+                    Create Rule
+                </span>
+            </a>
             <div>
-@*Display current server data
-                <h4>@ViewData["currentServer"].GetType().GetProperty("ServerName").GetValue(ViewData["currentServer"])</h4>
-                <hr />
-                <select id="metricNameList" onChange="selectedMetricChange()">
-                    @foreach (var metric in ViewData["currentServerMetricsNames"] as List<BusinessLayer.Metric>)
-                    {
-                        <option value="@metric.Name">@metric.Name</option>
-                    }
-                </select>
-                <hr />
-                <input type="number" value="5" id="metricAmount" min="1" max="20" />
-                <input type="button" id="refreshBtn" onclick="selectedMetricChange()" class="btn btn-success" value="Refresh" />
+                @*        <div class="col-md-3">
+                                <h1>Details</h1>
+
+                                <div>
+                    @*Display current server data
+                                    <h4>@ViewData["currentServer"].GetType().GetProperty("ServerName").GetValue(ViewData["currentServer"])</h4>
+                                    <hr />
+                                    <select id="metricNameList" onChange="selectedMetricChange()">
+                                        @foreach (var metric in ViewData["currentServerMetricsNames"] as List<BusinessLayer.Metric>)
+                                        {
+                                            <option value="@metric.Name">@metric.Name</option>
+                                        }
+                                    </select>
+                                    <hr />
+                                    <input type="number" value="5" id="metricAmount" min="1" max="20" />
+                                    <input type="button" id="refreshBtn" onclick="selectedMetricChange()" class="btn btn-success" value="Refresh" />
+                                </div>
+                            </div>*@
             </div>
-        </div>*@
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <h1 class="sysName">@ViewData["currentServer"].GetType().GetProperty("ServerName").GetValue(ViewData["currentServer"])</h1>
-                <div class="select-wrap">
-                    <select id="metricNameList" onChange="selectedMetricChange()" class="btn btn-custom ml-0">
-                        @foreach (var metric in ViewData["currentServerMetricsNames"] as List<BusinessLayer.Metric>)
-                        {
-                            <option value="@metric.Name" class="dropdown-item link-custom">@metric.Name</option>
-                        }
-                    </select>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h1 class="sysName">@ViewData["currentServer"].GetType().GetProperty("ServerName").GetValue(ViewData["currentServer"])</h1>
+                        <div class="select-wrap">
+                            <select id="metricNameList" onChange="selectedMetricChange()" class="btn btn-custom ml-0">
+                                @foreach (var metric in ViewData["currentServerMetricsNames"] as List<BusinessLayer.Metric>)
+                                {
+                                    <option value="@metric.Name" class="dropdown-item link-custom">@metric.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mt-4 d-flex justify-content-start">
+                            <input class="input-num" type="number" value="5" id="metricAmount" min="1" max="20" />
+                            <input type="button" id="refreshBtn" onclick="selectedMetricChange()" class="btn btn-custom btn-input ml-3" value="Refresh" />
+                        </div>
+                    </div>
+                    <div id="graphContainer" class="col-md-9">
+                        <canvas id="metricChart"></canvas>
+                    </div>
                 </div>
-                <div class="mt-4 d-flex justify-content-start">
-                    <input class="input-num" type="number" value="5" id="metricAmount" min="1" max="20" />
-                    <input type="button" id="refreshBtn" onclick="selectedMetricChange()" class="btn btn-custom btn-input ml-3" value="Refresh" />
-                </div>
-            </div>
-            <div id="graphContainer" class="col-md-9">
-                <canvas id="metricChart"></canvas>
             </div>
         </div>
     </div>
-    </div>
-    </div>
 </div>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script>
-    /// Create variables of the 
+    /// Create variables of the
     /// - Dropdown
     /// - Default Value
     /// - Chart for global use

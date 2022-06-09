@@ -20,6 +20,13 @@ namespace BusinessLayer
             Metrics.CreateMetric(new NewMetricDTO(metric.Name, metric.SystemId, metric.Value, DateTime.Now));
         }
 
+        public List<Metric> GetAllMetricsFromServer(int serverId)
+        {
+            List<Metric> mets = new List<Metric>();
+            Metrics.GetAllMetricsFromServer(serverId).ForEach(m => mets.Add(new Metric(m)));
+            return mets;
+        }
+
         public List<Metric> GetAllLatestMetricsFromServer(int serverId)
         {
             List<Metric> mets = new List<Metric>();

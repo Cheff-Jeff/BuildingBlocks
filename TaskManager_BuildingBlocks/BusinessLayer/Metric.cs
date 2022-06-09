@@ -15,6 +15,7 @@ namespace BusinessLayer
         public int SystemId { get; set; }
         public int Value { get; set; }
         public DateTime Date { get; set; }
+        public RuleDTO rules { get; set; }
 
         IMetric IMetric;
 
