@@ -19,7 +19,7 @@ namespace WebApp.Controllers
         // GET: UserController
         public ActionResult Index()
         {
-            if (HttpContext.Session.GetInt32("isAdmin") != null)
+            if (HttpContext.Session.GetInt32("isAdmin") != null && HttpContext.Session.GetInt32("isAdmin") == 1)
             {
                 UserViewModel userViewmodel = new UserViewModel();
                 ListViewModel list = new ListViewModel();
@@ -64,7 +64,7 @@ namespace WebApp.Controllers
         // GET: UserController/Edit/5
         public ActionResult Edit(int id)
         {
-            if (HttpContext.Session.GetInt32("isAdmin") != null)
+            if (HttpContext.Session.GetInt32("isAdmin") != null && HttpContext.Session.GetInt32("isAdmin") == 1)
             {
                 UserViewModel userViewModel = new UserViewModel();
                 userViewModel = FetchById(id);
@@ -78,28 +78,32 @@ namespace WebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, UserViewModel userViewModel)
         {
-            try
+            if (HttpContext.Session.GetInt32("isAdmin") != null && HttpContext.Session.GetInt32("isAdmin") == 1)
             {
-                if(userViewModel.RePassword != userViewModel.Password)
+                try
                 {
-                    TempData["UserNotEdited"] = "Passwords do not match, user not created!";
+                    if (userViewModel.RePassword != userViewModel.Password)
+                    {
+                        TempData["UserNotEdited"] = "Passwords do not match, user not created!";
 
-                    return View("Edit");
+                        return View("Edit");
+                    }
+                    else
+                    {
+                        byte[] salt = userContainer.AddSalt();
+                        var password = userContainer.hash(userViewModel.Password, salt);
+
+                        User us = new User(Convert.ToBase64String(salt), id, userViewModel.Email, password, userViewModel.IsAdmin);
+                        user.EditOneUser(us);
+                        return RedirectToAction(nameof(Index));
+                    }
                 }
-                else
+                catch
                 {
-                    byte[] salt = userContainer.AddSalt();
-                    var password = userContainer.hash(userViewModel.Password, salt);
-
-                    User us = new User(Convert.ToBase64String(salt), id, userViewModel.Email, password, userViewModel.IsAdmin);
-                    user.EditOneUser(us);
-                    return RedirectToAction(nameof(Index));
+                    return View();
                 }
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: UserController/Delete/5
@@ -126,18 +130,6 @@ namespace WebApp.Controllers
             }
 
             return userViewModel;
-        }
-
-        public IActionResult PdfEmployeeManager()
-        {
-            var desktop = new HtmlToPdf();
-            desktop.Options.WebPageWidth = 1920;
-
-            var pdf = desktop.ConvertUrl("https://localhost:44368/user/index");
-
-            var pdfBytes = pdf.Save();
-
-            return File(pdfBytes, "Application/pdf");
         }
     }
 }

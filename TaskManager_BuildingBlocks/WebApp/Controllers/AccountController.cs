@@ -53,7 +53,7 @@ namespace WebApp.Controllers
                 {
                     userContainer.UserRegister(new User(Convert.ToBase64String(salt), user.Email, Password, user.IsAdmin));
                     TempData["seccesss"] = "New user has been added.";
-                    return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Register", "Account");
                 }
                 else
                 {
