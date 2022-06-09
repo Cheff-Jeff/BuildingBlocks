@@ -54,6 +54,7 @@ namespace WebApp.Controllers
         // GET: SystemController/Details/5
         public ActionResult Details(int id)
         {
+            HttpContext.Session.SetInt32("SystemId", id);
             if (HttpContext.Session.GetInt32("isAdmin") != null)
             {
                 ViewData["currentServer"] = sc.GetOneSystemById(id);
