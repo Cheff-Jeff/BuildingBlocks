@@ -3,51 +3,49 @@
 @{
     ViewData["Title"] = "AddRule";
 }
+<div class="container">
+    <h1>AddRule</h1>
 
-<h1>AddRule</h1>
-
-<h4>Rule</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddRule">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="RuleId" />
-            <input type="hidden" asp-for="SystemId" />
-            <div class="form-group">
-                <label asp-for="RuleName" class="control-label"></label>
-                <input asp-for="RuleName" class="form-control" />
-                <span asp-validation-for="RuleName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Min" class="control-label"></label>
-                <input asp-for="Min" class="form-control" />
-                <span asp-validation-for="Min" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Max" class="control-label"></label>
-                <input asp-for="Max" class="form-control" />
-                <span asp-validation-for="Max" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NotifyEmail" class="control-label"></label>
-                <input 
-                            type="email" 
-                            id="emailInput"
-                            class="form-control text-center" 
-                            asp-for="NotifyEmail"
-                            />
-                <span asp-validation-for="NotifyEmail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <h4>Rule</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="AddRule">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="SystemId" />
+                <div class="form-group">
+                    <label asp-for="RuleName" class="control-label"></label>
+                    <input asp-for="RuleName" class="form-control" />
+                    <span asp-validation-for="RuleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Min" class="control-label"></label>
+                    <input asp-for="Min" class="form-control" />
+                    <span asp-validation-for="Min" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Max" class="control-label"></label>
+                    <input asp-for="Max" class="form-control" />
+                    <span asp-validation-for="Max" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NotifyEmail" class="control-label"></label>
+                    <input type="email"
+                           id="emailInput"
+                           class="form-control text-center"
+                           asp-for="NotifyEmail" />
+                    <span asp-validation-for="NotifyEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {
