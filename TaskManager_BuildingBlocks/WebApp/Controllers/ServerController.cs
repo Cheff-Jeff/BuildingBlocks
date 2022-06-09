@@ -94,8 +94,9 @@ namespace WebApp.Controllers
             {
                 if(ruleModel.Min < ruleModel.Max)
                 {
-                    //rc.AddRule(new Rule(ruleModel.RuleId, ruleModel.RuleName, ruleModel.SystemId, ruleModel.Min, ruleModel.Max, ruleModel.NotifyEmail));
-                    return RedirectToAction(nameof(Details));
+                    rc.AddRule(new Rule(ruleModel.RuleId, ruleModel.RuleName, ruleModel.SystemId, ruleModel.Min, ruleModel.Max, ruleModel.NotifyEmail));
+                    //return RedirectToAction(nameof(Details));
+                    return RedirectToAction("Index");
                 }
                 else { return View(); }
 
