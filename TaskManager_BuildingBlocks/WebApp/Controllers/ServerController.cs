@@ -80,9 +80,13 @@ namespace WebApp.Controllers
         // GET: SystemController/AddRule
         public ActionResult AddRule(int id)
         {
-            RuleModel model = new RuleModel(id);
+            if (HttpContext.Session.GetInt32("isAdmin") != null && HttpContext.Session.GetInt32("isAdmin") == 1)
+            {
+                RuleModel model = new RuleModel(id);
 
-            return View(model);
+                return View(model);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: SystemController/AddRule
