@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http;
+@{
     ViewData["Title"] = "Details";
 }
 @section css
@@ -18,30 +19,34 @@
                     </span>
                 </a>
             </div>
-            <a asp-action="AddRule" asp-route-id="@ViewData["currentServerId"]" class="btn btn-custom ml-0 mt-3">
-                <span>
-                    Create Rule
-                </span>
-            </a>
+            @if (Context.Session.GetInt32("isAdmin") == 1)
+            {
+                <a asp-action="AddRule" asp-route-id="@ViewData["currentServerId"]" class="btn btn-custom ml-0 mt-3">
+                    <span>
+                        Create Rule
+                    </span>
+                </a>
+            }
+
             <div>
                 @*        <div class="col-md-3">
-                                <h1>Details</h1>
+                        <h1>Details</h1>
 
-                                <div>
-                    @*Display current server data
-                                    <h4>@ViewData["currentServer"].GetType().GetProperty("ServerName").GetValue(ViewData["currentServer"])</h4>
-                                    <hr />
-                                    <select id="metricNameList" onChange="selectedMetricChange()">
-                                        @foreach (var metric in ViewData["currentServerMetricsNames"] as List<BusinessLayer.Metric>)
-                                        {
-                                            <option value="@metric.Name">@metric.Name</option>
-                                        }
-                                    </select>
-                                    <hr />
-                                    <input type="number" value="5" id="metricAmount" min="1" max="20" />
-                                    <input type="button" id="refreshBtn" onclick="selectedMetricChange()" class="btn btn-success" value="Refresh" />
-                                </div>
-                            </div>*@
+                        <div>
+            @*Display current server data
+                            <h4>@ViewData["currentServer"].GetType().GetProperty("ServerName").GetValue(ViewData["currentServer"])</h4>
+                            <hr />
+                            <select id="metricNameList" onChange="selectedMetricChange()">
+                                @foreach (var metric in ViewData["currentServerMetricsNames"] as List<BusinessLayer.Metric>)
+                                {
+                                    <option value="@metric.Name">@metric.Name</option>
+                                }
+                            </select>
+                            <hr />
+                            <input type="number" value="5" id="metricAmount" min="1" max="20" />
+                            <input type="button" id="refreshBtn" onclick="selectedMetricChange()" class="btn btn-success" value="Refresh" />
+                        </div>
+                    </div>*@
             </div>
             <div class="container">
                 <div class="row">
