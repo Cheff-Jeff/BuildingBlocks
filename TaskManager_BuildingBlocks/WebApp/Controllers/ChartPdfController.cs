@@ -16,20 +16,22 @@ namespace WebApp.Controllers
         MetricContainer mc = new MetricContainer(new MetricDAL());
         ServerContainer sc = new ServerContainer(new ServerDAL());
 
+        static int id;
+        
+
         // GET: ChartPdfController
         public IActionResult Index()
         {
             PdfPrintViewModel pdfPrintViewModel = new PdfPrintViewModel();
             ListViewModel list = new ListViewModel();
 
-            int id = (int)HttpContext.Session.GetInt32("SystemId");
 
             Server server = sc.GetOneSystemById(id);
             
             foreach (Metric metric in mc.GetAllMetricsFromServer(id))
             {
                 pdfPrintViewModel = new PdfPrintViewModel(server.ServerName, metric.Name, metric.Value, metric.Date);
-                if(metric.Date >= DateTime.Now.AddHours(-5))
+                if(metric.Date >= DateTime.Now.AddHours(-4))
                 {
                     list.allmetrics.Add(pdfPrintViewModel);
                 }
@@ -42,6 +44,8 @@ namespace WebApp.Controllers
 
         public IActionResult PdfPrint()
         {
+            id = (int)HttpContext.Session.GetInt32("SystemId");
+
             var desktop = new HtmlToPdf();
             desktop.Options.WebPageWidth = 1920;
 

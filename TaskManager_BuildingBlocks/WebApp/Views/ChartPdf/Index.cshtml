@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<PdfPrintViewModel>
 
-<h1>SystemReport</h1>
+
+<div class="jumbotron-fluid">
+    <h1 class="text-center">SystemReport</h1>
+</div>
 <p></p>
 
 <table class="table table-bordered">
@@ -23,20 +26,20 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetricName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Percentage)
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MetricName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Percentage)
+                </td>
+            </tr>
         }
     </tbody>
 </table>

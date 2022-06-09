@@ -67,8 +67,15 @@
             </div>
         </div>
     </div>
+    <button class="btn-custom btn-input ml-3" onclick="PrintReport()">Print report</button>
 </div>
 
+
+<script>
+    function PrintReport() {
+        window.open('@Url.Action("PdfPrint", "ChartPdf", new {  })', '_blank');
+};
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script>
