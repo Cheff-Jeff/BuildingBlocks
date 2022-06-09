@@ -38,6 +38,31 @@ namespace DataLayer
                 throw;
             }
         }
+
+        public List<MetricDTO> GetAllMetricsFromServer(int serverId)
+        {
+            Initialize();
+            OpenConnect();
+
+            cmd.Dispose();
+
+            cmd.Parameters.Clear();
+            cmd.CommandText = "SELECT* FROM Metrics INNER JOIN Systems ON Metrics.systemId = Systems.Id Inner JOIN Rules ON Rules.systemId = Metrics.systemId WHERE Metrics.systemId = @systemId";
+            cmd.Parameters.AddWithValue("@systemId", serverId);
+
+            using SqlDataReader metricReader = cmd.ExecuteReader();
+
+            List<MetricDTO> metrics = new List<MetricDTO>();
+
+            while (metricReader.Read())
+            {
+                metrics.Add(new MetricDTO((int)metricReader["Id"], (string)metricReader["Name"], serverId, (int)metricReader["Value"], (DateTime)metricReader["Date"]));
+            }
+
+            CloseConnect();
+            return metrics;
+        }
+
         public List<MetricDTO> GetAllLatestMetricsFromServer(int serverId)
         {
 

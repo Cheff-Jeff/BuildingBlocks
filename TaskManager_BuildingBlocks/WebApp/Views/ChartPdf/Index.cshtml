@@ -1,0 +1,43 @@
+﻿@model IEnumerable<PdfPrintViewModel>
+
+<h1>SystemReport</h1>
+<p></p>
+
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>
+                ServerName
+            </th>
+            <th>
+                MetricName
+            </th>
+            <th>
+                Date/Time
+            </th>
+            <th>
+                Value
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MetricName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Percentage)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
