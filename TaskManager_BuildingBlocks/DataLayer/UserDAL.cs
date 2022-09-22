@@ -32,6 +32,7 @@ namespace DataLayer
             DataSet ds = new DataSet();
             da.Fill(ds);
 
+
             int i = ds.Tables[0].Rows.Count;
             if (i > 0)
             {
